@@ -1,6 +1,6 @@
-# Wrapper for LNDBoss
+# Wrapper for SearXNG
 
-LNDBoss is a GUI for BalanceOfSatoshis. You can run LNDBoss on EmbassyOS by installing an .s9pk file, or you can build your own .s9pk file by following the instuctions below.
+SearXNG is a GUI for BalanceOfSatoshis. You can run SearXNG on EmbassyOS by installing an .s9pk file, or you can build your own .s9pk file by following the instuctions below.
 
 ## Dependencies
 
@@ -54,20 +54,20 @@ cd embassy-os/backend/
 ./install-sdk.sh
 embassy-sdk init
 ```
-Now you are ready to build your **lndboss** service
+Now you are ready to build your **SearXNG** service
 
 ## Cloning
 
 Clone the project locally. 
 
 ```
-git clone https://github.com/Start9Labs/lndboss-wrapper.git
-cd lndboss-wrapper
+git clone https://github.com/Start9Labs/SearXNG-wrapper.git
+cd SearXNG-wrapper
 ```
 
 ## Building
 
-To build the **LNDBoss** service, run the following command:
+To build the **SearXNG** service, run the following command:
 
 ```
 make
@@ -81,11 +81,11 @@ Run the following commands to determine successful install:
 ```
 embassy-cli auth login
 #Enter your embassy password
-embassy-cli --host https://embassy-q1w2e3r4.local package install lndboss.s9pk
+embassy-cli --host https://embassy-q1w2e3r4.local package install SearXNG.s9pk
 ```
-**Tip:** You can also install the lndboss.s9pk using **Sideload Service** under the **Embassy > SETTINGS** section.
+**Tip:** You can also install the SearXNG.s9pk using **Sideload Service** under the **Embassy > SETTINGS** section.
 ## Verify Install
 
-Go to your Embassy Services page, select **LNDBoss**, configure and start the service.
+Go to your Embassy Services page, select **SearXNG**, configure and start the service.
 
 **Done!** 

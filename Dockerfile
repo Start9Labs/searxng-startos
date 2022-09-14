@@ -1,19 +1,19 @@
-FROM --platform=linux/arm64/v8 alexbosworth/balanceofsatoshis as bos-builder
+FROM --platform=linux/arm64/v8 redis:alpine as redis-builder
 
-FROM --platform=linux/arm64/v8 niteshbalusu/lndboss as lndboss
+FROM --platform=linux/arm64/v8 searxng/searxng:latest as runner
 
-USER root
-RUN apk add tini bash
+ENV SEARXNG_DEBUG 1
+ENV PORT 8080
+ENV INSTANCE_NAME SearXNG
+ENV AUTOCOMPLETE true
+ENV BASE_URL https://searxng.embassy
+ENV SEARXNG_BASE_URL https://searxng.embassy
 
+COPY --from=redis-builder /usr/local/bin/* /usr/local/bin/
 
-ENV BOS_DATA_PATH '/root/.bosgui'
-ENV BOS_DEFAULT_SAVED_NODE 'start9'
-ENV BOS_DEFAULT_LND_SOCKET 'lnd.embassy:10009'
-ENV PATH "/app:$PATH"
-
-COPY --from=bos-builder /app/ /app/ 
+RUN apk add tini bash git curl sudo
+RUN echo "cache2 = name=searxngcache,items=2000,blocks=2000,blocksize=4096,bitmap=1" >> /etc/uwsgi/uwsgi.ini
 
 ADD docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
-ADD scripts/check-web.sh /usr/local/bin/check_web.sh
-ADD actions/reset-users.sh /usr/local/bin/reset_users.sh
+ADD scripts/check-web.sh /usr/local/bin/check-web.sh
 RUN chmod a+x /usr/local/bin/*.sh

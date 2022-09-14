@@ -1,25 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 
-set -ea 
+set -e
 
-echo "AMBOSS_HEALTH_CHECK=true" >> .env
-mkdir -p /root/.bos/embassy
-chmod -R a+x /root/.bos
-mkdir -p /root/.bosgui/start9
-chmod -R a+x /root/.bosgui
-rm -fr /root/.bosgui/config.json && rm -fr /root/.bosgui/start9/credentials.json 
-touch /root/.bosgui/config.json && touch /root/.bosgui/start9/credentials.json 
+export ULTRA_SECRET_KEY=$(openssl rand -hex 32)
 
-echo '{
-    "cert_path": "/home/node/.lnd/tls.cert",
-    "macaroon_path": "/home/node/.lnd/admin.macaroon",
-    "socket": "lnd.embassy:10009"
-}' >> /root/.bosgui/start9/credentials.json
+_term() {
+  echo "caught SIGTERM signal!"
+  kill -TERM "$redis_process" 2>/dev/null
+}
 
-echo '{"default_saved_node":"start9"}' >> /root/.bosgui/config.json
+# Configuring SearXNG
+sed -i "s|ultrasecretkey|$ULTRA_SECRET_KEY|g" /usr/local/searxng/utils/templates/etc/searxng/settings.yml
+sed -i "s|ultrasecretkey|$ULTRA_SECRET_KEY|g" /etc/searxng/settings.yml
 
-# Display current installed version and help
-echo "Balance of Satoshis - Version: "
-bos --version
-echo "Starting LNDBoss..."
-exec tini yarn start:prod
+echo 'Starting Redis...'
+redis-server --save "" --appendonly "no" &
+redis_process=$!
+
+echo "Starting SearXNG..."
+sleep 10
+/usr/local/searxng/dockerfiles/docker-entrypoint.sh
+
+trap _term SIGTERM
+
+wait -n $redis_process
