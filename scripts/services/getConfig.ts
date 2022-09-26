@@ -21,6 +21,12 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
       "target": "lan-address",
       "interface": "main",
     },
+    "tor-only": {
+      "name": "Enable Tor",
+      "description": "Enables your search engine on the Tor Network.",
+      "type": "boolean",
+      "default": false,
+    },
     "autocomplete": {
       "name": "Enable Autocomplete",
       "description": "Turns on autocomplete when using SearXNG. This will send data to your Embassy while typing, before pressing the search button",
@@ -45,5 +51,6 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
       "name": "Public Domain Name",
       "description": "Enter a domain name here if you want to share your SearXNG engine publicly. You will also need to modify your domain name's DNS settings to point to your Embassy.",
       "nullable": true,
+      "placeholder": "https://search.mydomain.com"
     }
 });

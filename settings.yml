@@ -14,5 +14,3 @@ general:
   instance_name: "Embassy Search"
   contact_url: false
   enable_metrics: false
-search:
-  autocomplete: false

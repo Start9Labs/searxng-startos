@@ -21,7 +21,7 @@ clean:
 $(ID_NAME).s9pk: manifest.yaml instructions.md scripts/*.sh icon.svg LICENSE scripts/embassy.js image.tar
 	embassy-sdk pack
 
-image.tar: Dockerfile docker_entrypoint.sh scripts/*.sh 
+image.tar: Dockerfile docker_entrypoint.sh settings.yml searxng.png searxng.svg scripts/*.sh 
 	DOCKER_CLI_EXPERIMENTAL=enabled docker buildx build --tag start9/$(ID_NAME)/main:$(VERSION) --platform=linux/arm64/v8 -o type=docker,dest=image.tar -f ./Dockerfile .
 
 scripts/embassy.js: $(TS_FILES)
