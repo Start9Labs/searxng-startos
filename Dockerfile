@@ -17,6 +17,7 @@ COPY --from=redis-builder /usr/local/bin/ /usr/local/bin/
 COPY --from=caddy-builder /etc/caddy/Caddyfile /etc/caddy/Caddyfile
 COPY --from=caddy-builder /data /data
 COPY --from=caddy-builder /config /config
+COPY searxng-docker/searxng/settings.yml searxng/settings.yml
 
 ADD docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
 ADD scripts/check-web.sh /usr/local/bin/check-web.sh

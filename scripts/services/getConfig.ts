@@ -27,6 +27,12 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
       "type": "boolean",
       "default": false,
     },
+    "enable-metrics": {
+      "name": "Enable Metrics",
+      "description": "Turns on data collection for search metrics when using SearXNG.",
+      "type": "boolean",
+      "default": false,
+    },
     "email-address": {
       "type": "string",
       "name": "Email Address",
