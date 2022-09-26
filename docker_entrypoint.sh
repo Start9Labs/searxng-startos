@@ -5,6 +5,11 @@ set -e
 export SEARXNG_HOSTNAME=$(yq e '.public-host' /root/start9/config.yaml)
 export LAN_ADDRESS=$(yq e '.lan-address' /root/start9/config.yaml)
 export TOR_ADDRESS=$(yq e '.tor-address' /root/start9/config.yaml)
+
+if [ "$SEARXNG_HOSTNAME" = "null" ]; then 
+  SEARXNG_HOSTNAME=$LAN_ADDRESS
+fi 
+
 export SEARXNG_HOSTNAME=${SEARXNG_HOSTNAME:-https://$LAN_ADDRESS}
 export LETSENCRYPT_EMAIL=$(yq e '.email-address' /root/start9/config.yaml)
 export AUTOCOMPLETE=$(yq e '.autocomplete' /root/start9/config.yaml)
