@@ -23,8 +23,10 @@ main:
   entrypoint: docker_entrypoint.sh
   args: []
   mounts:
-    main: /etc/searxng
-    redis: /var/lib/redis
+    main: /root
+    # redis: /var/lib/redis
+    # caddy-data: /data
+    # caddy-config: /config
 health-checks:
   main:
     name: Web UI
@@ -45,8 +47,12 @@ properties:
 volumes:
   main:
     type: data
-  redis:
-    type: data
+  # redis:
+  #   type: data
+  # caddy-data:
+  #   type: data
+  # caddy-config:
+  #   type: data
 interfaces:
   main:
     name: SearXNG Web Interface
@@ -54,14 +60,10 @@ interfaces:
     tor-config:
       port-mapping:
         80: "8080"
-        8888: "8888"
     lan-config:
       443:
         ssl: true
         internal: 8080
-      8888:
-        ssl: true
-        internal: 8888
     ui: true
     protocols:
       - tcp
@@ -77,10 +79,10 @@ backup:
       - duplicity
       - create
       - /mnt/backup
-      - /etc/searxng/data
+      - /root/data
     mounts:
       BACKUP: "/mnt/backup" 
-      main: "/etc/searxng/data"
+      main: "/root/data"
   restore:
     type: docker
     image: compat
@@ -89,11 +91,11 @@ backup:
     args:
       - duplicity
       - restore
-      - /etc/searxng/data
+      - /root/data
       - /mnt/backup
     mounts:
       BACKUP: "/mnt/backup"
-      main: "/etc/searxng/data"
+      main: "/root/data"
 migrations:
  from:
    "*":
