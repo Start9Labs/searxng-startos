@@ -1,9 +1,7 @@
 id: searxng 
 title: "SearXNG"
-version: 1.0.0.1
-release-notes: | 
-  * Initial Release for EmbassyOS
-  * Support for x86 architecture
+version: 1.0.0
+release-notes: Initial Release for embassyOS
 license: mit
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"
@@ -79,8 +77,8 @@ backup:
     args:
       - duplicity
       - restore
-      - /root/data
       - /mnt/backup
+      - /root/data
     mounts:
       BACKUP: "/mnt/backup"
       main: "/root/data"
@@ -93,4 +91,3 @@ migrations:
    "*":
      type: script
      args: ["to"]
-
