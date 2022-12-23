@@ -1,7 +1,8 @@
 id: searxng 
 title: "SearXNG"
 version: 1.0.0
-release-notes: Initial Release for embassyOS
+release-notes: | 
+  * Initial Release for embassyOS
 license: mit
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"
