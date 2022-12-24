@@ -29,7 +29,7 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
     // },
     "autocomplete": {
       "name": "Enable Autocomplete",
-      "description": "Turns on autocomplete when using SearXNG. This will send data to your Embassy while typing, before pressing the search button. This will decrease performance of the website when typing, and will make calls to the search engines before the search button is pressed.",
+      "description": "Turns on autocomplete when using SearXNG. This will send data to your Embassy while typing, before pressing the search button and use multiple known search engines to return frequently searched terms. Note: This will decrease performance of the website when typing, and will make calls to the search engines before the search button is pressed.",
       "type": "boolean",
       "default": false,
     // },
