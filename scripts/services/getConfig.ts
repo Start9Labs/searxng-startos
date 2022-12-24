@@ -21,23 +21,23 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
       "target": "lan-address",
       "interface": "main",
     },
-    "tor-only": {
-      "name": "Enable Tor",
-      "description": "Enables your search engine on the Tor Network.",
-      "type": "boolean",
-      "default": false,
-    },
+    // "tor-only": {
+    //   "name": "Enable Tor",
+    //   "description": "Enables your search engine on the Tor Network.",
+    //   "type": "boolean",
+    //   "default": false,
+    // },
     "autocomplete": {
       "name": "Enable Autocomplete",
-      "description": "Turns on autocomplete when using SearXNG. This will send data to your Embassy while typing, before pressing the search button",
+      "description": "Turns on autocomplete when using SearXNG. This will send data to your Embassy while typing, before pressing the search button. This will decrease performance of the website when typing, and will make calls to the search engines before the search button is pressed.",
       "type": "boolean",
       "default": false,
-    },
-    "enable-metrics": {
-      "name": "Enable Metrics",
-      "description": "Turns on data collection for search metrics when using SearXNG.",
-      "type": "boolean",
-      "default": false,
+    // },
+    // "enable-metrics": {
+    //   "name": "Enable Metrics",
+    //   "description": "Turns on data collection for search metrics when using SearXNG.",
+    //   "type": "boolean",
+    //   "default": false,
     } //,
     // "email-address": {
     //   "type": "string",
