@@ -4,13 +4,13 @@ set -e
 
 # Configuring SearXNG
 echo 'Configuring SearXNG...'
-export TOR_ONLY=$(yq e '.tor-only' /root/start9/config.yaml)
+export TOR_ONLY="false"
 export SEARXNG_HOSTNAME=$(yq e '.public-host' /root/start9/config.yaml)
 export LAN_ADDRESS=$(yq e '.lan-address' /root/start9/config.yaml)
 export TOR_ADDRESS=$(yq e '.tor-address' /root/start9/config.yaml)
 export LETSENCRYPT_EMAIL=$(yq e '.email-address' /root/start9/config.yaml)
 export AUTOCOMPLETE=$(yq e '.autocomplete' /root/start9/config.yaml)
-export ENABLE_METRICS=$(yq e '.enable-metrics' /root/start9/config.yaml)
+export ENABLE_METRICS="false"
 export ULTRA_SECRET_KEY=$(openssl rand -hex 32)
 if [ "$SEARXNG_HOSTNAME" = "null" ]; then 
   SEARXNG_HOSTNAME=$LAN_ADDRESS
