@@ -1,10 +1,32 @@
 # Welcome to SearXNG!
+
 A Privacy-respecting, hackable metasearch engine.
+
+SearXNG is a free internet metasearch engine which aggregates results from more than 70 search services. 
+By running your own SearXNG instance on embassyOS, you are neither tracked nor profiled. 
+
+Additionally, SearXNG can be used over Tor for online anonymity.
+
+SearXNG protects your privacy in three ways:
+1. removal of private data from requests going to search services
+2. not forwarding anything from a third party services through search services (e.g. advertisement)
+3. removal of private data from requests going to the result pages
+
+You can read more about how SearXNG protects your privacy when [running your own instance on SearXNG](https://docs.searxng.org/own-instance.html)
+
+
 ## Usage Instructions
+
 Open SearXNG by using the `LAUNCH UI` button and you can begin searching right away.
+In the top right corner there is a `Preferences` button, where you have several options to customize (or 'hack') the functionality and theme of your search engine.
 
 ## Configure SearX with Firefox
-1. Visit your SearX instance's web UI.
+
+If you use Firefox as your internet browser, you have the ability to run a search query directly from the address bar of the browser. In Firefox settings you can choose with default search engine to use, e.g DuckDuckGO or Google. 
+
+Alternatively, you can follow the instructions below to configure Firefox to use your own self-hosted SearXNG search engine to perform these queries.
+
+1. Visit your SearXNG instance's web UI.
 
 <!-- MD_PACKER_INLINE BEGIN -->
 ![SearX](./assets/browser0.png)
@@ -35,4 +57,5 @@ Open SearXNG by using the `LAUNCH UI` button and you can begin searching right a
 ![SearX](./assets/browser4.png)
 <!-- MD_PACKER_INLINE END -->
 
-For more information on how to use this service, please visit their [documentation webpage](https://docs.searxng.org).
+If you are an advanced user, SearXNG has many additional features that have not been mentioned here.
+For more information on how to use this search engine, please visit their [documentation webpage](https://docs.searxng.org).
