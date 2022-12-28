@@ -25,7 +25,7 @@ export SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
 sed -i "s|# SEARXNG_HOSTNAME=<host>|SEARXNG_HOSTNAME=$SEARXNG_HOSTNAME|g" .env
 sed -i "s|# LETSENCRYPT_EMAIL=<email>|LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL|" .env
 sed -i "s|ultrasecretkey|$ULTRA_SECRET_KEY|g" searxng/settings.yml
-sed -i 's|instance_name: .*|instance_name: "$INSTANCE_NAME"|g' searxng/settings.yml
+sed -i "s|instance_name: .*|instance_name: $INSTANCE_NAME|g" searxng/settings.yml
 if $ENABLE_METRICS; then 
   sed -i 's|enable_metrics: false|enable_metrics: true|g' searxng/settings.yml
 fi
