@@ -1,6 +1,6 @@
 # Welcome to SearXNG!
 
-`searXNG` is pronounced "serxing".
+`SearXNG` is pronounced "serxing".
 
 ## Overview
 
