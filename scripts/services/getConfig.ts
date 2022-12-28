@@ -33,6 +33,14 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
     //   "type": "boolean",
     //   "default": false,
     // },
+    "instance-name": {
+      "type": "string",
+      "name": "SearXNG Instance Name",
+      "description": "Enter a name for your SearXNG instance. This is the name that will be listed if you want to share your SearXNG engine publicly.",
+      "nullable": false,
+      "default": "Embassy SearXNG Engine",
+      "placeholder": "Uncle Jim SearXNG Engine"
+    },
     "enable-metrics": {
       "name": "Enable Metrics",
       "description": "Turns on data collection for search metrics when using SearXNG. This setting will record various anonymous metrics, and are available by navigating to '/stats', '/stats/errors' and '/preferences.'",

@@ -17,7 +17,7 @@ Please note: your home IP address is still exposed to the underlying search engi
 
 ## Usage Instructions
 
-Simply click `LAUNCH UI` and statt searching!
+Simply click `LAUNCH UI` and start searching!
 
 You can customize your searXNG instance by visiting the `Preferences` button in the top right corner of your searXNG homepage.
 
