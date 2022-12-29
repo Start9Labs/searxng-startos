@@ -11,9 +11,9 @@ marketing-site: "https://docs.searxng.org"
 donation-url: "https://docs.searxng.org/donate.html"
 build: ["make"]
 description:
-  short: Privacy-respecting, hackable metasearch engine
+  short: Privacy-preserving internet metasearch engine.
   long: |
-    SearXNG is a free internet metasearch engine which aggregates results from more than 70 search services. Users are neither tracked nor profiled. Additionally, SearXNG can be used over Tor for online anonymity.
+    searXNG is an Internet metasearch engine that aggregates results from more than 70 search services. It also helps protect your privacy by withholding sensitive metadata from the underlying search services. Your searXNG instance is highly configurable, and can even be shared with friends and family.
 assets:
   license: LICENSE
   icon: icon.png

@@ -1,12 +1,12 @@
-# Welcome to SearXNG!
+# Welcome to searXNG!
 
-`SearXNG` is pronounced "serxing".
+`searXNG` is pronounced "serk-sing".
 
 ## Overview
 
-SearXNG is an Internet metasearch engine which aggregates results from more than 70 search services that also helps protect your privacy.
+searXNG is an Internet metasearch engine which aggregates results from more than 70 search services that also helps protect your privacy.
 
-SearXNG protects your privacy in three ways:
+searXNG protects your privacy in three ways:
 1. Removal of private data from requests going to search services
 2. Not forwarding anything from a third party services through search services (e.g. advertisement)
 3. Removal of private data from requests going to the result pages
