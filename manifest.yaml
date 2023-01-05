@@ -1,8 +1,9 @@
 id: searxng 
 title: "SearXNG"
-version: 1.0.0
+version: 1.0.0.1
 release-notes: | 
-  * Initial Release for embassyOS
+  * Optimized icon size and alignment
+  * Branding back to just SearXNG
 license: mit
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"
@@ -17,7 +18,7 @@ description:
 assets:
   license: LICENSE
   icon: icon.png
-  instructions: instructions.md
+  instructions: docs/instructions.md
 main:
   type: docker
   image: main
