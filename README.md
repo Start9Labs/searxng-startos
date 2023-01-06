@@ -63,27 +63,36 @@ Clone the project locally.
 ```
 git clone https://github.com/Start9Labs/searxng-wrapper.git
 cd searxng-wrapper
+git submodule update --init
 ```
 
 ## Building
 
-To build the **SearXNG** service, run the following command:
+To build the **SearXNG** package, run the following command:
 
 ```
 make
 ```
 
-## Installing (on Embassy)
+## Installing (on embassyOS)
 
 Run the following commands to determine successful install:
-> :information_source: Change embassy-q1w2e3r4.local to your Embassy address
+> :information_source: Change embassy-server-name.local to your Embassy address
 
 ```
 embassy-cli auth login
 #Enter your embassy password
-embassy-cli --host https://embassy-q1w2e3r4.local package install SearXNG.s9pk
+embassy-cli --host https://embassy-server-name.local package install searxng.s9pk
 ```
-**Tip:** You can also install the searxng.s9pk using **Sideload Service** under the **System > MANAGE** section.
+
+If you already have your `embassy-cli` config file setup with a default `host`,
+you can install simply by running:
+
+```
+make install
+```
+
+> **Tip:** You can also install the searxng.s9pk using **Sideload Service** under the **System > MANAGE** section.
 ## Verify Install
 
 Go to your Embassy Services page, select **SearXNG**, configure and start the service.
