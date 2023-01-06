@@ -1,6 +1,6 @@
 # Wrapper for SearXNG
 
-SearXNG is a GUI for BalanceOfSatoshis. You can run SearXNG on EmbassyOS by installing an .s9pk file, or you can build your own .s9pk file by following the instuctions below.
+SearXNG is a privacy-preserving internet metasearch engine. You can run SearXNG on embassyOS by installing an .s9pk file, or you can build your own .s9pk file by following the instuctions below.
 
 ## Dependencies
 
@@ -12,7 +12,7 @@ SearXNG is a GUI for BalanceOfSatoshis. You can run SearXNG on EmbassyOS by inst
 - [embassy-sdk](https://github.com/Start9Labs/embassy-os/tree/master/backend)
 
 ## Build enviroment
-Prepare your EmbassyOS build enviroment. In this example we are using Ubuntu 20.04.
+Prepare your embassyOS build enviroment. In this example we are using Ubuntu 20.04.
 
 1. Install docker
 ```
@@ -61,8 +61,8 @@ Now you are ready to build your **SearXNG** service
 Clone the project locally. 
 
 ```
-git clone https://github.com/Start9Labs/SearXNG-wrapper.git
-cd SearXNG-wrapper
+git clone https://github.com/Start9Labs/searxng-wrapper.git
+cd searxng-wrapper
 ```
 
 ## Building
@@ -83,7 +83,7 @@ embassy-cli auth login
 #Enter your embassy password
 embassy-cli --host https://embassy-q1w2e3r4.local package install SearXNG.s9pk
 ```
-**Tip:** You can also install the SearXNG.s9pk using **Sideload Service** under the **Embassy > SETTINGS** section.
+**Tip:** You can also install the searxng.s9pk using **Sideload Service** under the **System > MANAGE** section.
 ## Verify Install
 
 Go to your Embassy Services page, select **SearXNG**, configure and start the service.
