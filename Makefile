@@ -13,7 +13,7 @@ verify: $(PKG_ID).s9pk
 	@echo "   Filesize: $(shell du -h $(PKG_ID).s9pk) is ready"
 
 install: $(PKG_ID).s9pk
-	embassy-cli pack`age install $(PKG_ID).s9pk
+	embassy-cli package install $(PKG_ID).s9pk
 
 clean:
 	rm -rf docker-images
