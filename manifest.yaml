@@ -1,10 +1,10 @@
 id: searxng 
 title: "SearXNG"
-version: 1.0.0.1
+version: 1.0.0.2
 release-notes: | 
-  * Optimized icon size and alignment
-  * Branding back to just SearXNG
-license: mit
+  * Update SearXNG code to latest version from upstream
+  * Minor fixes and changes
+license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"
 support-site: "https://github.com/searxng/searxng-docker/issues"
@@ -14,7 +14,7 @@ build: ["make"]
 description:
   short: Privacy-preserving internet metasearch engine.
   long: |
-    searXNG is an Internet metasearch engine that aggregates results from more than 70 search services. It also helps protect your privacy by withholding sensitive metadata from the underlying search services. Your searXNG instance is highly configurable, and can even be shared with friends and family.
+    SearXNG is an Internet metasearch engine that aggregates results from more than 70 search services. It also helps protect your privacy by withholding sensitive metadata from the underlying search services. Your SearXNG instance is highly configurable, and can even be shared with friends and family.
 assets:
   license: LICENSE
   icon: icon.png
