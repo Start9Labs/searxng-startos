@@ -43,7 +43,7 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
     },
     "enable-metrics": {
       "name": "Enable Metrics",
-      "description": "Your searXNG instance will collect anonymous metrics about its own usage and performance. You can view these metrics by appending `/stats` or `/stats/errors` to your searXNG URL.",
+      "description": "Your SearXNG instance will collect anonymous metrics about its own usage and performance. You can view these metrics by appending `/stats` or `/stats/errors` to your SearXNG URL.",
       "type": "boolean",
       "default": true,
     } //,

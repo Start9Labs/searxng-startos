@@ -4,19 +4,18 @@ FROM caddy:2-alpine as caddy-builder
 
 FROM searxng/searxng:latest as runner
 
-# arm64 or amd64
-ARG PLATFORM
-ARG ARCH
-
 USER root
 
-RUN apk add tini bash git curl sudo yq && \
-    rm -f /var/cache/apk/* && \
-    mkdir -p /var/lib/redis && mkdir -p /etc/caddy/ && mkdir -p /data && mkdir -p /config
+RUN apk add tini yq; \
+    rm -f /var/cache/apk/*
+RUN mkdir -p \
+    /var/lib/redis \
+    /etc/caddy \
+    /data \
+    /config \
+    /etc/searxng
 
 WORKDIR /etc/
-COPY searxng-docker/ .
-
 COPY --from=redis-builder /usr/local/bin/ /usr/local/bin/
 COPY --from=caddy-builder /etc/caddy/Caddyfile /etc/caddy/Caddyfile
 COPY --from=caddy-builder /data /data
