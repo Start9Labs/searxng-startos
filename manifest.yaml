@@ -1,7 +1,7 @@
 id: searxng 
 title: "SearXNG"
 version: 1.0.0.2
-release-notes: | 
+release-notes: |
   * Update SearXNG code to latest version from upstream
   * Fix for duckduckgo (access denied)
   * Minor code fixes and changes
