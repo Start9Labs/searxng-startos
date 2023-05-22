@@ -16,7 +16,7 @@ const yamlShape = object({
   }),
 })
 
-export const yamlFile = FileHelper.toml('/etc/searxng/settings.yml', yamlShape)
+export const yamlFile = FileHelper.yaml('/etc/searxng/settings.yml', yamlShape)
 
 export const defaultYaml: typeof yamlShape._TYPE = {
   use_default_settings: true,
