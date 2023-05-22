@@ -13,6 +13,8 @@ export const setInterfaces = sdk.setupInterfaces(
       name: 'Web UI',
       id: uiId,
       description: 'The web user interface of SearXNG',
+      hasPrimary: false,
+      disabled: false,
       ui: true,
       username: null,
       path: '',

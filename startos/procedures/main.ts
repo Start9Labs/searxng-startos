@@ -1,8 +1,5 @@
 import { sdk } from '../sdk'
-import {
-  checkPortListening,
-  runHealthScript,
-} from '@start9labs/start-sdk/lib/health/checkFns'
+import { checkPortListening } from '@start9labs/start-sdk/lib/health/checkFns'
 import { ExpectedExports } from '@start9labs/start-sdk/lib/types'
 import { HealthReceipt } from '@start9labs/start-sdk/lib/health/HealthReceipt'
 import { Daemons } from '@start9labs/start-sdk/lib/mainFn/Daemons'
@@ -41,12 +38,16 @@ export const main: ExpectedExports.main = sdk.setupMain(
         ready: {
           display: null,
           fn: async () =>
-            runHealthScript(effects, ['redis', '127.0.0.1:6379>', 'PING']),
+            sdk.healthCheck.runHealthScript(effects, [
+              'redis',
+              '127.0.0.1:6379>',
+              'PING',
+            ]),
         },
         requires: [],
       })
       .addDaemon('searxng', {
-        command: 'sh /usr/local/searxng/dockerfiles/docker-entrypoint.sh', // The command to start the daemon
+        command: 'sh /usr/local/searxng/dockerfiles/docker-entrypoint.sh',
         env: {
           SEARXNG_SECRET,
         },
