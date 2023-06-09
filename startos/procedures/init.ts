@@ -9,9 +9,17 @@ const install = sdk.setupInstall(async ({ effects, utils }) => {
 
 const uninstall = sdk.setupUninstall(async ({ effects, utils }) => {})
 
+const exportedValues = sdk.setupExports(({ effects, utils }) => {
+  return {
+    ui: [],
+    services: [],
+  }
+})
+
 export const { init, uninit } = sdk.setupInit(
   migrations,
   install,
   uninstall,
   setInterfaces,
+  exportedValues,
 )

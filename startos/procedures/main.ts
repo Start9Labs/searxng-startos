@@ -21,12 +21,9 @@ export const main: ExpectedExports.main = sdk.setupMain(
      * ======================== Daemons ========================
      */
 
-    const SEARXNG_SECRET = await effects.runCommand([
-      'openssl',
-      'rand',
-      '-hex',
-      '32',
-    ])
+    const SEARXNG_SECRET = (
+      await utils.childProcess.exec('openssl rand -hex 32')
+    ).stdout
 
     return Daemons.of({
       effects,
@@ -34,15 +31,14 @@ export const main: ExpectedExports.main = sdk.setupMain(
       healthReceipts,
     })
       .addDaemon('redis', {
-        command: ['redis-server', '--save ""', '--appendonly "no"'],
+        command: 'redis-server --save  "" --appendonly no',
         ready: {
           display: null,
           fn: async () =>
-            sdk.healthCheck.runHealthScript(effects, [
-              'redis',
-              '127.0.0.1:6379>',
-              'PING',
-            ]),
+            sdk.healthCheck.runHealthScript(
+              effects,
+              'redis 127.0.0.1:6379> PING',
+            ),
         },
         requires: [],
       })
