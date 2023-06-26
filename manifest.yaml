@@ -1,10 +1,10 @@
 id: searxng 
 title: "SearXNG"
-version: 1.0.0.2
+version: 2023.6.26
 release-notes: |
-  * Update SearXNG code to latest version from upstream
-  * Fix for duckduckgo (access denied)
-  * Minor code fixes and changes
+  * Updated SearXNG code to the latest version from upstream.
+  * Updated versioning to match upstream code.
+  * Simplified build process and made minor code fixes and changes.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"

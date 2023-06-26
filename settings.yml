@@ -11,6 +11,6 @@ redis:
   url: redis://searxng.embassy:6379/0
 general:
   debug: false
-  instance_name: "Embassy Search"
+  instance_name: "My SearXNG"
   contact_url: false
   enable_metrics: false

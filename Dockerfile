@@ -2,7 +2,7 @@ FROM redis:alpine as redis-builder
 
 FROM caddy:2-alpine as caddy-builder
 
-FROM searxng/searxng:latest as runner
+FROM searxng/searxng:2023.6.26-da7c3029 as runner
 
 USER root
 

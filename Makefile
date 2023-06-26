@@ -5,7 +5,7 @@ TS_FILES := $(shell find ./ -name \*.ts)
 # delete the target of a rule if it has changed and its recipe exits with a nonzero exit status
 .DELETE_ON_ERROR:
 
-all: verify
+all: submodule-update verify
 
 verify: $(PKG_ID).s9pk
 	@embassy-sdk verify s9pk $(PKG_ID).s9pk
@@ -14,7 +14,7 @@ verify: $(PKG_ID).s9pk
 
 install:
 ifeq (,$(wildcard ~/.embassy/config.yaml))
-	@echo; echo "You must define \"host: http://embassy-server-name.local\" in ~/.embassy/config.yaml config file first"; echo
+	@echo; echo "You must define \"host: http://server-name.local\" in ~/.embassy/config.yaml config file first"; echo
 else
 	embassy-cli package install $(PKG_ID).s9pk
 endif
@@ -31,6 +31,14 @@ clean:
 	rm -rf docker-images
 	rm -f $(PKG_ID).s9pk
 	rm -f scripts/*.js
+
+submodule-update:
+	@if [ -z "$(shell git submodule status | egrep -v '^ '|awk '{print $2}')" ]; then \
+		echo "\nAll submodules ready for build.\n"; \
+	else \
+		echo "\nPulling submodules...\n"; \
+		git submodule update --init --progress; \
+	fi
 
 scripts/embassy.js: $(TS_FILES)
 	deno bundle scripts/embassy.ts scripts/embassy.js
