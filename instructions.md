@@ -25,4 +25,4 @@ Fo more information on SearXNG and advanced usage instructions, check out the [o
 
 ## Allowing Others to Use Your SearXNG Instance (Uncle Jim)
 
-If you share your SearXNG address with friends or family, they gain the privacy benfits of using your instance to search the web.
+If you share your SearXNG address with friends or family, they gain the privacy benefits of using your instance to search the web.
