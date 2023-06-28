@@ -15,7 +15,7 @@ export SEARXNG_HOSTNAME=$(yq e '.public-host' /root/start9/config.yaml)
 export LAN_ADDRESS=$(yq e '.lan-address' /root/start9/config.yaml)
 export TOR_ADDRESS=$(yq e '.tor-address' /root/start9/config.yaml)
 export LETSENCRYPT_EMAIL=$(yq e '.email-address' /root/start9/config.yaml)
-export ENABLE_METRICS=$(yq e '.autocomplete' /root/start9/config.yaml)
+export ENABLE_METRICS=$(yq e '.enable-metrics' /root/start9/config.yaml)
 export ULTRA_SECRET_KEY=$(openssl rand -hex 32)
 export INSTANCE_NAME=$(yq e '.instance-name' /root/start9/config.yaml)
 if [ "$SEARXNG_HOSTNAME" = "null" ]; then 
@@ -30,11 +30,10 @@ fi
 export SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
 echo "SEARXNG_HOSTNAME=$SEARXNG_HOSTNAME" > /etc/.env
 echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> /etc/.env
-sed -i "s|ultrasecretkey|$ULTRA_SECRET_KEY|g" searxng/settings.yml
-sed -i "s|instance_name: .*|instance_name: $INSTANCE_NAME|g" searxng/settings.yml
-if $ENABLE_METRICS; then 
-  sed -i 's|enable_metrics: false|enable_metrics: true|g' searxng/settings.yml
-fi
+sed -i "s|ultrasecretkey|$ULTRA_SECRET_KEY|g" /etc/searxng/settings.yml
+sed -i "s|instance_name: .*|instance_name: $INSTANCE_NAME|g" /etc/searxng/settings.yml
+yq e ".general.enable_metrics = $ENABLE_METRICS" -i /etc/searxng/settings.yml
+touch /etc/searxng/limiter.toml
 touch /root/start9/stats.yaml
 echo 'version: 2' > /root/start9/stats.yaml
 echo 'data:' >> /root/start9/stats.yaml
