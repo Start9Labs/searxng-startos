@@ -1,7 +1,5 @@
 # Welcome to SearXNG!
 
-`SearXNG` is pronounced "serk-sing".
-
 ## Overview
 
 SearXNG is an Internet metasearch engine which aggregates results from more than 70 search services that also helps protect your privacy.
@@ -23,6 +21,6 @@ You can customize your SearXNG instance by visiting the `Preferences` button in 
 
 Fo more information on SearXNG and advanced usage instructions, check out the [official documentation](https://docs.searxng.org).
 
-## Allowing Others to Use Your SearXNG Instance (Uncle Jim)
+## Viewing Stats
 
-If you share your SearXNG address with friends or family, they gain the privacy benefits of using your instance to search the web.
+If you have enabled stats in config, you can visit your SearXNG URL followed by `/stats` and `/stats/errors` to view usage information about your SearXNG instance.
