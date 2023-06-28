@@ -1,5 +1,6 @@
-searxng.s9pk
-scripts/*.js
+*.s9pk
+procedures/*.js
+node_modules/
 .DS_Store
 .vscode/
-docker-images/
+docker-images
