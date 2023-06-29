@@ -21,7 +21,7 @@ jobs:
       - name: Get embassyOS Hash
         run: echo "EMBASSYHASH=$(git ls-remote https://github.com/Start9Labs/embassy-os --branch latest | awk '{ print $1}')" >> $GITHUB_ENV
       - name: Cache Packages
-        uses: actions/cache@v3
+        uses: buildjet/cache@v3
         id: packageCache
         with:
           path: |
