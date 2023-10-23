@@ -1,6 +1,6 @@
 # SearXNG Setup Guides
 ## Set SearX as Default Search in Browser (Desktop)
-1. Navigate to your Search page UI from the embassy services dashboard
+1. Navigate to your Search page UI from the StartOS services dashboard
 1. At the top of the browser Right Click on your SearXNG url
 1. At the bottom of the drop down Click Add "My SearXNG"
 1. Then using the Hamburger menu in the top right go to Settings > Search
