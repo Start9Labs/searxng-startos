@@ -8,8 +8,6 @@ _term() {
   kill -TERM "$searxng_process" 2>/dev/null
 }
 
-# Configuring SearXNG
-echo 'Configuring SearXNG...'
 export TOR_ONLY="false"
 export SEARXNG_HOSTNAME=$(yq e '.public-host' /root/start9/config.yaml)
 export LAN_ADDRESS=$(yq e '.lan-address' /root/start9/config.yaml)
@@ -37,12 +35,12 @@ touch /etc/searxng/limiter.toml
 touch /root/start9/stats.yaml
 echo 'version: 2' > /root/start9/stats.yaml
 echo 'data:' >> /root/start9/stats.yaml
-# Initializing Database
-echo 'Starting Redis...'
+
+printf "\n\n [i] Starting Redis ...\n\n"
 redis-server --save "" --appendonly "no" &
 redis_process=$!
 
-# Starting SearXNG
+printf "\n\n [i] Starting SearXNG ...\n\n"
 sh /usr/local/searxng/dockerfiles/docker-entrypoint.sh &
 searxng_process=$!
 
