@@ -1,11 +1,9 @@
 id: searxng
 title: "SearXNG"
-version: 2023.10.20.1
+version: 2023.10.20
 release-notes: |
   * Updated SearXNG code to the latest version from upstream.
-  * Updated versioning to match upstream code.
-  * Simplified build process and made minor code fixes and changes.
-  * Enable Metrics config setting fix
+  * Minor code fixes, cleanup and changes.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
 upstream-repo: "https://github.com/searxng/searxng-docker"
