@@ -60,6 +60,10 @@ jobs:
         run: |
           echo "## What's Changed" > change-log.txt
           yq e '.release-notes' manifest.yaml >> change-log.txt
+          echo "## SHA256 Hash" >> change-log.txt
+          echo '```' >> change-log.txt
+          sha256sum searxng.s9pk >> change-log.txt
+          echo '```' >> change-log.txt
       - name: Create Release
         uses: softprops/action-gh-release@v1
         env:
