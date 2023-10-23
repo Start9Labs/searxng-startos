@@ -31,7 +31,7 @@ main:
 health-checks:
   web-ui:
     name: Web UI
-    success-message: SearXNG is ready to visit in a web browser
+    success-message: SearXNG is accessible through a web browser
     type: script
 config:
   get:
