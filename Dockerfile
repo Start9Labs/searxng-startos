@@ -1,6 +1,6 @@
 FROM redis:alpine as redis-builder
 
-FROM searxng/searxng:2023.6.28-fd26f370
+FROM searxng/searxng:2023.10.20-01b5b9cb8
 
 USER root
 
