@@ -1,4 +1,4 @@
-searxng.s9pk
+*.s9pk
 scripts/*.js
 .DS_Store
 .vscode/

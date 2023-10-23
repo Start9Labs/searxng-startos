@@ -1,6 +1,11 @@
-# Wrapper for SearXNG
+<p align="center">
+  <img src="icon.png" alt="Project Logo" width="21%">
+</p>
 
-SearXNG is a privacy-preserving internet metasearch engine. You can run SearXNG on StartOS by installing an .s9pk file, or you can build your own .s9pk file by following the instuctions below.
+# SearXNG for StartOS
+
+[SearXNG](https://github.com/searxng/searxng) is a free internet metasearch engine which aggregates results from various search services and databases. Users are neither tracked nor profiled.
+This repository creates the `s9pk` package that is installed to run `SearXNG` on [StartOS](https://github.com/Start9Labs/start-os/).
 
 ## Dependencies
 
@@ -9,92 +14,53 @@ SearXNG is a privacy-preserving internet metasearch engine. You can run SearXNG 
 - [yq](https://mikefarah.gitbook.io/yq)
 - [deno](https://deno.land/)
 - [make](https://www.gnu.org/software/make/)
-- [embassy-sdk](https://github.com/Start9Labs/start-os/tree/master/backend)
-
-## Build enviroment
-Prepare your StartOS build enviroment. In this example we are using Ubuntu 20.04.
-
-1. Install docker
-```
-curl -fsSL https://get.docker.com -o- | bash
-sudo usermod -aG docker "$USER"
-exec sudo su -l $USER
-```
-2. Set buildx as the default builder
-```
-docker buildx install
-docker buildx create --use
-```
-3. Enable cross-arch emulated builds in docker
-```
-docker run --privileged --rm linuxkit/binfmt:v0.8
-```
-4. Install yq
-```
-sudo snap install yq
-```
-5. Install deno
-```
-sudo snap install deno
-```
-6. Install essentials build packages
-```
-sudo apt-get install -y build-essential openssl libssl-dev libc6-dev clang libclang-dev ca-certificates
-```
-7. Install Rust
-```
-curl https://sh.rustup.rs -sSf | sh
-# Choose nr 1 (default install)
-source $HOME/.cargo/env
-```
-8. Build and install StartOS SDK
-```
-cd ~/ && git clone --recursive https://github.com/Start9Labs/start-os.git
-cd start-os/backend/
-./install-sdk.sh
-embassy-sdk init
-```
-Now you are ready to build your **SearXNG** service
+- [start-sdk](https://github.com/Start9Labs/start-os/tree/sdk/backend)
 
 ## Cloning
 
-Clone the project locally. 
+Clone the SearXNG package repository locally.
 
 ```
-git clone https://github.com/Start9Labs/searxng-wrapper.git
-cd searxng-wrapper
-git submodule update --init
+git clone git@github.com:Start9Labs/searxng-startos.git
+cd searxng-startos
 ```
 
 ## Building
 
-To build the **SearXNG** package, run the following command:
+To build the **SearXNG** service as a universal package, run the following command:
 
 ```
 make
 ```
 
+Alternatively the package can be built for individual architectures by specifying the architecture as follows:
+
+```
+make x86
+```
+
+or
+
+```
+make arm
+```
+
 ## Installing (on StartOS)
 
-Run the following commands to determine successful install:
-> :information_source: Change server-name.local to your Start9 servers address
+Before installation, define `host: https://server-name.local` in your `~/.embassy/config.yaml` config file then run the following commands to determine successful install:
+
+> :information_source: Change server-name.local to your Start9 server address
 
 ```
-embassy-cli auth login
+start-cli auth login
 #Enter your StartOS password
-embassy-cli --host https://server-name.local package install searxng.s9pk
-```
-
-If you already have your `embassy-cli` config file setup with a default `host`,
-you can install simply by running:
-
-```
 make install
 ```
 
-> **Tip:** You can also install the searxng.s9pk using **Sideload Service** under the **System > MANAGE** section.
+**Tip:** You can also install the searxng.s9pk by sideloading it under the **StartOS > System > Sideload a Service** section.
+
 ## Verify Install
 
-Go to Services page, select **SearXNG**, configure and start the service.
+Go to your StartOS Services page, select **SearXNG**, configure and start the service.
 
-**Done!** 
+**Done!**

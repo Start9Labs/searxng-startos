@@ -5,7 +5,7 @@ release-notes: |
   * Updated SearXNG code to the latest version from upstream.
   * Minor code fixes, cleanup and changes.
 license: MIT
-wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
+wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
 support-site: "https://github.com/searxng/searxng-docker/issues"
 marketing-site: "https://docs.searxng.org"
