@@ -1,13 +1,11 @@
 id: searxng
 title: "SearXNG"
-version: 2023.6.28.1
+version: 2023.10.20
 release-notes: |
   * Updated SearXNG code to the latest version from upstream.
-  * Updated versioning to match upstream code.
-  * Simplified build process and made minor code fixes and changes.
-  * Enable Metrics config setting fix
+  * Minor code fixes, cleanup and changes.
 license: MIT
-wrapper-repo: "https://github.com/Start9Labs/searxng-wrapper"
+wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
 support-site: "https://github.com/searxng/searxng-docker/issues"
 marketing-site: "https://docs.searxng.org"
@@ -31,7 +29,7 @@ main:
 health-checks:
   web-ui:
     name: Web UI
-    success-message: SearXNG is ready to visit in a web browser
+    success-message: SearXNG is accessible through a web browser
     type: script
 config:
   get:

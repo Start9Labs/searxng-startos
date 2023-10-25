@@ -1,17 +1,16 @@
-FROM redis:alpine as redis-builder
+FROM redis:alpine as redis
 
-FROM searxng/searxng:2023.6.28-fd26f370
+FROM searxng/searxng:2023.10.20-01b5b9cb8
 
 USER root
 
-RUN apk add tini yq; \
+RUN apk add --no-cache yq; \
     rm -f /var/cache/apk/*
 RUN mkdir -p \
     /var/lib/redis \
     /etc/searxng
 
 WORKDIR /etc/
-COPY --from=redis-builder /usr/local/bin/ /usr/local/bin/
+COPY --chmod=755 docker_entrypoint.sh /usr/local/bin/
+COPY --from=redis /usr/local/bin/ /usr/local/bin/
 COPY settings.yml searxng/settings.yml
-ADD docker_entrypoint.sh /usr/local/bin/docker_entrypoint.sh
-RUN chmod a+x /usr/local/bin/*.sh
