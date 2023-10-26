@@ -1,6 +1,6 @@
 id: searxng
 title: "SearXNG"
-version: 2023.10.20
+version: 2023.10.22
 release-notes: |
   * Updated SearXNG code to the latest version from upstream.
   * Minor code fixes, cleanup and changes.
