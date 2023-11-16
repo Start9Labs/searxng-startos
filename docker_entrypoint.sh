@@ -8,7 +8,7 @@ _term() {
   kill -TERM "$searxng_process" 2>/dev/null
 }
 
-export TOR_ONLY="false"
+export TOR_ONLY=$(yq e '.tor-url' /root/start9/config.yaml)
 export SEARXNG_HOSTNAME=$(yq e '.public-host' /root/start9/config.yaml)
 export LAN_ADDRESS=$(yq e '.lan-address' /root/start9/config.yaml)
 export TOR_ADDRESS=$(yq e '.tor-address' /root/start9/config.yaml)

@@ -21,12 +21,6 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
     target: "lan-address",
     interface: "main",
   },
-  // "tor-only": {
-  //   "name": "Enable Tor",
-  //   "description": "Enables your search engine on the Tor Network.",
-  //   "type": "boolean",
-  //   "default": false,
-  // },
   // "autocomplete": {
   //   "name": "Enable Autocomplete",
   //   "description": "Turns on autocomplete when using SearXNG. This will send data to your Start9 server while typing, before pressing the search button and use multiple known search engines to return frequently searched terms. Note: This will decrease performance of the website when typing, and will make calls to the search engines before the search button is pressed.",
@@ -41,6 +35,12 @@ export const getConfig: T.ExpectedExports.getConfig = compat.getConfig({
     nullable: false,
     default: "My SearXNG Engine",
     placeholder: "Uncle Jim SearXNG Engine",
+  },
+  "tor-url": {
+    "name": "Enable Tor address as the base URL",
+    "description": "Activates the utilization of a .onion address as the primary URL, particularly beneficial for publicly hosted instances over the Tor network.",
+    "type": "boolean",
+    "default": false,
   },
   "enable-metrics": {
     name: "Enable Stats",
