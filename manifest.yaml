@@ -4,6 +4,7 @@ version: 2023.11.14
 release-notes: |
   * Updated SearXNG code to the latest version from upstream.
   * Added option to set a Tor address as the base URL.
+  * Slightly adjusted timeout.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
