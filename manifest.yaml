@@ -2,9 +2,11 @@ id: searxng
 title: "SearXNG"
 version: 2024.1.9
 release-notes: |
-  * Updated SearXNG code to the latest version from upstream.
-  * Added option to set a Tor address as the base URL.
-  * Slightly adjusted timeout.
+  - Updated SearXNG code to the latest version from upstream.
+
+  > `Highlights`
+  - New engines have been implemented: `mdn`, `fyyd`, `podcastindex`, and `rottentomatoes`.
+  - `stract` (beta) has been added and can be chosen as both an autocompleter and engine. 
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
