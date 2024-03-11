@@ -24,5 +24,5 @@ export const migration: T.ExpectedExports.migration =
         ),
       },
     },
-    "2024.1.9"
+    "2024.3.10"
   );

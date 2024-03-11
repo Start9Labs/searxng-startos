@@ -1,12 +1,12 @@
 id: searxng
 title: "SearXNG"
-version: 2024.1.9
+version: 2024.3.10
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > `Highlights`
-  - New engines have been implemented: `mdn`, `fyyd`, `podcastindex`, and `rottentomatoes`.
-  - `stract` (beta) has been added and can be chosen as both an autocompleter and engine. 
+  - Use latest Alpine 3.19 as buildbase
+  - New engines have been implemented: `goodreads`, `ask.com`, and `mullvad leta`.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
