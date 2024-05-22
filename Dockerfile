@@ -1,6 +1,6 @@
 FROM redis:alpine as redis
 
-FROM searxng/searxng:2024.3.10-707d6270c
+FROM searxng/searxng:2024.5.17-ec41b5358
 
 USER root
 

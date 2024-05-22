@@ -1,12 +1,14 @@
 id: searxng
 title: "SearXNG"
-version: 2024.3.10
+version: 2024.5.17
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > `Highlights`
-  - Use latest Alpine 3.19 as buildbase
-  - New engines have been implemented: `goodreads`, `ask.com`, and `mullvad leta`.
+  - New search engines: cargo search (crates.io), Hex.pm, Searchmysite, Gitea, Open Meteo, LibreTranslate, Mullvad Leta.
+  - New plugins: unit converter, calculator.
+  - Wikimedia Commons support for media files.
+  - Added keybindings for copying URLs in Hotkeys. Press "h" key on main or result page to get help.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
@@ -29,6 +31,10 @@ main:
   args: []
   mounts:
     main: /root
+hardware-requirements:
+  arch:
+    - x86_64
+    - aarch64
 health-checks:
   web-ui:
     name: Web UI
