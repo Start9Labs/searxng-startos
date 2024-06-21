@@ -1,14 +1,16 @@
 id: searxng
 title: "SearXNG"
-version: 2024.5.17
+version: 2024.6.20
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > `Highlights`
-  - New search engines: cargo search (crates.io), Hex.pm, Searchmysite, Gitea, Open Meteo, LibreTranslate, Mullvad Leta.
-  - New plugins: unit converter, calculator.
-  - Wikimedia Commons support for media files.
-  - Added keybindings for copying URLs in Hotkeys. Press "h" key on main or result page to get help.
+  - Implemented dedicated module for Mojeek.
+  - Added engines for discourse forums (python, caddy, pi-hole).
+  - Added reusable function to filter text.
+  - Fixed issue of showing DDG IP from zero click.
+  - Implemented FindThatMeme engine.
+  - Added instant answers from DuckDuckGo.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
