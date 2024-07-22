@@ -1,16 +1,14 @@
 id: searxng
 title: "SearXNG"
-version: 2024.6.20
+version: 2024.7.20
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > `Highlights`
-  - Implemented dedicated module for Mojeek.
-  - Added engines for discourse forums (python, caddy, pi-hole).
-  - Added reusable function to filter text.
-  - Fixed issue of showing DDG IP from zero click.
-  - Implemented FindThatMeme engine.
-  - Added instant answers from DuckDuckGo.
+  - Image updated to use Alpine 3.20 and Python 3.12.
+  - Support for Alpine Linux packages searches `!alp`
+  - Fixed URL display issues in Firefox simple theme.
+  - Flag icon repositioned in language selection.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
