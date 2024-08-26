@@ -1,14 +1,15 @@
 id: searxng
 title: "SearXNG"
-version: 2024.7.20
+version: 2024.8.21
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > `Highlights`
-  - Image updated to use Alpine 3.20 and Python 3.12.
-  - Support for Alpine Linux packages searches `!alp`
-  - Fixed URL display issues in Firefox simple theme.
-  - Flag icon repositioned in language selection.
+  - New Search Engines: Now includes Yandex and Encyclosearch for more search options.
+  - Improved Translations: Added French and updated other languages for better accessibility.
+  - Faster Searches: Enhanced performance and fixed bugs in Google, Tineye, and other engines.
+  - Cleaner Interface: Easier to clear search boxes and smoother user experience.
+  - Up-to-Date Security: Latest updates for a more secure and stable experience.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
