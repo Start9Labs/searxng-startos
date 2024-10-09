@@ -1,15 +1,14 @@
 id: searxng
 title: "SearXNG"
-version: 2024.8.21
+version: 2024.10.4
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > `Highlights`
-  - New Search Engines: Now includes Yandex and Encyclosearch for more search options.
-  - Improved Translations: Added French and updated other languages for better accessibility.
-  - Faster Searches: Enhanced performance and fixed bugs in Google, Tineye, and other engines.
-  - Cleaner Interface: Easier to clear search boxes and smoother user experience.
-  - Up-to-Date Security: Latest updates for a more secure and stable experience.
+  - **Black Theme**: A new, pure black theme option is now available for a sleek, modern look.
+  - **More Languages & Regions**: Added support for more languages and regions to improve search accuracy and customization.
+  - **Outdated Engines Removed**: Removed old, unsupported search engines for a cleaner, more streamlined experience.
+  - **Regular Updates & Security**: Frequent updates ensure compatibility with the latest software, keeping everything secure and up-to-date.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
