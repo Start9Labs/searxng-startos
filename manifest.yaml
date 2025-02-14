@@ -1,16 +1,15 @@
 id: searxng
 title: "SearXNG"
-version: 2024.11.29
+version: 2025.2.12
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
-  - Update bundling process to use Deno emit module
 
   > **Highlights**
-    - **Improved search results**: Fixed issues with DuckDuckGo and Google search engines, removing unwanted HTML tags and improving result quality.
-    - **Enhanced image search**: Fixed stretching issues in image search results and improved thumbnail handling across various image sources.
-    - **New search sources**: Added Adobe Stock (photos, videos, audio) and OpenLibrary search capabilities.
-    - **Browser integration**: Added new RSS viewing features for better browser compatibility.
-    - **General improvements**: Updated various components for better performance and fixed several currency conversion issues.
+    - **Better Media Results**: Fixed video dates, Openverse API, and restored Wikidata links.
+    - **More Languages**: Added Irish support and updated translations.
+    - **New Search Options**: Added NixOS Wiki, ipernity images, and Baidu autocompletion.
+    - **Smoother Mobile Use**: Improved gallery swipes, back button, and mobile views.
+    - **Fewer Bugs**: Fixed crashes, hostname errors, and updated security.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
