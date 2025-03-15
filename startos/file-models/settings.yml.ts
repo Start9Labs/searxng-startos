@@ -2,6 +2,7 @@ import { matches, FileHelper } from '@start9labs/start-sdk'
 import { defaultSettings } from '../utils'
 
 const { object, string, literal, boolean, number } = matches
+
 const { use_default_settings, server, ui, redis, general, outgoing } =
   defaultSettings
 

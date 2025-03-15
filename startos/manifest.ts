@@ -13,7 +13,6 @@ export const manifest = setupManifest({
     short: 'Privacy-preserving internet metasearch engine.',
     long: 'SearXNG is an Internet metasearch engine that aggregates results from more than 70 search services. It also helps protect your privacy by withholding sensitive metadata from the underlying search services. Your SearXNG instance is highly configurable, and can even be shared with friends and family.',
   },
-  assets: [],
   volumes: ['main'],
   images: {
     redis: {

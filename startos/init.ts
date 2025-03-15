@@ -9,7 +9,7 @@ import { defaultSettings } from './utils'
 
 // **** Install ****
 const install = sdk.setupInstall(async ({ effects }) => {
-  await yamlFile.write(defaultSettings)
+  await yamlFile.write(effects, defaultSettings)
 })
 
 // **** Uninstall ****
