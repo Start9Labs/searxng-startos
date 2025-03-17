@@ -4,12 +4,17 @@ import { setDependencies } from './dependencies'
 import { setInterfaces } from './interfaces'
 import { versions } from './versions'
 import { actions } from './actions'
-import { yamlFile } from './file-models/settings.yml'
+import { config } from './actions/config'
 import { defaultSettings } from './utils'
+import { yamlFile } from './file-models/settings.yml'
 
 // **** Install ****
 const install = sdk.setupInstall(async ({ effects }) => {
   await yamlFile.write(effects, defaultSettings)
+  // TODO test to ensure this action gets fired on initial install and if base url is deleted via ssh
+  yamlFile.read.onChange(async (file) => {
+    if (!file?.server.base_url) await sdk.action.requestOwn(effects, config, 'critical')
+  })
 })
 
 // **** Uninstall ****

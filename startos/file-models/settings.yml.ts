@@ -13,6 +13,7 @@ const shape = object({
     secret_key: string.onMismatch(server.secret_key), // update
     limiter: boolean.onMismatch(server.limiter), // can be disabled for a private instance
     image_proxy: literal(server.image_proxy).onMismatch(server.image_proxy),
+    base_url: string.onMismatch(server.base_url)
   }),
   ui: object({
     static_use_hash: literal(ui.static_use_hash).onMismatch(ui.static_use_hash),

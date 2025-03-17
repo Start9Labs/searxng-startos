@@ -3,46 +3,37 @@ import { T } from '@start9labs/start-sdk'
 import { uiPort } from './utils'
 
 export const main = sdk.setupMain(async ({ effects, started }) => {
-  /**
-   * ======================== Setup (optional) ========================
-   *
-   * In this section, we fetch any resources or run any desired preliminary commands.
-   */
   console.info('Starting SearXNG!')
 
-  /**
-   * ======================== Additional Health Checks (optional) ========================
-   *
-   * In this section, we define *additional* health checks beyond those included with each daemon (below).
-   */
-  const healthReceipts: T.HealthCheck[] = []
+  const additionalChecks: T.HealthCheck[] = []
 
-  /**
-   * ======================== Daemons ========================
-   *
-   * In this section, we create one or more daemons that define the service runtime.
-   *
-   * Each daemon defines its own health check, which can optionally be exposed to the user.
-   */
-  return sdk.Daemons.of(effects, started, healthReceipts)
+  const redisContainer = await sdk.SubContainer.of(
+    effects,
+    { imageId: 'redis' },
+    'primary',
+  )
+
+  return sdk.Daemons.of(effects, started, additionalChecks)
     .addDaemon('redis', {
-      subcontainer: { imageId: 'redis' },
-      command: ['hello-world'],
+      subcontainer: redisContainer,
+      command: ['redis-server', '--save', `""`, '--appendonly', `"no"`],
       mounts: sdk.Mounts.of().addVolume('main', null, '/data', false),
       ready: {
         display: null,
-        fn: () =>
-          // @TODO need a health check for redis
-          sdk.healthCheck.checkPortListening(effects, uiPort, {
-            successMessage: 'The web interface is ready',
-            errorMessage: 'The web interface is not ready',
-          }),
+        fn: async () => {
+          const res = await redisContainer.exec(['redis-cli', 'ping'])
+          return res.stdout === 'PONG'
+            ? // no message needed since display is null
+              { message: '', result: 'success' }
+            : { message: '', result: 'failure' }
+        },
       },
       requires: [],
     })
     .addDaemon('searxng', {
       subcontainer: { imageId: 'searx' },
-      command: ['hello-world'],
+      // TODO how do we use entrypoint command in upstream Dockerfile
+      command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],
       mounts: sdk.Mounts.of().addVolume('main', null, '/data', false),
       ready: {
         display: 'Web Interface',
