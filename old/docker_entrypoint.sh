@@ -12,7 +12,7 @@ export TOR_ONLY=$(yq e '.tor-url' /root/start9/config.yaml)
 export SEARXNG_HOSTNAME=$(yq e '.public-host' /root/start9/config.yaml)
 export LAN_ADDRESS=$(yq e '.lan-address' /root/start9/config.yaml)
 export TOR_ADDRESS=$(yq e '.tor-address' /root/start9/config.yaml)
-export LETSENCRYPT_EMAIL=$(yq e '.email-address' /root/start9/config.yaml)
+# export LETSENCRYPT_EMAIL=$(yq e '.email-address' /root/start9/config.yaml)
 export ENABLE_METRICS=$(yq e '.enable-metrics' /root/start9/config.yaml)
 export ULTRA_SECRET_KEY=$(openssl rand -hex 32)
 export INSTANCE_NAME=$(yq e '.instance-name' /root/start9/config.yaml)
@@ -25,9 +25,9 @@ if $TOR_ONLY; then
   export SEARXNG_HOSTNAME=http://$TOR_ADDRESS
   export SEARXNG_BASE_URL=http://$TOR_ADDRESS/
 fi
-export SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
+# export SEARXNG_TLS=${LETSENCRYPT_EMAIL:-internal}
 echo "SEARXNG_HOSTNAME=$SEARXNG_HOSTNAME" > /etc/.env
-echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> /etc/.env
+# echo "LETSENCRYPT_EMAIL=$LETSENCRYPT_EMAIL" >> /etc/.env
 sed -i "s|ultrasecretkey|$ULTRA_SECRET_KEY|g" /etc/searxng/settings.yml
 sed -i "s|instance_name: .*|instance_name: $INSTANCE_NAME|g" /etc/searxng/settings.yml
 yq e ".general.enable_metrics = $ENABLE_METRICS" -i /etc/searxng/settings.yml
