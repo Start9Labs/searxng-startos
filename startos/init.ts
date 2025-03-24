@@ -13,7 +13,10 @@ const install = sdk.setupInstall(async ({ effects }) => {
   await yamlFile.write(effects, defaultSettings)
   // TODO test to ensure this action gets fired on initial install and if base url is deleted via ssh
   yamlFile.read.onChange(async (file) => {
-    if (!file?.server.base_url) await sdk.action.requestOwn(effects, config, 'critical')
+    if (!file?.server.base_url)
+      await sdk.action.requestOwn(effects, config, 'critical', {
+        reason: 'Configure SearXNG before starting for the first time',
+      })
   })
 })
 
