@@ -3,7 +3,7 @@ import { setupManifest } from '@start9labs/start-sdk'
 export const manifest = setupManifest({
   id: 'searxng',
   title: 'SearXNG',
-  license: 'mit',
+  license: 'MIT',
   wrapperRepo: 'https://github.com/Start9Labs/searxng-startos',
   upstreamRepo: 'https://github.com/searxng/searxng-docker',
   supportSite: 'https://github.com/searxng/searxng-docker/issues',
@@ -17,7 +17,7 @@ export const manifest = setupManifest({
   images: {
     redis: {
       source: {
-        dockerTag: 'redis:alpine',
+        dockerTag: 'valkey/valkey:8-alpine',
       },
     },
     searx: {
