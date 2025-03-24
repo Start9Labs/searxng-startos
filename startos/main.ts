@@ -19,20 +19,19 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       command: ['redis-server', '--save', ``, '--appendonly', `no`],
       mounts: sdk.Mounts.of(),
       ready: {
-        display: 'Redis',
+        display: null,
         fn: async () => {
           const res = await redisContainer.exec(['redis-cli', 'ping'])
-          return res.stdout === 'PONG'
+          return res.stdout.toString().trim() === 'PONG'
             ? // no message needed since display is null
               { message: '', result: 'success' }
-            : { message: JSON.stringify(res.stdout), result: 'failure' }
+            : { message: '', result: 'failure' }
         },
       },
       requires: [],
     })
     .addDaemon('searxng', {
       subcontainer: { imageId: 'searx' },
-      // TODO how do we use entrypoint command in upstream Dockerfile
       command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],
       mounts: sdk.Mounts.of().addVolume('main', null, '/etc/searxng', false),
       ready: {
