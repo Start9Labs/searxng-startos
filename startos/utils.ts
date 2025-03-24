@@ -1,4 +1,4 @@
-import { Effects } from "@start9labs/start-sdk/base/lib/Effects"
+import { Effects } from '@start9labs/start-sdk/base/lib/Effects'
 import { sdk } from './sdk'
 
 export const uiPort = 80
@@ -9,7 +9,7 @@ export const defaultSettings = {
     secret_key: 'hmmm', // update
     limiter: false, // can be disabled for a private instance
     image_proxy: true,
-    base_url: ''
+    base_url: '',
   },
   ui: {
     static_use_hash: true,
@@ -30,9 +30,7 @@ export const defaultSettings = {
 export async function getPrimaryInterfaceUrls(
   effects: Effects,
 ): Promise<string[]> {
-  const httpInterface = await sdk.serviceInterface
-    .getOwn(effects, 'primary')
-    .const()
+  const httpInterface = await sdk.serviceInterface.getOwn(effects, 'ui').const()
 
   return httpInterface?.addressInfo?.urls || []
 }
