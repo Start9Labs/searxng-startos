@@ -1,7 +1,7 @@
 import { Effects } from '@start9labs/start-sdk/base/lib/Effects'
 import { sdk } from './sdk'
 
-export const uiPort = 80
+export const uiPort = 8080
 
 export const defaultSettings = {
   use_default_settings: true,
