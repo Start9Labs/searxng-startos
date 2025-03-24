@@ -19,13 +19,13 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       command: ['redis-server', '--save', ``, '--appendonly', `no`],
       mounts: sdk.Mounts.of(),
       ready: {
-        display: null,
+        display: 'Redis',
         fn: async () => {
           const res = await redisContainer.exec(['redis-cli', 'ping'])
           return res.stdout.toString().trim() === 'PONG'
             ? // no message needed since display is null
               { message: '', result: 'success' }
-            : { message: '', result: 'failure' }
+            : { message: res.stdout.toString().trim(), result: 'failure' }
         },
       },
       requires: [],
