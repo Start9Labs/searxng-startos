@@ -24,5 +24,5 @@ export const migration: T.ExpectedExports.migration =
         ),
       },
     },
-    "2025.2.12"
+    "2025.3.21"
   );

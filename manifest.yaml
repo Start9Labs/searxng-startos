@@ -1,15 +1,15 @@
 id: searxng
 title: "SearXNG"
-version: 2025.2.12
+version: 2025.3.21
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > **Highlights**
-    - **Better Media Results**: Fixed video dates, Openverse API, and restored Wikidata links.
-    - **More Languages**: Added Irish support and updated translations.
-    - **New Search Options**: Added NixOS Wiki, ipernity images, and Baidu autocompletion.
-    - **Smoother Mobile Use**: Improved gallery swipes, back button, and mobile views.
-    - **Fewer Bugs**: Fixed crashes, hostname errors, and updated security.
+    - **Better Answer Results**: Fixed source URLs for instant answers and reduced duplicate information in DuckDuckGo responses.
+    - **Expanded Chinese Content**: Added Baidu Images, Sogou WeChat articles, 360search, and video platforms AcFun/iQiyi support.
+    - **Improved Video Playback**: Fixed duration displays and metadata for Presearch videos, plus Bilibili embedded stream support.
+    - **Smarter Interface**: Added dynamic height adjustment in Simple theme and better mobile display optimization.
+    - **More Language Support**: Updated translations for 25+ languages and improved non-English search compatibility.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
