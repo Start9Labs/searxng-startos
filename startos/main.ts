@@ -7,21 +7,21 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
 
   const additionalChecks: T.HealthCheck[] = []
 
-  const redisContainer = await sdk.SubContainer.of(
+  const redisSub = await sdk.SubContainer.of(
     effects,
     { imageId: 'redis' },
-    'primary',
+    null,
+    'redis-sub',
   )
 
   return sdk.Daemons.of(effects, started, additionalChecks)
     .addDaemon('redis', {
-      subcontainer: redisContainer,
+      subcontainer: redisSub,
       command: ['redis-server', '--save', ``, '--appendonly', `no`],
-      mounts: sdk.Mounts.of(),
       ready: {
         display: 'Redis',
         fn: async () => {
-          const res = await redisContainer.exec(['redis-cli', 'ping'])
+          const res = await redisSub.exec(['redis-cli', 'ping'])
           return res.stdout.toString().trim() === 'PONG'
             ? // no message needed since display is null
               { message: '', result: 'success' }
@@ -31,9 +31,13 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       requires: [],
     })
     .addDaemon('searxng', {
-      subcontainer: { imageId: 'searx' },
+      subcontainer: await sdk.SubContainer.of(
+        effects,
+        { imageId: 'searx' },
+        sdk.Mounts.of().addVolume('main', null, '/etc/searxng', false),
+        'searx-sub',
+      ),
       command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],
-      mounts: sdk.Mounts.of().addVolume('main', null, '/etc/searxng', false),
       ready: {
         display: 'Web Interface',
         fn: () =>

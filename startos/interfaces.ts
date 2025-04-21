@@ -22,7 +22,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
     }),
   )
   // TODO test that this interface is active only if metrics are enabled
-  yamlFile.read.onChange((settings) => {
+  yamlFile.read.onChange(effects, (settings) => {
     if (settings?.general.enable_metrics) {
       toExport.push(
         sdk.createInterface(effects, {
@@ -39,7 +39,6 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
       )
     }
   })
-
   const uiReceipt = await uiMultiOrigin.export(toExport)
 
   return [uiReceipt]

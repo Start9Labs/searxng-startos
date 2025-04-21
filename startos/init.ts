@@ -1,5 +1,5 @@
 import { sdk } from './sdk'
-import { exposedStore } from './store'
+import { exposedStore, initStore } from './store'
 import { setDependencies } from './dependencies'
 import { setInterfaces } from './interfaces'
 import { versions } from './versions'
@@ -8,11 +8,15 @@ import { config } from './actions/config'
 import { defaultSettings } from './utils'
 import { yamlFile } from './file-models/settings.yml'
 
-// **** Install ****
-const install = sdk.setupInstall(async ({ effects }) => {
+// **** Pre Install ****
+const preInstall = sdk.setupPreInstall(async ({ effects }) => {
   await yamlFile.write(effects, defaultSettings)
+})
+
+// **** Post Install ****
+const postInstall = sdk.setupPostInstall(async ({ effects }) => {
   // TODO test to ensure this action gets fired on initial install and if base url is deleted via ssh
-  yamlFile.read.onChange(async (file) => {
+  yamlFile.read.onChange(effects, async (file) => {
     if (!file?.server.base_url)
       await sdk.action.requestOwn(effects, config, 'critical', {
         reason: 'Configure SearXNG before starting for the first time',
@@ -28,10 +32,12 @@ const uninstall = sdk.setupUninstall(async ({ effects }) => {})
  */
 export const { packageInit, packageUninit, containerInit } = sdk.setupInit(
   versions,
-  install,
+  preInstall,
+  postInstall,
   uninstall,
   setInterfaces,
   setDependencies,
   actions,
+  initStore,
   exposedStore,
 )
