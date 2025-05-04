@@ -9,19 +9,19 @@ This repository creates the `s9pk` package that is installed to run `SearXNG` on
 
 ## Dependencies
 
+Prior to building the `searxng.s9pk` package, it's essential to configure your build environment for StartOS services. You can find instructions on how to set up the appropriate build environment in the [Packaging Guide](https://staging.docs.start9.com/packaging-guide/).
+
 - [docker](https://docs.docker.com/get-docker)
 - [docker-buildx](https://docs.docker.com/buildx/working-with-buildx/)
-- [yq](https://mikefarah.gitbook.io/yq)
-- [deno](https://deno.land/)
 - [make](https://www.gnu.org/software/make/)
-- [start-sdk](https://github.com/Start9Labs/start-os/tree/sdk/backend)
+- [start-cli](https://github.com/Start9Labs/start-cli/)
 
 ## Cloning
 
 Clone the SearXNG package repository locally.
 
 ```
-git clone git@github.com:Start9Labs/searxng-startos.git
+git clone https://github.com/Start9Labs/searxng-startos.git
 cd searxng-startos
 ```
 
@@ -33,31 +33,17 @@ To build the **SearXNG** service as a universal package, run the following comma
 make
 ```
 
-Alternatively the package can be built for individual architectures by specifying the architecture as follows:
-
-```
-make x86
-```
-
-or
-
-```
-make arm
-```
-
 ## Installing (on StartOS)
 
-Before installation, define `host: https://server-name.local` in your `~/.embassy/config.yaml` config file then run the following commands to determine successful install:
+Before installation, define `host: https://server-name.local` in your `~/.startos/config.yaml` config file then run the following commands to determine successful install:
 
 > :information_source: Change server-name.local to your Start9 server address
 
 ```
-start-cli auth login
-#Enter your StartOS password
 make install
 ```
 
-**Tip:** You can also install the searxng.s9pk by sideloading it under the **StartOS > System > Sideload a Service** section.
+**Tip:** You can also install the `searxng.s9pk` by using the **Sideload** tab available in the top menu of the StartOS UI.
 
 ## Verify Install
 
