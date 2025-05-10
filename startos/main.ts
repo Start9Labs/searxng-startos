@@ -34,7 +34,12 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       subcontainer: await sdk.SubContainer.of(
         effects,
         { imageId: 'searx' },
-        sdk.Mounts.of().addVolume('main', null, '/etc/searxng', false),
+        sdk.Mounts.of().mountVolume({
+          volumeId: 'main',
+          subpath: null,
+          mountpoint: '/etc/searxng',
+          readonly: false,
+        }),
         'searx-sub',
       ),
       command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],

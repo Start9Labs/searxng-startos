@@ -59,12 +59,14 @@ export const config = sdk.Action.withInput(
 
   // optionally pre-fill the input form
   async ({ effects }) => {
-    const { general, server } = (await yamlFile.read.const(effects))!
-    return {
-      instance_name: general.instance_name,
-      base_url: server.base_url,
-      enable_metrics: general.enable_metrics,
-    }
+    const yaml = await yamlFile.read().once()
+    return yaml
+      ? {
+          instance_name: yaml.general.instance_name,
+          base_url: yaml.server.base_url,
+          enable_metrics: yaml.general.enable_metrics,
+        }
+      : {}
   },
 
   // the execution function
