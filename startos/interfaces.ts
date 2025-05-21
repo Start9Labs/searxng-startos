@@ -1,4 +1,4 @@
-import { yamlFile } from './file-models/settings.yml'
+import { settingsYaml } from './fileModels/settings.yml'
 import { sdk } from './sdk'
 import { uiPort } from './utils'
 
@@ -18,11 +18,11 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
       schemeOverride: null,
       username: null,
       path: '',
-      search: {},
+      query: {},
     }),
   )
   // TODO test that this interface is active only if metrics are enabled
-  yamlFile
+  settingsYaml
     .read((s) => s.general?.enable_metrics)
     .onChange(effects, (enable_metrics) => {
       if (enable_metrics) {
@@ -36,7 +36,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
             schemeOverride: null,
             username: null,
             path: '/stats',
-            search: {},
+            query: {},
           }),
         )
       }

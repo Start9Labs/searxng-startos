@@ -1,4 +1,4 @@
-import { yamlFile } from '../file-models/settings.yml'
+import { settingsYaml } from '../fileModels/settings.yml'
 import { sdk } from '../sdk'
 import { getPrimaryInterfaceUrls, defaultSettings } from '../utils'
 
@@ -59,7 +59,7 @@ export const config = sdk.Action.withInput(
 
   // optionally pre-fill the input form
   async ({ effects }) => {
-    const yaml = await yamlFile.read().once()
+    const yaml = await settingsYaml.read().once()
     return yaml
       ? {
           instance_name: yaml.general.instance_name,
@@ -71,7 +71,7 @@ export const config = sdk.Action.withInput(
 
   // the execution function
   async ({ effects, input }) =>
-    yamlFile.merge(effects, {
+    settingsYaml.merge(effects, {
       general: {
         instance_name: input.instance_name,
         enable_metrics: input.enable_metrics,
