@@ -32,6 +32,9 @@ const shape = object({
 })
 
 export const settingsYaml = FileHelper.yaml(
-  '/media/startos/volumes/main/settings.yml',
+  {
+    volumeId: 'main',
+    subpath: 'settings.yml',
+  },
   shape,
 )
