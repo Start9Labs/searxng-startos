@@ -40,9 +40,9 @@ export const inputSpec = InputSpec.of({
   }),
 })
 
-export const config = sdk.Action.withInput(
+export const setConfig = sdk.Action.withInput(
   // id
-  'config',
+  'set-config',
 
   // metadata
   async ({ effects }) => ({

@@ -17,7 +17,7 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
   return sdk.Daemons.of(effects, started, additionalChecks)
     .addDaemon('redis', {
       subcontainer: redisSub,
-      command: ['redis-server', '--save', ``, '--appendonly', `no`],
+      exec: { command: ['redis-server', '--save', ``, '--appendonly', `no`] },
       ready: {
         display: 'Redis',
         fn: async () => {
@@ -42,7 +42,9 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
         }),
         'searx-sub',
       ),
-      command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],
+      exec: {
+        command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],
+      },
       ready: {
         display: 'Web Interface',
         fn: () =>
