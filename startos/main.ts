@@ -1,11 +1,8 @@
 import { sdk } from './sdk'
-import { T } from '@start9labs/start-sdk'
 import { uiPort } from './utils'
 
 export const main = sdk.setupMain(async ({ effects, started }) => {
-  console.info('Starting SearXNG!')
-
-  const additionalChecks: T.HealthCheck[] = []
+  console.info('[i] Starting SearXNG!')
 
   const redisSub = await sdk.SubContainer.of(
     effects,
@@ -14,7 +11,7 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
     'redis-sub',
   )
 
-  return sdk.Daemons.of(effects, started, additionalChecks)
+  return sdk.Daemons.of(effects, started)
     .addDaemon('redis', {
       subcontainer: redisSub,
       exec: { command: ['redis-server', '--save', ``, '--appendonly', `no`] },
@@ -33,14 +30,14 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
     .addDaemon('searxng', {
       subcontainer: await sdk.SubContainer.of(
         effects,
-        { imageId: 'searx' },
+        { imageId: 'searxng' },
         sdk.Mounts.of().mountVolume({
           volumeId: 'main',
           subpath: null,
           mountpoint: '/etc/searxng',
           readonly: false,
         }),
-        'searx-sub',
+        'searxng-sub',
       ),
       exec: {
         command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],

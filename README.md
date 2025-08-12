@@ -9,12 +9,12 @@ This repository creates the `s9pk` package that is installed to run `SearXNG` on
 
 ## Dependencies
 
+Prior to building the `SearXNG` package, it's essential to configure your build environment for StartOS services. You can find instructions on how to set up the appropriate build environment in the [Packaging Guide](https://staging.docs.start9.com/packaging-guide/).
+
 - [docker](https://docs.docker.com/get-docker)
 - [docker-buildx](https://docs.docker.com/buildx/working-with-buildx/)
-- [yq](https://mikefarah.gitbook.io/yq)
-- [deno](https://deno.land/)
 - [make](https://www.gnu.org/software/make/)
-- [start-sdk](https://github.com/Start9Labs/start-os/tree/sdk/backend)
+- [start-cli](https://github.com/Start9Labs/start-cli/)
 
 ## Cloning
 
@@ -47,13 +47,11 @@ make arm
 
 ## Installing (on StartOS)
 
-Before installation, define `host: https://server-name.local` in your `~/.embassy/config.yaml` config file then run the following commands to determine successful install:
+Before installation, define `host: https://server-name.local` in your `~/.startos/config.yaml` config file then run the following commands to determine successful install:
 
 > :information_source: Change server-name.local to your Start9 server address
 
 ```
-start-cli auth login
-#Enter your StartOS password
 make install
 ```
 
