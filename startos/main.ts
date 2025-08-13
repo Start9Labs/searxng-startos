@@ -4,21 +4,21 @@ import { uiPort } from './utils'
 export const main = sdk.setupMain(async ({ effects, started }) => {
   console.info('[i] Starting SearXNG!')
 
-  const redisSub = await sdk.SubContainer.of(
+  const valkeySub = await sdk.SubContainer.of(
     effects,
-    { imageId: 'redis' },
+    { imageId: 'valkey' },
     null,
-    'redis-sub',
+    'valkey-sub',
   )
 
   return sdk.Daemons.of(effects, started)
-    .addDaemon('redis', {
-      subcontainer: redisSub,
-      exec: { command: ['redis-server', '--save', ``, '--appendonly', `no`] },
+    .addDaemon('valkey', {
+      subcontainer: valkeySub,
+      exec: { command: ['valkey-server', '--save', ``, '--appendonly', `no`] },
       ready: {
-        display: 'Redis',
+        display: 'Valkey',
         fn: async () => {
-          const res = await redisSub.exec(['redis-cli', 'ping'])
+          const res = await valkeySub.exec(['valkey-cli', 'ping'])
           return res.stdout.toString().trim() === 'PONG'
             ? // no message needed since display is null
               { message: '', result: 'success' }
@@ -50,6 +50,6 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
             errorMessage: 'The web interface is not ready',
           }),
       },
-      requires: ['redis'],
+      requires: ['valkey'],
     })
 })

@@ -3,7 +3,7 @@ import { defaultSettings } from '../utils'
 
 const { object, string, literal, boolean, number } = matches
 
-const { use_default_settings, server, ui, redis, general, outgoing } =
+const { use_default_settings, server, ui, valkey, general, outgoing } =
   defaultSettings
 
 const shape = object({
@@ -18,8 +18,8 @@ const shape = object({
   ui: object({
     static_use_hash: literal(ui.static_use_hash).onMismatch(ui.static_use_hash),
   }),
-  redis: object({
-    url: literal(redis.url).onMismatch(redis.url),
+  valkey: object({
+    url: literal(valkey.url).onMismatch(valkey.url),
   }),
   general: object({
     debug: literal(general.debug).onMismatch(general.debug),

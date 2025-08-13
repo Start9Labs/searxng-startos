@@ -14,8 +14,8 @@ export const defaultSettings = {
   ui: {
     static_use_hash: true,
   },
-  redis: {
-    url: 'redis://searxng.embassy:6379/0', // TODO ask aiden if we can use unix sockets instead
+  valkey: {
+    url: 'valkey://searxng.embassy:6379/0', // TODO ask aiden if we can use unix sockets instead
   },
   general: {
     debug: false,

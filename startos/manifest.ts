@@ -27,7 +27,7 @@ export const manifest = setupManifest({
   },
   volumes: ['main'],
   images: {
-    redis: {
+    valkey: {
       source: {
         dockerTag: 'valkey/valkey:8-alpine',
       },
