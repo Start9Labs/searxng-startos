@@ -1,15 +1,15 @@
 id: searxng
 title: "SearXNG"
-version: 2025.3.21
+version: 2025.8.9
 release-notes: |
   - Updated SearXNG code to the latest version from upstream.
 
   > **Highlights**
-    - **Better Answer Results**: Fixed source URLs for instant answers and reduced duplicate information in DuckDuckGo responses.
-    - **Expanded Chinese Content**: Added Baidu Images, Sogou WeChat articles, 360search, and video platforms AcFun/iQiyi support.
-    - **Improved Video Playback**: Fixed duration displays and metadata for Presearch videos, plus Bilibili embedded stream support.
-    - **Smarter Interface**: Added dynamic height adjustment in Simple theme and better mobile display optimization.
-    - **More Language Support**: Updated translations for 25+ languages and improved non-English search compatibility.
+    - **New Engine:** Added Marginalia for broader, indie-oriented web results, improving discovery beyond mainstream sources.
+    - **Better Weather Answers:** Migrated DuckDuckGo weather to a new template and fixed condition mapping for more accurate, reliable weather info.
+    - **Video Search Restored:** Google Video engine was refactored to work again, improving coverage of video results.
+    - **Clearer Results:** Restored published dates in legacy results and fixed Tagesschau video handling to reduce broken or unclear entries.
+    - **Faster, More Stable Service:** Migrated backend cache from Redis to Valkey and added multiple stability fixes, improving responsiveness under load.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
