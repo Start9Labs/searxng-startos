@@ -37,7 +37,7 @@ echo 'version: 2' >/root/start9/stats.yaml
 echo 'data:' >>/root/start9/stats.yaml
 
 printf "\n\n [i] Starting Valkey ...\n"
-valkey-server --save "" --appendonly "no" &
+valkey-server --save "" --appendonly "no" --unixsocket "/var/run/valkey.sock" &
 valkey_process=$!
 
 printf "done!\n\n [i] Starting SearXNG ...\n\n"

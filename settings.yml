@@ -8,7 +8,7 @@ server:
 ui:
   static_use_hash: true
 valkey:
-  url: valkey://searxng.embassy:6379/0
+  url: valkey:////var/run/valkey.sock
 general:
   debug: false
   instance_name: "My SearXNG"
