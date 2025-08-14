@@ -23,7 +23,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
 
   const enableMetrics = await settingsYaml
     .read((s) => s.general?.enable_metrics)
-    .once()
+    .const(effects)
 
   if (enableMetrics) {
     toExport.push(
