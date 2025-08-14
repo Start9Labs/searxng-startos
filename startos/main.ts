@@ -14,7 +14,17 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
   return sdk.Daemons.of(effects, started)
     .addDaemon('valkey', {
       subcontainer: valkeySub,
-      exec: { command: ['valkey-server', '--save', ``, '--appendonly', `no`] },
+      exec: {
+        command: [
+          'valkey-server',
+          '--save',
+          ``,
+          '--appendonly',
+          `no`,
+          '--unixsocket',
+          '/var/run/valkey.sock',
+        ],
+      },
       ready: {
         display: 'Valkey',
         fn: async () => {
@@ -40,7 +50,8 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
         'searxng-sub',
       ),
       exec: {
-        command: ['sh', '/usr/local/searxng/dockerfiles/docker-entrypoint.sh'],
+        cwd: '/usr/local/searxng',
+        command: ['sh', '/usr/local/searxng/entrypoint.sh'],
       },
       ready: {
         display: 'Web Interface',

@@ -1,12 +1,20 @@
+import { utils } from '@start9labs/start-sdk'
 import { Effects } from '@start9labs/start-sdk/base/lib/Effects'
 import { sdk } from './sdk'
 
 export const uiPort = 8080
 
+export function randomPassword() {
+  return {
+    charset: 'a-z,A-Z,0-9',
+    len: 24,
+  }
+}
+
 export const defaultSettings = {
   use_default_settings: true,
   server: {
-    secret_key: 'hmmm', // update
+    secret_key: utils.getDefaultString(randomPassword()), // Uses StartOS password generation
     limiter: false, // can be disabled for a private instance
     image_proxy: true,
     base_url: '',
@@ -15,7 +23,7 @@ export const defaultSettings = {
     static_use_hash: true,
   },
   valkey: {
-    url: 'valkey://searxng.embassy:6379/0', // TODO ask aiden if we can use unix sockets instead
+    url: 'valkey:///var/run/valkey.sock',
   },
   general: {
     debug: false,
