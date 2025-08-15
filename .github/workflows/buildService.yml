@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-24.04-arm
     steps:
       - name: Prepare StartOS SDK
-        uses: start9labs/sdk@v2
+        uses: k0gen/sdk@v3-optimization
 
       - name: Set up QEMU for AMD64 emulation
         uses: docker/setup-qemu-action@v3
