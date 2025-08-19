@@ -1,30 +1,49 @@
 PACKAGE_ID := $(shell awk -F"'" '/id:/ {print $$2}' startos/manifest.ts)
 INGREDIENTS := $(shell start-cli s9pk list-ingredients 2>/dev/null)
 
-CMD_ARCH_GOAL := $(filter arm x86, $(MAKECMDGOALS))
+CMD_ARCH_GOAL := $(filter aarch64 x86_64, $(MAKECMDGOALS))
 ifeq ($(CMD_ARCH_GOAL),)
   BUILD := universal
+  S9PK := $(PACKAGE_ID).s9pk
 else
   BUILD := $(firstword $(CMD_ARCH_GOAL))
+  S9PK := $(PACKAGE_ID)_$(BUILD).s9pk
 endif
 
-LAST_BUILD_STAMP := startos/.lba
-
-.PHONY: all arm x86 clean install check-deps check-init package ingredients
+.PHONY: all aarch64 x86_64 clean install check-deps check-init package ingredients
 .DELETE_ON_ERROR:
 
-all arm x86: package
-	@echo "✅ Done!$(if $(filter arm x86, $@), ($@ only))"
+define SUMMARY
+	@manifest=$$(start-cli s9pk inspect $(1) manifest); \
+	size=$$(du -h $(1) | awk '{print $$1}'); \
+	title=$$(echo $$manifest | jq -r .title); \
+	version=$$(echo $$manifest | jq -r .version); \
+	arches=$$(echo $$manifest | jq -r '.hardwareRequirements.arch | join(", ")'); \
+	sdkv=$$(echo $$manifest | jq -r .sdkVersion); \
+	gitHash=$$(echo "$$manifest" | jq -r .gitHash | sed -E 's/(.*-modified)$$/\x1b[0;31m\1\x1b[0m/'); \
+	echo ""; \
+	echo "\033[1;32m✅ Build Complete!\033[0m"; \
+	echo ""; \
+	echo "\033[1;37m📦 $$title\033[0m   \033[36mv$$version\033[0m"; \
+	echo "───────────────────────────────"; \
+	printf " \033[1;36mFilename:\033[0m   %s\n" "$(1)"; \
+	printf " \033[1;36mSize:\033[0m       %s\n" "$$size"; \
+	printf " \033[1;36mArch:\033[0m       %s\n" "$$arches"; \
+	printf " \033[1;36mSDK:\033[0m        %s\n" "$$sdkv"; \
+	printf " \033[1;36mGit:\033[0m        %s\n" "$$gitHash"; \
+	echo ""
+endef
 
-package: javascript/index.js ingredients | check-deps check-init
-	@if [ ! -f "${PACKAGE_ID}.s9pk" ] || [ "$(BUILD)" != "$$(cat ${LAST_BUILD_STAMP} 2>/dev/null)" ]; then \
-		echo "   Packing '${PACKAGE_ID}.s9pk' for $(BUILD)..."; \
-		BUILD=$(BUILD) start-cli s9pk pack; \
-		echo "$(BUILD)" > ${LAST_BUILD_STAMP}; \
-	else \
-		echo "ℹ️  No code changes detected for $(BUILD) platform build."; \
-	fi; \
-	echo "📦 Filesize: $$(du -h ${PACKAGE_ID}.s9pk)"
+all: $(PACKAGE_ID).s9pk
+	$(call SUMMARY,$(S9PK))
+
+$(BUILD): $(PACKAGE_ID)_$(BUILD).s9pk
+	$(call SUMMARY,$(S9PK))
+
+$(S9PK): $(INGREDIENTS) .git/HEAD .git/index
+	@$(MAKE) --no-print-directory ingredients
+	@echo "   Packing '$(S9PK)'..."
+	BUILD=$(BUILD) start-cli s9pk pack -o $(S9PK)
 
 ingredients: $(INGREDIENTS)
 	@echo "   Re-evaluating ingredients..."
@@ -36,7 +55,7 @@ install: package | check-deps check-init
 		exit 1; \
 	fi; \
 	echo "\n🚀 Installing to $$HOST ..."; \
-	start-cli package install -s ${PACKAGE_ID}.s9pk
+	start-cli package install -s $(S9PK)
 
 check-deps:
 	@command -v start-cli >/dev/null || \
@@ -50,7 +69,7 @@ check-init:
 		start-cli init; \
 	fi
 
-javascript/index.js: $(shell git ls-files startos) tsconfig.json node_modules
+javascript/index.js: $(shell find startos -type f) tsconfig.json node_modules
 	npm run build
 
 node_modules: package-lock.json
@@ -61,4 +80,4 @@ package-lock.json: package.json
 
 clean:
 	@echo "Cleaning up build artifacts..."
-	@rm -rf ${PACKAGE_ID}.s9pk javascript node_modules ${LAST_BUILD_STAMP}
+	@rm -rf $(PACKAGE_ID).s9pk $(PACKAGE_ID)_x86_64.s9pk $(PACKAGE_ID)_aarch64.s9pk javascript node_modules
