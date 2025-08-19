@@ -28,9 +28,9 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   if (enableMetrics) {
     toExport.push(
       sdk.createInterface(effects, {
-        name: 'Metrics Dashboard',
+        name: 'Stats Dashboard',
         id: 'metrics',
-        description: 'SearXNG metrics dashboard',
+        description: 'SearXNG stats dashboard',
         type: 'ui',
         masked: false,
         schemeOverride: null,

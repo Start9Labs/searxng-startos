@@ -33,9 +33,9 @@ export const inputSpec = InputSpec.of({
     }
   }),
   enable_metrics: Value.toggle({
-    name: 'Enable Metrics',
+    name: 'Enable Stats',
     description:
-      'Your SearXNG instance will collect anonymous stats about its own usage and performance. You can view these metrics by appending `/stats` or `/stats/errors` to your SearXNG URL.',
+      'Your SearXNG instance will collect anonymous stats about its own usage and performance.',
     default: enable_metrics,
   }),
 })
