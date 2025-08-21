@@ -28,6 +28,12 @@ export const manifest = setupManifest({
       },
       arch: architectures,
     } as SDKImageInputSpec,
+    caddy: {
+      source: {
+        dockerTag: 'caddy:2-alpine',
+      },
+      arch: architectures,
+    } as SDKImageInputSpec,
     searxng: {
       source: {
         dockerTag: 'searxng/searxng:2025.8.9-935f3fe',

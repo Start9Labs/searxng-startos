@@ -1,5 +1,6 @@
+import { writeFile } from 'fs/promises'
 import { sdk } from './sdk'
-import { uiPort } from './utils'
+import { uiPort, getCaddyfile } from './utils'
 
 export const main = sdk.setupMain(async ({ effects, started }) => {
   console.info('[i] Starting SearXNG!')
@@ -10,6 +11,36 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
     null,
     'valkey-sub',
   )
+
+  const caddySub = await sdk.SubContainer.of(
+    effects,
+    { imageId: 'caddy' },
+    sdk.Mounts.of().mountVolume({
+      volumeId: 'main',
+      subpath: 'caddy',
+      mountpoint: '/data',
+      readonly: false,
+    }),
+    'caddy-sub',
+  )
+
+  const searxngSub = await sdk.SubContainer.of(
+    effects,
+    { imageId: 'searxng' },
+    sdk.Mounts.of().mountVolume({
+      volumeId: 'main',
+      subpath: null,
+      mountpoint: '/etc/searxng',
+      readonly: false,
+    }),
+    'searxng-sub',
+  )
+
+  // Write Caddyfile to Caddy container's root filesystem
+  await writeFile(`${caddySub.rootfs}/Caddyfile`, getCaddyfile())
+
+  // Create empty limiter.toml for now to suppress SearXNG warning
+  await writeFile(`${searxngSub.rootfs}/etc/searxng/limiter.toml`, '')
 
   return sdk.Daemons.of(effects, started)
     .addDaemon('valkey', {
@@ -30,25 +61,14 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
         fn: async () => {
           const res = await valkeySub.exec(['valkey-cli', 'ping'])
           return res.stdout.toString().trim() === 'PONG'
-            ? // no message needed since display is null
-              { message: '', result: 'success' }
+            ? { message: '', result: 'success' }
             : { message: res.stdout.toString().trim(), result: 'failure' }
         },
       },
       requires: [],
     })
     .addDaemon('searxng', {
-      subcontainer: await sdk.SubContainer.of(
-        effects,
-        { imageId: 'searxng' },
-        sdk.Mounts.of().mountVolume({
-          volumeId: 'main',
-          subpath: null,
-          mountpoint: '/etc/searxng',
-          readonly: false,
-        }),
-        'searxng-sub',
-      ),
+      subcontainer: searxngSub,
       exec: {
         cwd: '/usr/local/searxng',
         command: ['sh', '/usr/local/searxng/entrypoint.sh'],
@@ -56,11 +76,26 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       ready: {
         display: 'Web Interface',
         fn: () =>
-          sdk.healthCheck.checkPortListening(effects, uiPort, {
+          sdk.healthCheck.checkPortListening(effects, 8080, {
             successMessage: 'The web interface is ready',
             errorMessage: 'The web interface is not ready',
           }),
       },
       requires: ['valkey'],
+    })
+    .addDaemon('caddy', {
+      subcontainer: caddySub,
+      exec: {
+        command: ['caddy', 'run', '--config', '/Caddyfile'],
+      },
+      ready: {
+        display: 'Caddy',
+        fn: () =>
+          sdk.healthCheck.checkPortListening(effects, uiPort, {
+            successMessage: 'Caddy is ready',
+            errorMessage: 'Caddy is not ready',
+          }),
+      },
+      requires: ['searxng'],
     })
 })
