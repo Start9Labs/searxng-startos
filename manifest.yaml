@@ -1,15 +1,17 @@
 id: searxng
 title: "SearXNG"
-version: 2025.8.9
+version: 2025.10.15
 release-notes: |
-  - Updated SearXNG code to the latest version from upstream.
+  - Updated SearXNG code to the latest upstream version.
 
   > **Highlights**
-    - **New Engine:** Added Marginalia for broader, indie-oriented web results, improving discovery beyond mainstream sources.
-    - **Better Weather Answers:** Migrated DuckDuckGo weather to a new template and fixed condition mapping for more accurate, reliable weather info.
-    - **Video Search Restored:** Google Video engine was refactored to work again, improving coverage of video results.
-    - **Clearer Results:** Restored published dates in legacy results and fixed Tagesschau video handling to reduce broken or unclear entries.
-    - **Faster, More Stable Service:** Migrated backend cache from Redis to Valkey and added multiple stability fixes, improving responsiveness under load.
+    - **New Azure Search:** You can now search Azure cloud resources directly in SearXNG.
+    - **Video Search Improvement:** See video lengths in search results at a glance.
+    - **Pinterest and Weather Fixes:** Pinterest results and the !weather command are now more reliable.
+    - **Safer Search:** SafeSearch on Startpage now filters results correctly.
+    - **Smarter Google Scholar:** Better handling when Google asks for CAPTCHA.
+
+    - Interface and stability updates throughout for a smoother experience.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"
