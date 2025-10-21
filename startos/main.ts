@@ -72,6 +72,9 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       exec: {
         cwd: '/usr/local/searxng',
         command: ['sh', '/usr/local/searxng/entrypoint.sh'],
+        env: {
+          PYTHONWARNINGS: 'ignore::DeprecationWarning'
+        },
       },
       ready: {
         display: 'Web Interface',
@@ -87,6 +90,9 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
       subcontainer: caddySub,
       exec: {
         command: ['caddy', 'run', '--config', '/Caddyfile'],
+        env: {
+          HOME: '/root'
+        },
       },
       ready: {
         display: 'Caddy',

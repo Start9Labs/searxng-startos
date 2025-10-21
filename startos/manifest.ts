@@ -36,7 +36,7 @@ export const manifest = setupManifest({
     } as SDKImageInputSpec,
     searxng: {
       source: {
-        dockerTag: 'searxng/searxng:2025.8.9-935f3fe',
+        dockerTag: 'searxng/searxng:2025.10.15-576d30ffc',
       },
       arch: architectures,
     } as SDKImageInputSpec,
