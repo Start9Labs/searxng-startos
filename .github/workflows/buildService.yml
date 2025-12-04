@@ -11,7 +11,7 @@ on:
 
 jobs:
   BuildPackage:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Prepare StartOS SDK
         uses: start9labs/sdk@v2
