@@ -21,6 +21,10 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Switch to default Docker builder
+        run: docker buildx use default
+        shell: bash
+
       - name: Build the service package
         id: build
         run: |
