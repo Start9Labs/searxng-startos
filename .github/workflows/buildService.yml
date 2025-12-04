@@ -21,10 +21,6 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Switch to default Docker context
-        run: docker context use default
-        shell: bash
-
       - name: Build the service package
         id: build
         run: |
