@@ -40,7 +40,7 @@ export async function getPrimaryInterfaceUrls(
 ): Promise<string[]> {
   const httpInterface = await sdk.serviceInterface.getOwn(effects, 'ui').const()
 
-  return httpInterface?.addressInfo?.urls || []
+  return httpInterface?.addressInfo?.format() || []
 }
 export const getCaddyfile = (): string => {
   return `

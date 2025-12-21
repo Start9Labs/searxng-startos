@@ -8,24 +8,34 @@ import { rm } from 'fs/promises'
 import { settingsYaml } from '../../fileModels/settings.yml'
 import { defaultSettings } from '../../utils'
 
-export const v2025_8_9_1 = VersionInfo.of({
-  version: '2025.8.9:1-alpha.0',
+export const v2025_12_19_1 = VersionInfo.of({
+  version: '2025.12.19:1-beta.0',
   releaseNotes: 'Revamped for StartOS 0.4.0',
   migrations: {
     up: async ({ effects }) => {
       // Read legacy config from start9/config.yaml
-      const legacyConfig = await FileHelper.yaml(
-        {
-          volumeId: 'main',
-          subpath: 'start9/config.yaml',
-        },
-        matches.object({
-          'instance-name': matches.string.optional(),
-          'enable-metrics': matches.boolean.optional(),
-        }),
-      )
-        .read()
-        .once()
+      let legacyConfig: {
+        'instance-name'?: string
+        'enable-metrics'?: boolean
+      } | null | undefined
+
+      try {
+        legacyConfig = await FileHelper.yaml(
+          {
+            volumeId: 'main',
+            subpath: 'start9/config.yaml',
+          },
+          matches.object({
+            'instance-name': matches.string.optional(),
+            'enable-metrics': matches.boolean.optional(),
+          }),
+        )
+          .read()
+          .once()
+      } catch (error) {
+        // File doesn't exist (e.g., fresh install), use defaults
+        legacyConfig = undefined
+      }
 
       // Start with default settings and apply legacy values if they exist
       const settings = {

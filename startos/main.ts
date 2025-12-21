@@ -2,7 +2,7 @@ import { writeFile } from 'fs/promises'
 import { sdk } from './sdk'
 import { uiPort, getCaddyfile } from './utils'
 
-export const main = sdk.setupMain(async ({ effects, started }) => {
+export const main = sdk.setupMain(async ({ effects }) => {
   console.info('[i] Starting SearXNG!')
 
   const valkeySub = await sdk.SubContainer.of(
@@ -42,7 +42,7 @@ export const main = sdk.setupMain(async ({ effects, started }) => {
   // Create empty limiter.toml for now to suppress SearXNG warning
   await writeFile(`${searxngSub.rootfs}/etc/searxng/limiter.toml`, '')
 
-  return sdk.Daemons.of(effects, started)
+  return sdk.Daemons.of(effects)
     .addDaemon('valkey', {
       subcontainer: valkeySub,
       exec: {
