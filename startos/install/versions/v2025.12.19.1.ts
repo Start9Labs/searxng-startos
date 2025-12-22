@@ -1,8 +1,7 @@
 import { VersionInfo, IMPOSSIBLE, YAML } from '@start9labs/start-sdk'
-import { rm } from 'fs/promises'
+import { rm, readFile } from 'fs/promises'
 import { settingsYaml } from '../../fileModels/settings.yml'
 import { defaultSettings } from '../../utils'
-import { readFile } from 'fs/promises'
 
 export const v2025_12_19_1 = VersionInfo.of({
   version: '2025.12.19:1-beta.0',
