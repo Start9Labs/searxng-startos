@@ -1,63 +1,45 @@
-import {
-  VersionInfo,
-  IMPOSSIBLE,
-  FileHelper,
-  matches,
-} from '@start9labs/start-sdk'
+import { VersionInfo, IMPOSSIBLE, YAML } from '@start9labs/start-sdk'
 import { rm } from 'fs/promises'
 import { settingsYaml } from '../../fileModels/settings.yml'
 import { defaultSettings } from '../../utils'
+import { readFile } from 'fs/promises'
 
 export const v2025_12_19_1 = VersionInfo.of({
   version: '2025.12.19:1-beta.0',
   releaseNotes: 'Revamped for StartOS 0.4.0',
   migrations: {
     up: async ({ effects }) => {
-      // Read legacy config from start9/config.yaml
-      let legacyConfig: {
-        'instance-name'?: string
-        'enable-metrics'?: boolean
-      } | null | undefined
+      // get old config.yaml
+      const configYaml:
+        | {
+            'instance-name'?: string
+            'enable-metrics'?: boolean
+          }
+        | undefined = await readFile(
+        '/media/startos/volumes/main/start9/config.yaml',
+        'utf-8',
+      ).then(YAML.parse, () => undefined)
 
-      try {
-        legacyConfig = await FileHelper.yaml(
-          {
-            volumeId: 'main',
-            subpath: 'start9/config.yaml',
+      if (configYaml) {
+        // Write settings
+        await settingsYaml.write(effects, {
+          ...defaultSettings,
+          general: {
+            ...defaultSettings.general,
+            instance_name:
+              configYaml['instance-name'] ??
+              defaultSettings.general.instance_name,
+            enable_metrics:
+              configYaml['enable-metrics'] ??
+              defaultSettings.general.enable_metrics,
           },
-          matches.object({
-            'instance-name': matches.string.optional(),
-            'enable-metrics': matches.boolean.optional(),
-          }),
-        )
-          .read()
-          .once()
-      } catch (error) {
-        // File doesn't exist (e.g., fresh install), use defaults
-        legacyConfig = undefined
+        })
+
+        // Clean up legacy folder
+        await rm('/media/startos/volumes/main/start9', {
+          recursive: true,
+        })
       }
-
-      // Start with default settings and apply legacy values if they exist
-      const settings = {
-        ...defaultSettings,
-        general: {
-          ...defaultSettings.general,
-          instance_name:
-            legacyConfig?.['instance-name'] ??
-            defaultSettings.general.instance_name,
-          enable_metrics:
-            legacyConfig?.['enable-metrics'] ??
-            defaultSettings.general.enable_metrics,
-        },
-      }
-
-      // Write the new settings
-      await settingsYaml.write(effects, settings)
-
-      // Clean up legacy folder
-      await rm('/media/startos/volumes/main/start9', { recursive: true }).catch(
-        console.error,
-      )
     },
     down: IMPOSSIBLE,
   },

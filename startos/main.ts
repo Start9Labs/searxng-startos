@@ -57,7 +57,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
         ],
       },
       ready: {
-        display: 'Valkey',
+        display: null,
         fn: async () => {
           const res = await valkeySub.exec(['valkey-cli', 'ping'])
           return res.stdout.toString().trim() === 'PONG'
@@ -73,7 +73,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
         cwd: '/usr/local/searxng',
         command: ['sh', '/usr/local/searxng/entrypoint.sh'],
         env: {
-          PYTHONWARNINGS: 'ignore::DeprecationWarning'
+          PYTHONWARNINGS: 'ignore::DeprecationWarning',
         },
       },
       ready: {
@@ -91,11 +91,11 @@ export const main = sdk.setupMain(async ({ effects }) => {
       exec: {
         command: ['caddy', 'run', '--config', '/Caddyfile'],
         env: {
-          HOME: '/root'
+          HOME: '/root',
         },
       },
       ready: {
-        display: 'Caddy',
+        display: null,
         fn: () =>
           sdk.healthCheck.checkPortListening(effects, uiPort, {
             successMessage: 'Caddy is ready',
