@@ -1,9 +1,10 @@
 import { writeFile } from 'fs/promises'
 import { sdk } from './sdk'
 import { uiPort, getCaddyfile } from './utils'
+import { i18n } from './i18n'
 
 export const main = sdk.setupMain(async ({ effects }) => {
-  console.info('[i] Starting SearXNG!')
+  console.info(i18n('Starting SearXNG!'))
 
   const valkeySub = await sdk.SubContainer.of(
     effects,
@@ -77,11 +78,11 @@ export const main = sdk.setupMain(async ({ effects }) => {
         },
       },
       ready: {
-        display: 'Web Interface',
+        display: i18n('Web Interface'),
         fn: () =>
           sdk.healthCheck.checkPortListening(effects, 8080, {
-            successMessage: 'The web interface is ready',
-            errorMessage: 'The web interface is not ready',
+            successMessage: i18n('The web interface is ready'),
+            errorMessage: i18n('The web interface is not ready'),
           }),
       },
       requires: ['valkey'],
@@ -98,8 +99,8 @@ export const main = sdk.setupMain(async ({ effects }) => {
         display: null,
         fn: () =>
           sdk.healthCheck.checkPortListening(effects, uiPort, {
-            successMessage: 'Caddy is ready',
-            errorMessage: 'Caddy is not ready',
+            successMessage: i18n('Caddy is ready'),
+            errorMessage: i18n('Caddy is not ready'),
           }),
       },
       requires: ['searxng'],

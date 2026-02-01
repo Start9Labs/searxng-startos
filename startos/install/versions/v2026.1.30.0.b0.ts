@@ -3,9 +3,15 @@ import { rm, readFile } from 'fs/promises'
 import { settingsYaml } from '../../fileModels/settings.yml'
 import { defaultSettings } from '../../utils'
 
-export const v2025_12_19_1 = VersionInfo.of({
-  version: '2025.12.19:1-beta.0',
-  releaseNotes: 'Revamped for StartOS 0.4.0',
+export const v2026_1_30_0_b0 = VersionInfo.of({
+  version: '2026.1.30:0-beta.0',
+  releaseNotes: {
+    en_US: 'Revamped for StartOS 0.4.0',
+    es_ES: 'Renovado para StartOS 0.4.0',
+    de_DE: 'Überarbeitet für StartOS 0.4.0',
+    pl_PL: 'Przebudowano dla StartOS 0.4.0',
+    fr_FR: 'Remanié pour StartOS 0.4.0',
+  },
   migrations: {
     up: async ({ effects }) => {
       // get old config.yaml

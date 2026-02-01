@@ -1,6 +1,7 @@
 import { setConfig } from '../actions/setConfig'
 import { settingsYaml } from '../fileModels/settings.yml'
 import { sdk } from '../sdk'
+import { i18n } from '../i18n'
 
 export const taskConfig = sdk.setupOnInit(async (effects) => {
   const config = await settingsYaml
@@ -12,7 +13,7 @@ export const taskConfig = sdk.setupOnInit(async (effects) => {
 
   if (!config?.base_url || !config.instance_name) {
     await sdk.action.createOwnTask(effects, setConfig, 'critical', {
-      reason: 'Required configurations are missing',
+      reason: i18n('Required configurations are missing'),
     })
   }
 })

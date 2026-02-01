@@ -1,4 +1,5 @@
 import { setupManifest } from '@start9labs/start-sdk'
+import i18n from './i18n'
 
 export const manifest = setupManifest({
   id: 'searxng',
@@ -11,36 +12,27 @@ export const manifest = setupManifest({
   donationUrl: 'https://docs.searxng.org/donate.html',
   docsUrl:
     'https://github.com/Start9Labs/searxng-startos/blob/master/docs/instructions.md',
-  description: {
-    short: 'Privacy-preserving internet metasearch engine.',
-    long: 'SearXNG is an Internet metasearch engine that aggregates results from more than 70 search services. It also helps protect your privacy by withholding sensitive metadata from the underlying search services. Your SearXNG instance is highly configurable, and can even be shared with friends and family.',
-  },
+  description: i18n.description,
   volumes: ['main'],
   images: {
     valkey: {
       source: {
         dockerTag: 'valkey/valkey:8-alpine',
       },
+      arch: ['x86_64', 'aarch64'],
     },
     caddy: {
       source: {
         dockerTag: 'caddy:2-alpine',
       },
+      arch: ['x86_64', 'aarch64'],
     },
     searxng: {
       source: {
-        dockerTag: 'searxng/searxng:2025.12.19-8bf600cc6',
+        dockerTag: 'searxng/searxng:2026.1.30-ad42b553b',
       },
+      arch: ['x86_64', 'aarch64'],
     },
-  },
-  hardwareRequirements: {},
-  alerts: {
-    install: null,
-    update: null,
-    uninstall: null,
-    restore: null,
-    start: null,
-    stop: null,
   },
   dependencies: {},
 })

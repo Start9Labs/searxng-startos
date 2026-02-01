@@ -1,6 +1,7 @@
 import { settingsYaml } from '../fileModels/settings.yml'
 import { sdk } from '../sdk'
 import { getPrimaryInterfaceUrls, defaultSettings } from '../utils'
+import { i18n } from '../i18n'
 
 const { InputSpec, Value } = sdk
 
@@ -8,9 +9,9 @@ const { instance_name, enable_metrics } = defaultSettings.general
 
 export const inputSpec = InputSpec.of({
   instance_name: Value.text({
-    name: 'Instance Name',
+    name: i18n('Instance Name'),
     description:
-      'Enter a name for your SearXNG instance. This is the name that will be listed if you want to share your SearXNG engine publicly.',
+      i18n('Enter a name for your SearXNG instance. This is the name that will be listed if you want to share your SearXNG engine publicly.'),
     required: true,
     default: instance_name,
   }),
@@ -18,9 +19,9 @@ export const inputSpec = InputSpec.of({
     const urls = await getPrimaryInterfaceUrls(effects)
 
     return {
-      name: 'Primary URL',
+      name: i18n('Primary URL'),
       description:
-        'Choose which of your SearXNG URLs should serve as the primary URL for the purposes of creating links, sending invites, etc.',
+        i18n('Choose which of your SearXNG URLs should serve as the primary URL for the purposes of creating links, sending invites, etc.'),
       values: urls.reduce(
         (obj, url) => ({
           ...obj,
@@ -33,9 +34,9 @@ export const inputSpec = InputSpec.of({
     }
   }),
   enable_metrics: Value.toggle({
-    name: 'Enable Stats',
+    name: i18n('Enable Stats'),
     description:
-      'Your SearXNG instance will collect anonymous stats about its own usage and performance.',
+      i18n('Your SearXNG instance will collect anonymous stats about its own usage and performance.'),
     default: enable_metrics,
   }),
 })
@@ -46,8 +47,8 @@ export const setConfig = sdk.Action.withInput(
 
   // metadata
   async ({ effects }) => ({
-    name: 'Config',
-    description: 'Configure settings for your SearXNG instance',
+    name: i18n('Config'),
+    description: i18n('Configure settings for your SearXNG instance'),
     warning: null,
     allowedStatuses: 'any',
     group: null,
