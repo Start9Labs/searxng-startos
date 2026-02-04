@@ -21,6 +21,8 @@ export default {
     16: 'Configuración',
     17: 'Configurar los ajustes de su instancia de SearXNG',
     18: 'Faltan configuraciones requeridas',
+    19: 'Proxy todo el tráfico a través de Tor',
+    20: 'Enrutar todas las solicitudes de motores de búsqueda a través del proxy Tor de StartOS. Esto habilita motores exclusivos de Tor (por ejemplo, Ahmia, Torch) pero hará que todas las búsquedas sean más lentas.',
   },
   de_DE: {
     0: 'SearXNG wird gestartet!',
@@ -42,6 +44,8 @@ export default {
     16: 'Konfiguration',
     17: 'Einstellungen für Ihre SearXNG-Instanz konfigurieren',
     18: 'Erforderliche Konfigurationen fehlen',
+    19: 'Gesamten Datenverkehr über Tor leiten',
+    20: 'Alle Suchmaschinenanfragen über den StartOS-Tor-Proxy leiten. Dies aktiviert Tor-exklusive Suchmaschinen (z. B. Ahmia, Torch), macht aber alle Suchen langsamer.',
   },
   pl_PL: {
     0: 'Uruchamianie SearXNG!',
@@ -63,6 +67,8 @@ export default {
     16: 'Konfiguracja',
     17: 'Skonfiguruj ustawienia instancji SearXNG',
     18: 'Brakuje wymaganych konfiguracji',
+    19: 'Przekieruj cały ruch przez Tor',
+    20: 'Przekieruj wszystkie żądania wyszukiwarek przez proxy Tor StartOS. Umożliwia to korzystanie z wyszukiwarek dostępnych tylko przez Tor (np. Ahmia, Torch), ale spowolni wszystkie wyszukiwania.',
   },
   fr_FR: {
     0: 'Démarrage de SearXNG !',
@@ -84,5 +90,7 @@ export default {
     16: 'Configuration',
     17: 'Configurer les paramètres de votre instance SearXNG',
     18: 'Des configurations requises sont manquantes',
+    19: 'Acheminer tout le trafic via Tor',
+    20: 'Acheminer toutes les requêtes des moteurs de recherche via le proxy Tor de StartOS. Cela active les moteurs exclusifs à Tor (par ex. Ahmia, Torch) mais rendra toutes les recherches plus lentes.',
   },
 } satisfies Record<string, LangDict>

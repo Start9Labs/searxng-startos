@@ -20,6 +20,8 @@ const dict = {
   'Config': 16,
   'Configure settings for your SearXNG instance': 17,
   'Required configurations are missing': 18,
+  'Proxy All Traffic Over Tor': 19,
+  'Route all search engine requests through the StartOS Tor proxy. This enables Tor-only engines (e.g. Ahmia, Torch) but will make all searches slower.': 20,
 } as const
 
 export type I18nKey = keyof typeof dict

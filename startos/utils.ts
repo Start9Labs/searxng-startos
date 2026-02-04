@@ -38,7 +38,9 @@ export const defaultSettings = {
 export async function getPrimaryInterfaceUrls(
   effects: Effects,
 ): Promise<string[]> {
-  return sdk.serviceInterface.getOwn(effects, 'ui', (i) => i?.addressInfo?.format() || []).const()
+  return sdk.serviceInterface
+    .getOwn(effects, 'ui', (i) => i?.addressInfo?.format() || [])
+    .const()
 }
 
 export const getCaddyfile = (): string => {

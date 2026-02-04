@@ -2,7 +2,8 @@ import { matches, FileHelper } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
 import { defaultSettings } from '../utils'
 
-const { object, string, literal, boolean, number } = matches
+const { object, string, literal, boolean, number, arrayOf, dictionary } =
+  matches
 
 const { use_default_settings, server, ui, valkey, general, outgoing } =
   defaultSettings
@@ -29,6 +30,8 @@ const shape = object({
   }),
   outgoing: object({
     request_timeout: number.onMismatch(outgoing.request_timeout),
+    proxies: dictionary([string, arrayOf(string)]).optional().onMismatch(undefined),
+    using_tor_proxy: boolean.optional().onMismatch(undefined),
   }),
 })
 

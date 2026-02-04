@@ -2,9 +2,13 @@ import { writeFile } from 'fs/promises'
 import { sdk } from './sdk'
 import { uiPort, getCaddyfile } from './utils'
 import { i18n } from './i18n'
+import { settingsYaml } from './fileModels/settings.yml'
 
 export const main = sdk.setupMain(async ({ effects }) => {
   console.info(i18n('Starting SearXNG!'))
+
+  // restart on settings changes
+  await settingsYaml.read().const(effects)
 
   const valkeySub = await sdk.SubContainer.of(
     effects,

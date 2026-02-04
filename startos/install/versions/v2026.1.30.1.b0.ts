@@ -3,8 +3,8 @@ import { rm, readFile } from 'fs/promises'
 import { settingsYaml } from '../../fileModels/settings.yml'
 import { defaultSettings } from '../../utils'
 
-export const v2026_1_30_0_b0 = VersionInfo.of({
-  version: '2026.1.30:0-beta.0',
+export const v2026_1_30_1_b0 = VersionInfo.of({
+  version: '2026.1.30:1-beta.0',
   releaseNotes: {
     en_US: 'Revamped for StartOS 0.4.0',
     es_ES: 'Renovado para StartOS 0.4.0',
