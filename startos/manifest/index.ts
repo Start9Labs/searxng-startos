@@ -10,8 +10,7 @@ export const manifest = setupManifest({
   supportSite: 'https://github.com/searxng/searxng-docker/issues',
   marketingSite: 'https://docs.searxng.org',
   donationUrl: 'https://docs.searxng.org/donate.html',
-  docsUrl:
-    'https://github.com/Start9Labs/searxng-startos/blob/master/docs/instructions.md',
+  docsUrl: 'https://docs.searxng.org/',
   description: i18n.description,
   volumes: ['main'],
   images: {
