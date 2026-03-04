@@ -5,12 +5,11 @@ export const manifest = setupManifest({
   id: 'searxng',
   title: 'SearXNG',
   license: 'MIT',
-  wrapperRepo: 'https://github.com/Start9Labs/searxng-startos',
+  packageRepo: 'https://github.com/Start9Labs/searxng-startos/tree/update/040',
   upstreamRepo: 'https://github.com/searxng/searxng-docker',
-  supportSite: 'https://github.com/searxng/searxng-docker/issues',
-  marketingSite: 'https://docs.searxng.org',
+  marketingUrl: 'https://docs.searxng.org',
   donationUrl: 'https://docs.searxng.org/donate.html',
-  docsUrl: 'https://docs.searxng.org/',
+  docsUrls: ['https://docs.searxng.org/'],
   description: i18n.description,
   volumes: ['main'],
   images: {
@@ -28,10 +27,19 @@ export const manifest = setupManifest({
     },
     searxng: {
       source: {
-        dockerTag: 'searxng/searxng:2026.1.30-ad42b553b',
+        dockerTag: 'searxng/searxng:2026.3.3-b5c1c2804',
       },
       arch: ['x86_64', 'aarch64'],
     },
   },
-  dependencies: {},
+  dependencies: {
+    tor: {
+      description: i18n.torDescription,
+      optional: true,
+      metadata: {
+        title: 'Tor Network Daemon',
+        icon: 'https://raw.githubusercontent.com/Start9Labs/tor-startos/65faea17febc739d910e8c26ff4e61f6333487a8/icon.svg',
+      },
+    },
+  },
 })

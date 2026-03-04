@@ -1,7 +1,9 @@
 import { settingsYaml } from './fileModels/settings.yml'
+import { i18n } from './i18n'
 import { sdk } from './sdk'
 import { uiPort } from './utils'
-import { i18n } from './i18n'
+
+export const uiId = 'ui'
 
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   const uiMulti = sdk.MultiHost.of(effects, 'main')
@@ -11,7 +13,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   const toExport = [
     sdk.createInterface(effects, {
       name: i18n('Web UI'),
-      id: 'ui',
+      id: uiId,
       description: i18n('Web interface for SearXNG'),
       type: 'ui',
       masked: false,

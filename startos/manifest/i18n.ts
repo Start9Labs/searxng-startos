@@ -1,4 +1,11 @@
 export default {
+  torDescription: {
+    en_US: 'Used to proxy search engine requests through the Tor network for enhanced privacy.',
+    es_ES: 'Se utiliza para enrutar las solicitudes de motores de búsqueda a través de la red Tor para mayor privacidad.',
+    de_DE: 'Wird verwendet, um Suchmaschinenanfragen über das Tor-Netzwerk für verbesserten Datenschutz zu leiten.',
+    pl_PL: 'Używany do przekierowywania zapytań wyszukiwarek przez sieć Tor w celu zwiększenia prywatności.',
+    fr_FR: "Utilisé pour acheminer les requêtes des moteurs de recherche via le réseau Tor pour une confidentialité renforcée.",
+  },
   description: {
     short: {
       en_US: 'Privacy-preserving internet metasearch engine.',

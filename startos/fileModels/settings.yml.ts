@@ -1,39 +1,40 @@
-import { matches, FileHelper } from '@start9labs/start-sdk'
+import { FileHelper, z, utils } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
-import { defaultSettings } from '../utils'
 
-const { object, string, literal, boolean, number, arrayOf, dictionary } =
-  matches
+function randomPassword() {
+  return {
+    charset: 'a-z,A-Z,0-9',
+    len: 24,
+  }
+}
 
-const { use_default_settings, server, ui, valkey, general, outgoing } =
-  defaultSettings
-
-const shape = object({
-  use_default_settings:
-    literal(use_default_settings).onMismatch(use_default_settings),
-  server: object({
-    secret_key: string.onMismatch(server.secret_key),
-    limiter: boolean.onMismatch(server.limiter), // can be disabled for a private instance
-    image_proxy: literal(server.image_proxy).onMismatch(server.image_proxy),
-    base_url: string.onMismatch(server.base_url),
+const shape = z.object({
+  use_default_settings: z.literal(true).catch(true),
+  server: z.object({
+    secret_key: z.string().catch(utils.getDefaultString(randomPassword())),
+    limiter: z.boolean().catch(false),
+    image_proxy: z.literal(true).catch(true),
+    base_url: z.string().catch(''),
   }),
-  ui: object({
-    static_use_hash: literal(ui.static_use_hash).onMismatch(ui.static_use_hash),
+  ui: z.object({
+    static_use_hash: z.literal(true).catch(true),
   }),
-  valkey: object({
-    url: literal(valkey.url).onMismatch(valkey.url),
+  valkey: z.object({
+    url: z.literal('valkey:///var/run/valkey.sock').catch('valkey:///var/run/valkey.sock'),
   }),
-  general: object({
-    debug: literal(general.debug).onMismatch(general.debug),
-    instance_name: string.optional().onMismatch(general.instance_name),
-    enable_metrics: boolean.onMismatch(general.enable_metrics),
+  general: z.object({
+    debug: z.literal(false).catch(false),
+    instance_name: z.string().optional().catch('My SearXNG'),
+    enable_metrics: z.boolean().catch(false),
   }),
-  outgoing: object({
-    request_timeout: number.onMismatch(outgoing.request_timeout),
-    proxies: dictionary([string, arrayOf(string)]).optional().onMismatch(undefined),
-    using_tor_proxy: boolean.optional().onMismatch(undefined),
+  outgoing: z.object({
+    request_timeout: z.number().catch(3.5),
+    proxies: z.record(z.string(), z.array(z.string())).optional().catch(undefined),
+    using_tor_proxy: z.boolean().optional().catch(undefined),
   }),
 })
+
+export type SettingsType = z.infer<typeof shape>
 
 export const settingsYaml = FileHelper.yaml(
   {

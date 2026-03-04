@@ -1,13 +1,11 @@
 import { settingsYaml } from '../fileModels/settings.yml'
-import { sdk } from '../sdk'
-import { getPrimaryInterfaceUrls, defaultSettings } from '../utils'
 import { i18n } from '../i18n'
+import { uiId } from '../interfaces'
+import { sdk } from '../sdk'
 
-export const torProxy = 'socks5h://10.0.3.1:9050'
+export const torProxy = 'socks5h://tor.startos:9050'
 
 const { InputSpec, Value } = sdk
-
-const { instance_name, enable_metrics } = defaultSettings.general
 
 export const inputSpec = InputSpec.of({
   instance_name: Value.text({
@@ -16,10 +14,12 @@ export const inputSpec = InputSpec.of({
       'Enter a name for your SearXNG instance. This is the name that will be listed if you want to share your SearXNG engine publicly.',
     ),
     required: true,
-    default: instance_name,
+    default: 'My SearXNG',
   }),
   base_url: Value.dynamicSelect(async ({ effects }) => {
-    const urls = await getPrimaryInterfaceUrls(effects)
+    const urls = await sdk.serviceInterface
+      .getOwn(effects, uiId, (i) => i?.addressInfo?.format() || [])
+      .const()
 
     return {
       name: i18n('Primary URL'),
@@ -42,7 +42,7 @@ export const inputSpec = InputSpec.of({
     description: i18n(
       'Your SearXNG instance will collect anonymous stats about its own usage and performance.',
     ),
-    default: enable_metrics,
+    default: false,
   }),
   proxy_tor: Value.toggle({
     name: i18n('Proxy All Traffic Over Tor'),

@@ -4,6 +4,7 @@ import { setInterfaces } from '../interfaces'
 import { versionGraph } from '../install/versionGraph'
 import { actions } from '../actions'
 import { restoreInit } from '../backups'
+import { seedFiles } from './seedFiles'
 import { taskConfig } from './taskConfig'
 
 export const init = sdk.setupInit(
@@ -12,6 +13,7 @@ export const init = sdk.setupInit(
   setInterfaces,
   setDependencies,
   actions,
+  seedFiles,
   taskConfig,
 )
 

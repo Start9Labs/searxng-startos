@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="icon.png" alt="Project Logo" width="21%">
+  <img src="icon.svg" alt="Project Logo" width="21%">
 </p>
 
 # SearXNG for StartOS
@@ -18,9 +18,9 @@ This package runs **3 containers**:
 
 | Container | Image | Purpose |
 |-----------|-------|---------|
-| searxng | `searxng/searxng:2026.1.30` | Search metaengine |
-| caddy | `caddy:2-alpine` | Reverse proxy with security headers |
-| valkey | `valkey/valkey:8-alpine` | Redis-compatible caching |
+| searxng | `searxng/searxng` | Search metaengine |
+| caddy | `caddy` | Reverse proxy with security headers |
+| valkey | `valkey/valkey` | Redis-compatible caching |
 
 ## Volumes
 
@@ -91,7 +91,7 @@ Daemons start in order: Valkey → SearXNG → Caddy
 ## Tor Proxy Support
 
 When "Proxy All Traffic Over Tor" is enabled:
-- All search requests route through `socks5h://10.0.3.1:9050`
+- All search requests route through `socks5h://tor.startos:9050`
 - Tor-only engines become available (Ahmia, Torch, etc.)
 - Searches are slower but more private
 - Your IP is hidden from search engines
@@ -111,62 +111,3 @@ When "Proxy All Traffic Over Tor" is enabled:
 - Image/video/news/file search categories
 - Bang shortcuts (!g, !ddg, etc.)
 
----
-
-## Quick Reference (YAML)
-
-```yaml
-package_id: searxng
-upstream_version: 2026.1.30
-containers:
-  - name: searxng
-    image: searxng/searxng:2026.1.30
-  - name: caddy
-    image: caddy:2-alpine
-  - name: valkey
-    image: valkey/valkey:8-alpine
-
-volumes:
-  main:
-    backup: true
-
-interfaces:
-  ui:
-    type: ui
-    port: 80
-    path: /
-  metrics:
-    type: ui
-    port: 80
-    path: /stats
-    conditional: enable_metrics
-
-actions:
-  - id: set-config
-    name: Config
-    has_input: true
-    options:
-      - instance_name
-      - base_url
-      - enable_metrics
-      - proxy_tor
-
-dependencies: []
-
-auto_configure:
-  - secret_key (random)
-  - limiter: false
-  - image_proxy: true
-  - valkey unix socket
-  - caddy security headers
-
-health_checks:
-  - name: Valkey
-    method: cli_ping
-  - name: SearXNG
-    method: port_listening
-    port: 8080
-  - name: Caddy
-    method: port_listening
-    port: 80
-```
