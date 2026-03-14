@@ -1,17 +1,18 @@
 id: searxng
 title: "SearXNG"
-version: 2025.10.15
+version: 2026.3.13
 release-notes: |
-  - Updated SearXNG code to the latest upstream version.
+  - Updated SearXNG from 2025.10.15 to 2026.3.13.
+
+  > **SECURITY**
+    - **XSS Fix:** Patched unsafe rendering of untrusted external data.
 
   > **Highlights**
-    - **New Azure Search:** You can now search Azure cloud resources directly in SearXNG.
-    - **Video Search Improvement:** See video lengths in search results at a glance.
-    - **Pinterest and Weather Fixes:** Pinterest results and the !weather command are now more reliable.
-    - **Safer Search:** SafeSearch on Startpage now filters results correctly.
-    - **Smarter Google Scholar:** Better handling when Google asks for CAPTCHA.
-
-    - Interface and stability updates throughout for a smoother experience.
+    - **DuckDuckGo Overhaul:** Complete rewrite of all DuckDuckGo engines.
+    - **Google Engine Fixes:** Fixed broken Google engine XPaths.
+    - **New Engines:** Bing autocompleter, Pexels, ArtStation, NIST.gov.
+    - **Removed Engines:** Right Dao, Stract, Livespace, Searchcode, Seekr.
+    - **Performance:** Dropped fasttext-predict dependency, adjusted suspended_times defaults, removed Sec-Fetch-* headers.
 license: MIT
 wrapper-repo: "https://github.com/Start9Labs/searxng-startos"
 upstream-repo: "https://github.com/searxng/searxng-docker"

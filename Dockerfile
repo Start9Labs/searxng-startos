@@ -4,7 +4,7 @@ RUN apk add --no-cache yq;\
     mv /usr/bin/yq /usr/local/bin/;\
     rm -f /var/cache/apk/*
 
-FROM searxng/searxng:2025.10.15-576d30ffc AS final
+FROM searxng/searxng:2026.3.13-3c1f68c59 AS final
 
 USER root
 
