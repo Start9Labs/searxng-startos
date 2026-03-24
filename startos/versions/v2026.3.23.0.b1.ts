@@ -1,9 +1,9 @@
 import { IMPOSSIBLE, VersionInfo, YAML } from '@start9labs/start-sdk'
 import { readFile, rm } from 'fs/promises'
-import { settingsYaml } from '../../fileModels/settings.yml'
+import { settingsYaml } from '../fileModels/settings.yml'
 
-export const v_2026_3_23_0_b0 = VersionInfo.of({
-  version: '2026.3.23:0-beta.0',
+export const v_2026_3_23_0_b1 = VersionInfo.of({
+  version: '2026.3.23:0-beta.1',
   releaseNotes: {
     en_US: 'Update SearXNG to 2026.3.23',
     es_ES: 'Actualización de SearXNG a 2026.3.23',
