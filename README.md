@@ -1,18 +1,40 @@
 <p align="center">
-  <img src="icon.svg" alt="Project Logo" width="21%">
+  <img src="icon.svg" alt="SearXNG Logo" width="21%">
 </p>
 
-# SearXNG for StartOS
+# SearXNG on StartOS
 
-This repository packages [SearXNG](https://github.com/searxng/searxng) for StartOS. This document describes what makes this package different from a default SearXNG deployment.
+> **Upstream docs:** <https://docs.searxng.org/>
+>
+> Everything not listed in this document should behave the same as upstream
+> SearXNG. If a feature, setting, or behavior is not mentioned here, the
+> upstream documentation is accurate and fully applicable.
 
-For general SearXNG usage and features, see the [upstream documentation](https://docs.searxng.org/).
-
-## How This Differs from Upstream
+This repository packages [SearXNG](https://github.com/searxng/searxng) for StartOS. SearXNG is a privacy-respecting, hackable metasearch engine that aggregates results from 70+ search engines.
 
 This package runs SearXNG behind a Caddy reverse proxy with security headers, uses Valkey for caching, and is pre-configured for private use (rate limiter disabled). Optional Tor proxy support routes all search requests through StartOS's Tor network.
 
-## Container Runtime
+---
+
+## Table of Contents
+
+- [Image and Container Runtime](#image-and-container-runtime)
+- [Volume and Data Layout](#volume-and-data-layout)
+- [Installation and First-Run Flow](#installation-and-first-run-flow)
+- [Configuration Management](#configuration-management)
+- [Network Access and Interfaces](#network-access-and-interfaces)
+- [Actions (StartOS UI)](#actions-startos-ui)
+- [Backups and Restore](#backups-and-restore)
+- [Health Checks](#health-checks)
+- [Dependencies](#dependencies)
+- [Limitations and Differences](#limitations-and-differences)
+- [What Is Unchanged from Upstream](#what-is-unchanged-from-upstream)
+- [Contributing](#contributing)
+- [Quick Reference for AI Consumers](#quick-reference-for-ai-consumers)
+
+---
+
+## Image and Container Runtime
 
 This package runs **3 containers**:
 
@@ -22,92 +44,116 @@ This package runs **3 containers**:
 | caddy | `caddy` | Reverse proxy with security headers |
 | valkey | `valkey/valkey` | Redis-compatible caching |
 
-## Volumes
+- **Architectures:** x86_64, aarch64
+- **Entrypoint:** Default upstream entrypoint for SearXNG; default entrypoints for Caddy and Valkey
 
-| Volume | Contents | Backed Up |
-|--------|----------|-----------|
-| `main` | SearXNG settings, Caddy data | Yes |
+## Volume and Data Layout
+
+| Volume | Mount Point | Contents |
+|--------|-------------|----------|
+| `main` | `/etc/searxng` (searxng container), `/data` (caddy container) | SearXNG `settings.yml`, `store.json`, Caddy persistent data |
+
+StartOS manages a `store.json` file and a `settings.yml` file in the `main` volume for persistent configuration.
+
+## Installation and First-Run Flow
+
+- On first install, `settings.yml` is seeded with defaults (auto-generated `secret_key`, `limiter: false`, `image_proxy: true`, Valkey cache URL)
+- A **critical setup task** is created prompting the user to run the **Config** action to set instance name and primary URL
+- No upstream setup wizard — all configuration is handled via the StartOS Config action
 
 ## Configuration Management
 
-### Auto-Configured Settings
+| StartOS-Managed | Upstream-Managed |
+|-----------------|------------------|
+| Instance name, primary URL, stats toggle, Tor proxy toggle (via Config action) | Search preferences, enabled engines, UI theme (via SearXNG web UI) |
+| `secret_key`, `limiter`, `image_proxy`, Valkey cache URL (auto-configured) | |
+| Caddy security headers (CSP, Permissions-Policy, X-Content-Type-Options, X-Robots-Tag) | |
 
-| Setting | Value | Purpose |
-|---------|-------|---------|
-| `secret_key` | Random 24-char | Session security |
-| `limiter` | `false` | Disabled for private instance |
-| `image_proxy` | `true` | Proxy images through SearXNG |
-| `valkey.url` | Unix socket | Cache connection |
-| Security headers | CSP, Permissions-Policy, etc. | Via Caddy |
+## Network Access and Interfaces
 
-### User-Configurable Settings
+| Interface | ID | Type | Port | Path | Description |
+|-----------|----|------|------|------|-------------|
+| Web UI | `ui` | ui | 80 | `/` | Main search interface |
+| Stats Dashboard | `metrics` | ui | 80 | `/stats` | Usage statistics (only exported when "Enable Stats" is on) |
 
-The **Config** action exposes:
-- **Instance Name**: Display name for your instance
-- **Primary URL**: Base URL for links (selectable from your interfaces)
-- **Enable Stats**: Anonymous usage statistics collection
-- **Proxy All Traffic Over Tor**: Route search requests through Tor (enables .onion search engines)
+## Actions (StartOS UI)
 
-## Network Interfaces
+### Config (`set-config`)
 
-| Interface | Type | Port | Path | Description |
-|-----------|------|------|------|-------------|
-| Web UI | ui | 80 | `/` | Main search interface |
-| Stats Dashboard | ui | 80 | `/stats` | Usage statistics (if enabled) |
+Configure your SearXNG instance settings.
 
-The Stats Dashboard interface is only exported when "Enable Stats" is turned on.
+| Property | Value |
+|----------|-------|
+| **Name** | Config |
+| **Purpose** | Configure instance name, primary URL, stats collection, and Tor proxy |
+| **Visibility** | Enabled |
+| **Availability** | Any (running or stopped) |
+| **Inputs** | Instance Name (text, required, default: "My SearXNG"), Primary URL (dynamic select from available interfaces), Enable Stats (toggle, default: off), Proxy All Traffic Over Tor (toggle, default: off) |
+| **Outputs** | Settings are merged into `settings.yml`; service restarts to apply changes |
 
-## Actions
+## Backups and Restore
 
-### Config
-
-Configure your SearXNG instance settings:
-- Instance name
-- Primary URL selection
-- Stats collection toggle
-- Tor proxy toggle
-
-**Note:** Changing configuration triggers a service restart.
-
-## Dependencies
-
-None. SearXNG queries external search engines directly (or via Tor if enabled).
-
-## Backups
-
-All data is backed up:
-- `main` volume - settings, preferences
+- **Backed up:** `main` volume (SearXNG settings, Caddy data)
+- **Restore behavior:** Volume is restored in place; service resumes with previous configuration
 
 ## Health Checks
 
-| Check | Method | Success Condition |
-|-------|--------|-------------------|
-| Valkey | CLI ping | Returns "PONG" |
-| SearXNG | Port listening | Port 8080 responds |
-| Caddy | Port listening | Port 80 responds |
+| Check | Daemon | Method | Success Condition |
+|-------|--------|--------|-------------------|
+| Valkey | valkey | CLI ping (`valkey-cli ping`) | Returns "PONG" |
+| Web Interface | searxng | Port listening (8080) | Port 8080 responds |
+| Caddy | caddy | Port listening (80) | Port 80 responds |
 
 Daemons start in order: Valkey → SearXNG → Caddy
 
-## Tor Proxy Support
+## Dependencies
 
-When "Proxy All Traffic Over Tor" is enabled:
-- All search requests route through `socks5h://tor.startos:9050`
-- Tor-only engines become available (Ahmia, Torch, etc.)
-- Searches are slower but more private
-- Your IP is hidden from search engines
+### Tor (optional)
 
-## Limitations
+| Property | Value |
+|----------|-------|
+| **Service** | Tor Network Daemon |
+| **Required/Optional** | Optional — only required when "Proxy All Traffic Over Tor" is enabled |
+| **Health checks** | `tor` health check must pass |
+| **Mounted volumes** | None |
+| **Purpose** | Routes all outgoing search requests through the Tor SOCKS proxy (`socks5h://tor.startos:9050`), enabling Tor-only engines (Ahmia, Torch) and hiding server IP from search engines |
 
-1. **No persistent search history**: By design, SearXNG doesn't store search history
-2. **Engine availability**: Some search engines may block or rate-limit requests
-3. **No user accounts**: SearXNG is designed for anonymous use
+## Limitations and Differences
 
-## What's Unchanged
+1. **No persistent search history** — by design, SearXNG does not store search history
+2. **Engine availability** — some search engines may block or rate-limit requests
+3. **No user accounts** — SearXNG is designed for anonymous use
+4. **Rate limiter disabled** — the built-in rate limiter is turned off since this is a private instance
+5. **Tor proxy adds latency** — when enabled, all searches route through Tor and will be slower
+
+## What Is Unchanged from Upstream
 
 - Full SearXNG search functionality
 - 70+ search engine support
 - Privacy protection features
-- Customizable preferences
+- Customizable preferences via the web UI
 - Image/video/news/file search categories
 - Bang shortcuts (!g, !ddg, etc.)
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for build instructions and development workflow.
+
+---
+
+## Quick Reference for AI Consumers
+
+```yaml
+package_id: searxng
+image: searxng/searxng, caddy, valkey/valkey
+architectures: [x86_64, aarch64]
+volumes:
+  main: /etc/searxng (searxng), /data (caddy)
+ports:
+  ui: 80
+dependencies:
+  - tor (optional)
+startos_managed_env_vars: []
+actions:
+  - set-config
+```
