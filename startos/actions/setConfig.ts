@@ -18,7 +18,7 @@ export const inputSpec = InputSpec.of({
   }),
   base_url: Value.dynamicSelect(async ({ effects }) => {
     const urls = await sdk.serviceInterface
-      .getOwn(effects, uiId, (i) => i?.addressInfo?.format() || [])
+      .getOwn(effects, uiId, (i) => i?.addressInfo?.nonLocal.format() || [])
       .const()
 
     return {
