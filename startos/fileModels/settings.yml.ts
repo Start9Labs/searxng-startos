@@ -44,6 +44,18 @@ const searchSchema = z.object({
   formats: z.array(z.string()).catch(() => ['html', 'json']),
 })
 
+const engineSchema = z
+  .object({
+    name: z.string(),
+    engine: z.string().optional(),
+    api_key: z.string().optional(),
+    inactive: z.boolean().optional(),
+    disabled: z.boolean().optional(),
+  })
+  .passthrough()
+
+export type EngineEntry = z.infer<typeof engineSchema>
+
 const shape = z.object({
   use_default_settings: z.literal(true).catch(true),
   server: serverSchema.catch(() => serverSchema.parse({})),
@@ -52,6 +64,7 @@ const shape = z.object({
   general: generalSchema.catch(() => generalSchema.parse({})),
   outgoing: outgoingSchema.catch(() => outgoingSchema.parse({})),
   search: searchSchema.catch(() => searchSchema.parse({})),
+  engines: z.array(engineSchema).optional().catch(undefined),
 })
 
 export type SettingsType = z.infer<typeof shape>

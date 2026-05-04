@@ -102,6 +102,21 @@ Configure your SearXNG instance settings.
 | **Inputs** | Instance Name (text, required, default: "My SearXNG"), Primary URL (dynamic select from available interfaces), Enable Stats (toggle, default: off), Proxy All Traffic Over Tor (toggle, default: off) |
 | **Outputs** | Settings are merged into `settings.yml`; service restarts to apply changes |
 
+### Engine API Keys (`set-engine-keys`)
+
+Configure API keys for paid SearXNG search engines. Adding an entry both supplies the key and activates the engine (overriding the upstream `inactive: true` default). Removing an entry reverts that engine to its upstream default.
+
+| Property | Value |
+|----------|-------|
+| **Name** | Engine API Keys |
+| **Visibility** | Enabled |
+| **Availability** | Any (running or stopped) |
+| **Inputs** | A list where each entry selects an engine and supplies an API key. Curated entries: **Brave Search API** (`braveapi`), **Wolfram Alpha API** (`wolframalpha_api`). Choose **Other** to enter any other SearXNG engine module name (e.g. `kagi`) plus its key — the Engine ID must match an existing or installed SearXNG engine module. |
+| **Uniqueness** | Each engine can appear at most once. Multiple "Other" entries are allowed as long as their Engine IDs differ. |
+| **Outputs** | Entries are written to the `engines:` block of `settings.yml`, with `inactive: false` and `disabled: false` so each engine is usable immediately. The service restarts to apply changes. |
+
+API keys are stored in `settings.yml` (which lives in the `main` volume backup) and shown masked in the form.
+
 ## Backups and Restore
 
 - **Backed up:** `main` volume (SearXNG settings, Caddy data)
@@ -167,4 +182,5 @@ dependencies:
 startos_managed_env_vars: []
 actions:
   - set-config
+  - set-engine-keys
 ```
