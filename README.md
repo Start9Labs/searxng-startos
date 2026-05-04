@@ -67,7 +67,18 @@ StartOS manages a `store.json` file and a `settings.yml` file in the `main` volu
 |-----------------|------------------|
 | Instance name, primary URL, stats toggle, Tor proxy toggle (via Config action) | Search preferences, enabled engines, UI theme (via SearXNG web UI) |
 | `secret_key`, `limiter`, `image_proxy`, Valkey cache URL (auto-configured) | |
+| `search.formats: [html, json]` (auto-configured — enables `?format=json` for programmatic clients) | |
 | Caddy security headers (CSP, Permissions-Policy, X-Content-Type-Options, X-Robots-Tag) | |
+
+### Programmatic Search (JSON API)
+
+The instance is pre-configured to serve JSON-format search results, which makes it usable as a search backend for clients like Open WebUI's web-search feature. From any other StartOS package on the same server, the search endpoint is reachable at:
+
+```
+http://searxng.startos:80/search?q=<query>&format=json
+```
+
+The HTML UI is unaffected.
 
 ## Network Access and Interfaces
 

@@ -2,14 +2,19 @@ import { IMPOSSIBLE, VersionInfo, YAML } from '@start9labs/start-sdk'
 import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
-export const v_2026_3_29_2 = VersionInfo.of({
-  version: '2026.3.29:2',
+export const v_2026_5_2_1 = VersionInfo.of({
+  version: '2026.5.2:1',
   releaseNotes: {
-    en_US: 'Internal updates (start-sdk 1.3.3)',
-    es_ES: 'Actualizaciones internas (start-sdk 1.3.3)',
-    de_DE: 'Interne Aktualisierungen (start-sdk 1.3.3)',
-    pl_PL: 'Aktualizacje wewnętrzne (start-sdk 1.3.3)',
-    fr_FR: 'Mises à jour internes (start-sdk 1.3.3)',
+    en_US:
+      'Update to upstream SearXNG 2026.5.2. Enable JSON search output so SearXNG can serve as a search backend for clients like Open WebUI.',
+    es_ES:
+      'Actualización a SearXNG 2026.5.2. Habilita la salida JSON de búsqueda para que SearXNG pueda servir como backend de búsqueda para clientes como Open WebUI.',
+    de_DE:
+      'Aktualisierung auf SearXNG 2026.5.2. JSON-Suchausgabe aktivieren, damit SearXNG als Such-Backend für Clients wie Open WebUI dienen kann.',
+    pl_PL:
+      'Aktualizacja do SearXNG 2026.5.2. Włączenie wyjścia JSON w wyszukiwarce, dzięki czemu SearXNG może służyć jako zaplecze wyszukiwania dla klientów takich jak Open WebUI.',
+    fr_FR:
+      'Mise à jour vers SearXNG 2026.5.2. Activer la sortie JSON de recherche afin que SearXNG puisse servir de backend de recherche pour les clients comme Open WebUI.',
   },
   migrations: {
     up: async ({ effects }) => {

@@ -40,6 +40,10 @@ const outgoingSchema = z.object({
   using_tor_proxy: z.boolean().optional().catch(undefined),
 })
 
+const searchSchema = z.object({
+  formats: z.array(z.string()).catch(() => ['html', 'json']),
+})
+
 const shape = z.object({
   use_default_settings: z.literal(true).catch(true),
   server: serverSchema.catch(() => serverSchema.parse({})),
@@ -47,6 +51,7 @@ const shape = z.object({
   valkey: valkeySchema.catch(() => valkeySchema.parse({})),
   general: generalSchema.catch(() => generalSchema.parse({})),
   outgoing: outgoingSchema.catch(() => outgoingSchema.parse({})),
+  search: searchSchema.catch(() => searchSchema.parse({})),
 })
 
 export type SettingsType = z.infer<typeof shape>
