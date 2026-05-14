@@ -1,4 +1,3 @@
-## How the upstream version is pulled
-- dockerTag in `startos/manifest/index.ts`: `searxng/searxng:<version>-<hash>`
+# CLAUDE.md
 
-> Tag format includes a commit hash suffix. Check Docker Hub for exact tag names.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the doc map and contribution workflow.

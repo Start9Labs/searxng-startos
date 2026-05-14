@@ -9,7 +9,6 @@ export const manifest = setupManifest({
   upstreamRepo: 'https://github.com/searxng/searxng-docker',
   marketingUrl: 'https://docs.searxng.org',
   donationUrl: 'https://docs.searxng.org/donate.html',
-  docsUrls: ['https://docs.searxng.org/'],
   description: i18n.description,
   volumes: ['main'],
   images: {
@@ -27,7 +26,7 @@ export const manifest = setupManifest({
     },
     searxng: {
       source: {
-        dockerTag: 'searxng/searxng:2026.5.2-aefc3c316',
+        dockerTag: 'searxng/searxng:2026.5.10-df1f24fb7',
       },
       arch: ['x86_64', 'aarch64'],
     },
