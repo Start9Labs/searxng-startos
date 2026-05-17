@@ -2,14 +2,14 @@ import { IMPOSSIBLE, VersionInfo, YAML } from '@start9labs/start-sdk'
 import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
-export const v_2026_5_16_1 = VersionInfo.of({
-  version: '2026.5.16:1',
+export const v_2026_5_17_1 = VersionInfo.of({
+  version: '2026.5.17:1',
   releaseNotes: {
-    en_US: 'Bumps SearXNG → 2026.5.16.',
-    es_ES: 'Actualiza SearXNG → 2026.5.16.',
-    de_DE: 'Aktualisiert SearXNG → 2026.5.16.',
-    pl_PL: 'Aktualizuje SearXNG → 2026.5.16.',
-    fr_FR: 'Met à jour SearXNG → 2026.5.16.',
+    en_US: 'Bumps SearXNG → 2026.5.17.',
+    es_ES: 'Actualiza SearXNG → 2026.5.17.',
+    de_DE: 'Aktualisiert SearXNG → 2026.5.17.',
+    pl_PL: 'Aktualizuje SearXNG → 2026.5.17.',
+    fr_FR: 'Met à jour SearXNG → 2026.5.17.',
   },
   migrations: {
     up: async ({ effects }) => {
