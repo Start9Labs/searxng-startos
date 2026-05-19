@@ -2,24 +2,14 @@ import { IMPOSSIBLE, VersionInfo, YAML } from '@start9labs/start-sdk'
 import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
-export const v_2026_5_13_1 = VersionInfo.of({
-  version: '2026.5.13:1',
+export const v_2026_5_17_2 = VersionInfo.of({
+  version: '2026.5.17:2',
   releaseNotes: {
-    en_US: `**Bumps**
-
-- SearXNG → 2026.5.13`,
-    es_ES: `**Actualizaciones**
-
-- SearXNG → 2026.5.13`,
-    de_DE: `**Aktualisierungen**
-
-- SearXNG → 2026.5.13`,
-    pl_PL: `**Aktualizacje**
-
-- SearXNG → 2026.5.13`,
-    fr_FR: `**Mises à jour**
-
-- SearXNG → 2026.5.13`,
+    en_US: 'Upstream patch: adds cara.app search engine.',
+    es_ES: 'Parche de upstream: añade el motor de búsqueda cara.app.',
+    de_DE: 'Upstream-Patch: fügt die Suchmaschine cara.app hinzu.',
+    pl_PL: 'Łatka upstream: dodaje wyszukiwarkę cara.app.',
+    fr_FR: 'Correctif amont : ajoute le moteur de recherche cara.app.',
   },
   migrations: {
     up: async ({ effects }) => {
