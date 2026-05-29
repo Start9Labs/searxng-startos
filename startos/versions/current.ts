@@ -2,7 +2,7 @@ import { IMPOSSIBLE, VersionInfo, YAML } from '@start9labs/start-sdk'
 import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
-export const v_2026_5_29_0 = VersionInfo.of({
+export const current = VersionInfo.of({
   version: '2026.5.29:0',
   releaseNotes: {
     en_US: 'Bumps SearXNG → 2026.5.29.',
