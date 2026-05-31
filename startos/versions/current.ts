@@ -3,13 +3,13 @@ import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
 export const current = VersionInfo.of({
-  version: '2026.5.30:0',
+  version: '2026.5.31:0',
   releaseNotes: {
-    en_US: 'Bumps SearXNG → 2026.5.30.',
-    es_ES: 'Actualiza SearXNG → 2026.5.30.',
-    de_DE: 'Aktualisiert SearXNG → 2026.5.30.',
-    pl_PL: 'Aktualizuje SearXNG → 2026.5.30.',
-    fr_FR: 'Met à jour SearXNG → 2026.5.30.',
+    en_US: 'Bumps SearXNG → 2026.5.31.',
+    es_ES: 'Actualiza SearXNG → 2026.5.31.',
+    de_DE: 'Aktualisiert SearXNG → 2026.5.31.',
+    pl_PL: 'Aktualizuje SearXNG → 2026.5.31.',
+    fr_FR: 'Met à jour SearXNG → 2026.5.31.',
   },
   migrations: {
     up: async ({ effects }) => {
