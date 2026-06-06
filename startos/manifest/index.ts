@@ -6,7 +6,7 @@ export const manifest = setupManifest({
   title: 'SearXNG',
   license: 'MIT',
   packageRepo: 'https://github.com/Start9Labs/searxng-startos',
-  upstreamRepo: 'https://github.com/searxng/searxng-docker',
+  upstreamRepo: 'https://github.com/searxng/searxng',
   marketingUrl: 'https://docs.searxng.org',
   donationUrl: 'https://docs.searxng.org/donate.html',
   description: i18n.description,
