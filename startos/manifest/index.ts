@@ -26,7 +26,7 @@ export const manifest = setupManifest({
     },
     searxng: {
       source: {
-        dockerTag: 'searxng/searxng:2026.6.8-f3fab143b',
+        dockerTag: 'searxng/searxng:2026.6.10-f4c63c8eb',
       },
       arch: ['x86_64', 'aarch64'],
     },

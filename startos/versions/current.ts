@@ -3,38 +3,38 @@ import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
 export const current = VersionInfo.of({
-  version: '2026.6.8:0',
+  version: '2026.6.10:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.6.8.
+    en_US: `Updated SearXNG to 2026.6.10.
 
-- New search engines: heexy (general, images), seek-ninja (general), tiger.ch.
-- Fixes: aol now uses the Wikidata ID for C++; yep sends Sec-Fetch headers to bypass "access denied".
+- New DuckDuckGo web engine as an alternative to html.duckduckgo.com.
+- Hardening: the SQLite database schema is now created during app initialization.
 
-Full changes: https://github.com/searxng/searxng/compare/2026.6.7-86903a2c6...2026.6.8-f3fab143b`,
-    es_ES: `Actualiza SearXNG a 2026.6.8.
+Full changes: https://github.com/searxng/searxng/compare/f3fab143b...f4c63c8eb`,
+    es_ES: `Actualiza SearXNG a 2026.6.10.
 
-- Nuevos motores de búsqueda: heexy (general, imágenes), seek-ninja (general), tiger.ch.
-- Correcciones: aol ahora usa el ID de Wikidata para C++; yep envía cabeceras Sec-Fetch para evitar el «acceso denegado».
+- Nuevo motor web de DuckDuckGo como alternativa a html.duckduckgo.com.
+- Refuerzo: el esquema de la base de datos SQLite ahora se crea durante la inicialización de la aplicación.
 
-Cambios completos: https://github.com/searxng/searxng/compare/2026.6.7-86903a2c6...2026.6.8-f3fab143b`,
-    de_DE: `Aktualisiert SearXNG auf 2026.6.8.
+Cambios completos: https://github.com/searxng/searxng/compare/f3fab143b...f4c63c8eb`,
+    de_DE: `Aktualisiert SearXNG auf 2026.6.10.
 
-- Neue Suchmaschinen: heexy (allgemein, Bilder), seek-ninja (allgemein), tiger.ch.
-- Korrekturen: aol verwendet nun die Wikidata-ID für C++; yep sendet Sec-Fetch-Header, um „Zugriff verweigert“ zu umgehen.
+- Neue DuckDuckGo-Web-Suchmaschine als Alternative zu html.duckduckgo.com.
+- Härtung: Das SQLite-Datenbankschema wird nun während der App-Initialisierung erstellt.
 
-Vollständige Änderungen: https://github.com/searxng/searxng/compare/2026.6.7-86903a2c6...2026.6.8-f3fab143b`,
-    pl_PL: `Aktualizuje SearXNG do 2026.6.8.
+Vollständige Änderungen: https://github.com/searxng/searxng/compare/f3fab143b...f4c63c8eb`,
+    pl_PL: `Aktualizuje SearXNG do 2026.6.10.
 
-- Nowe wyszukiwarki: heexy (ogólna, obrazy), seek-ninja (ogólna), tiger.ch.
-- Poprawki: aol używa teraz identyfikatora Wikidata dla C++; yep wysyła nagłówki Sec-Fetch, aby ominąć „odmowę dostępu”.
+- Nowa wyszukiwarka internetowa DuckDuckGo jako alternatywa dla html.duckduckgo.com.
+- Wzmocnienie: schemat bazy danych SQLite jest teraz tworzony podczas inicjalizacji aplikacji.
 
-Pełna lista zmian: https://github.com/searxng/searxng/compare/2026.6.7-86903a2c6...2026.6.8-f3fab143b`,
-    fr_FR: `Met à jour SearXNG vers 2026.6.8.
+Pełna lista zmian: https://github.com/searxng/searxng/compare/f3fab143b...f4c63c8eb`,
+    fr_FR: `Met à jour SearXNG vers 2026.6.10.
 
-- Nouveaux moteurs de recherche : heexy (général, images), seek-ninja (général), tiger.ch.
-- Corrections : aol utilise désormais l'identifiant Wikidata pour le C++ ; yep envoie les en-têtes Sec-Fetch pour contourner « accès refusé ».
+- Nouveau moteur web DuckDuckGo en alternative à html.duckduckgo.com.
+- Renforcement : le schéma de la base de données SQLite est désormais créé lors de l'initialisation de l'application.
 
-Changements complets : https://github.com/searxng/searxng/compare/2026.6.7-86903a2c6...2026.6.8-f3fab143b`,
+Changements complets : https://github.com/searxng/searxng/compare/f3fab143b...f4c63c8eb`,
   },
   migrations: {
     up: async ({ effects }) => {
