@@ -3,38 +3,43 @@ import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
 export const current = VersionInfo.of({
-  version: '2026.6.12:0',
+  version: '2026.6.13:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.6.12.
+    en_US: `Updated SearXNG to 2026.6.13.
 
-- New search engines: Fireball (general, news, videos) and Dogpile (general, news, images, videos).
-- Added support for Kagi (requires an API key).
+- New search engines: ChatNoir, s1search, abcnyheter (Norway) and ResultHunter.
+- Image results now list alternative formats.
+- Fixes: DuckDuckGo result titles containing HTML, and a Tiger crash on empty results.
 
-Full changes: https://github.com/searxng/searxng/compare/f4c63c8eb...de8a3de15`,
-    es_ES: `Actualiza SearXNG a 2026.6.12.
+Full changes: https://github.com/searxng/searxng/compare/de8a3de15...d14fa1f6e`,
+    es_ES: `Actualiza SearXNG a 2026.6.13.
 
-- Nuevos motores de búsqueda: Fireball (general, noticias, vídeos) y Dogpile (general, noticias, imágenes, vídeos).
-- Se añade compatibilidad con Kagi (requiere una clave de API).
+- Nuevos motores de búsqueda: ChatNoir, s1search, abcnyheter (Noruega) y ResultHunter.
+- Los resultados de imágenes ahora muestran formatos alternativos.
+- Correcciones: títulos de resultados de DuckDuckGo con HTML y un fallo de Tiger con resultados vacíos.
 
-Cambios completos: https://github.com/searxng/searxng/compare/f4c63c8eb...de8a3de15`,
-    de_DE: `Aktualisiert SearXNG auf 2026.6.12.
+Cambios completos: https://github.com/searxng/searxng/compare/de8a3de15...d14fa1f6e`,
+    de_DE: `Aktualisiert SearXNG auf 2026.6.13.
 
-- Neue Suchmaschinen: Fireball (allgemein, Nachrichten, Videos) und Dogpile (allgemein, Nachrichten, Bilder, Videos).
-- Unterstützung für Kagi hinzugefügt (erfordert einen API-Schlüssel).
+- Neue Suchmaschinen: ChatNoir, s1search, abcnyheter (Norwegen) und ResultHunter.
+- Bildergebnisse listen jetzt alternative Formate auf.
+- Korrekturen: DuckDuckGo-Ergebnistitel mit HTML sowie ein Tiger-Absturz bei leeren Ergebnissen.
 
-Vollständige Änderungen: https://github.com/searxng/searxng/compare/f4c63c8eb...de8a3de15`,
-    pl_PL: `Aktualizuje SearXNG do 2026.6.12.
+Vollständige Änderungen: https://github.com/searxng/searxng/compare/de8a3de15...d14fa1f6e`,
+    pl_PL: `Aktualizuje SearXNG do 2026.6.13.
 
-- Nowe wyszukiwarki: Fireball (ogólne, wiadomości, wideo) oraz Dogpile (ogólne, wiadomości, obrazy, wideo).
-- Dodano obsługę Kagi (wymaga klucza API).
+- Nowe wyszukiwarki: ChatNoir, s1search, abcnyheter (Norwegia) oraz ResultHunter.
+- Wyniki obrazów wyświetlają teraz alternatywne formaty.
+- Poprawki: tytuły wyników DuckDuckGo zawierające HTML oraz awaria Tiger przy pustych wynikach.
 
-Pełna lista zmian: https://github.com/searxng/searxng/compare/f4c63c8eb...de8a3de15`,
-    fr_FR: `Met à jour SearXNG vers 2026.6.12.
+Pełna lista zmian: https://github.com/searxng/searxng/compare/de8a3de15...d14fa1f6e`,
+    fr_FR: `Met à jour SearXNG vers 2026.6.13.
 
-- Nouveaux moteurs de recherche : Fireball (général, actualités, vidéos) et Dogpile (général, actualités, images, vidéos).
-- Ajout de la prise en charge de Kagi (nécessite une clé API).
+- Nouveaux moteurs de recherche : ChatNoir, s1search, abcnyheter (Norvège) et ResultHunter.
+- Les résultats d'images affichent désormais des formats alternatifs.
+- Corrections : titres de résultats DuckDuckGo contenant du HTML et un plantage de Tiger sur des résultats vides.
 
-Changements complets : https://github.com/searxng/searxng/compare/f4c63c8eb...de8a3de15`,
+Changements complets : https://github.com/searxng/searxng/compare/de8a3de15...d14fa1f6e`,
   },
   migrations: {
     up: async ({ effects }) => {
