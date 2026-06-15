@@ -5,7 +5,7 @@ import { versionGraph } from '../versions'
 import { actions } from '../actions'
 import { restoreInit } from '../backups'
 import { seedFiles } from './seedFiles'
-import { taskConfig } from './taskConfig'
+import { watchBaseUrl } from './watchBaseUrl'
 
 export const init = sdk.setupInit(
   restoreInit,
@@ -14,7 +14,7 @@ export const init = sdk.setupInit(
   setDependencies,
   actions,
   seedFiles,
-  taskConfig,
+  watchBaseUrl,
 )
 
 export const uninit = sdk.setupUninit(versionGraph)
