@@ -27,7 +27,7 @@ const valkeySchema = z.object({
 
 const generalSchema = z.object({
   debug: z.literal(false).catch(false),
-  instance_name: z.string().optional().catch('My SearXNG'),
+  instance_name: z.string().catch('My SearXNG'),
   enable_metrics: z.boolean().catch(false),
 })
 

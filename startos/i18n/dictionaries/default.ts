@@ -19,7 +19,6 @@ const dict = {
   'Your SearXNG instance will collect anonymous stats about its own usage and performance.': 15,
   'Config': 16,
   'Configure settings for your SearXNG instance': 17,
-  'Required configurations are missing': 18,
   'Proxy All Traffic Over Tor': 19,
   'Route all search engine requests through the StartOS Tor proxy. This enables Tor-only engines (e.g. Ahmia, Torch) but will make all searches slower.': 20,
   'Engine API Keys': 21,
@@ -27,6 +26,14 @@ const dict = {
   'API Key': 23,
   'Engine ID': 25,
   'The SearXNG engine module name (e.g. "kagi"). Must match a real engine module.': 26,
+  'Manage Access': 27,
+  'Make your SearXNG instance public, or require a username and password to use it. The username is always "admin"; you set the password. This protects both the Web UI and the Stats Dashboard.': 28,
+  'Access': 29,
+  'Choose who can use your SearXNG instance. Public: anyone with the address can use it. Private: require a username and password to log in.': 30,
+  'Public': 31,
+  'Private (require login)': 32,
+  'Password': 33,
+  'The password for logging in as "admin". Use the generate button for a strong random password, or type your own.': 34,
 } as const
 
 export type I18nKey = keyof typeof dict

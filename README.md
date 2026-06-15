@@ -58,8 +58,8 @@ StartOS manages a `store.json` file and a `settings.yml` file in the `main` volu
 ## Installation and First-Run Flow
 
 - On first install, `settings.yml` is seeded with defaults (auto-generated `secret_key`, `limiter: false`, `image_proxy: true`, Valkey cache URL)
-- A **critical setup task** is created prompting the user to run the **Config** action to set instance name and primary URL
-- No upstream setup wizard — all configuration is handled via the StartOS Config action
+- Instance name defaults to "My SearXNG" and the primary URL is seeded to the interface's `.local` (mDNS) address, so the service is ready to start with no required setup step
+- No upstream setup wizard — adjust instance name and primary URL anytime via the StartOS **Config** action
 
 ## Configuration Management
 
@@ -86,6 +86,8 @@ The HTML UI is unaffected.
 |-----------|----|------|------|------|-------------|
 | Web UI | `ui` | ui | 80 | `/` | Main search interface |
 | Stats Dashboard | `metrics` | ui | 80 | `/stats` | Usage statistics (only exported when "Enable Stats" is on) |
+
+Both interfaces are **public by default** (no login). Use the **Manage Access** action to require a username (always `admin`) and a password. Authentication is enforced by the StartOS reverse proxy at the edge — both interfaces share port 80, so one login covers the Web UI and the Stats Dashboard.
 
 ## Actions (StartOS UI)
 
@@ -116,6 +118,18 @@ Configure API keys for paid SearXNG search engines. Adding an entry both supplie
 | **Outputs** | Entries are written to the `engines:` block of `settings.yml`, with `inactive: false` and `disabled: false` so each engine is usable immediately. The service restarts to apply changes. |
 
 API keys are stored in `settings.yml` (which lives in the `main` volume backup) and shown masked in the form.
+
+### Manage Access (`manage-access`)
+
+Make the instance public (the default) or require a login. The username is always `admin`; you set the password. Authentication is enforced by the StartOS reverse proxy at the edge and covers **both** the Web UI and the Stats Dashboard (they share port 80) — there is no SearXNG-level account system.
+
+| Property | Value |
+|----------|-------|
+| **Name** | Manage Access |
+| **Visibility** | Enabled |
+| **Availability** | Any (running or stopped) |
+| **Inputs** | Access mode — **Public** (no auth, default) or **Private** (a password; use the generate button for a strong random one, or type your own) |
+| **Outputs** | The password is written to `store.json`; the Web UI binding re-exports with HTTP Basic auth (no service restart). On **Private**, the credentials are shown once and are copyable. On **Public**, the password is cleared. |
 
 ## Backups and Restore
 
@@ -183,4 +197,5 @@ startos_managed_env_vars: []
 actions:
   - set-config
   - set-engine-keys
+  - manage-access
 ```
