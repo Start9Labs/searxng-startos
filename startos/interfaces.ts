@@ -13,9 +13,6 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   // proxy enforces basic auth at the edge for everything on this port — both
   // the Web UI and the Stats Dashboard. No password set ⇒ public.
   const password = await storeJson.read((s) => s?.uiPassword).const(effects)
-  const realm =
-    (await settingsYaml.read((s) => s.general?.instance_name).const(effects)) ||
-    'SearXNG'
 
   const uiMultiOrigin = await uiMulti.bindPort(uiPort, {
     protocol: 'http',
@@ -24,7 +21,7 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
           auth: {
             type: 'basic',
             credentials: [{ username: uiUsername, password }],
-            realm,
+            realm: 'SearXNG',
           },
         }
       : undefined,
