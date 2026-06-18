@@ -3,23 +3,23 @@ import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
 export const current = VersionInfo.of({
-  version: '2026.6.16:0',
+  version: '2026.6.18:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.6.16. A small maintenance release: a deprecation warning for the obsolete engine \`about.language\` property, and a fix for minimal container setup.
+    en_US: `Updated SearXNG to 2026.6.18. Adds the Swiss search.ch/web engine and fixes the chinaso engine to handle empty upstream results gracefully.
 
-Full changes: https://github.com/searxng/searxng/compare/cf1410af8...502c820a2`,
-    es_ES: `Actualiza SearXNG a 2026.6.16. Una pequeña versión de mantenimiento: un aviso de obsolescencia para la propiedad obsoleta \`about.language\` de los motores y una corrección para la configuración mínima del contenedor.
+Full changes: https://github.com/searxng/searxng/compare/502c820a2...bd73cc09e`,
+    es_ES: `Actualiza SearXNG a 2026.6.18. Añade el motor suizo search.ch/web y corrige el motor chinaso para gestionar correctamente los resultados vacíos del proveedor.
 
-Cambios completos: https://github.com/searxng/searxng/compare/cf1410af8...502c820a2`,
-    de_DE: `Aktualisiert SearXNG auf 2026.6.16. Eine kleine Wartungsversion: eine Veraltungswarnung für die obsolete Suchmaschinen-Eigenschaft \`about.language\` und eine Korrektur für die minimale Container-Einrichtung.
+Cambios completos: https://github.com/searxng/searxng/compare/502c820a2...bd73cc09e`,
+    de_DE: `Aktualisiert SearXNG auf 2026.6.18. Fügt die Schweizer Suchmaschine search.ch/web hinzu und behebt die chinaso-Suchmaschine, sodass leere Ergebnisse der Quelle korrekt behandelt werden.
 
-Vollständige Änderungen: https://github.com/searxng/searxng/compare/cf1410af8...502c820a2`,
-    pl_PL: `Aktualizuje SearXNG do 2026.6.16. Niewielkie wydanie konserwacyjne: ostrzeżenie o wycofaniu nieaktualnej właściwości wyszukiwarki \`about.language\` oraz poprawka minimalnej konfiguracji kontenera.
+Vollständige Änderungen: https://github.com/searxng/searxng/compare/502c820a2...bd73cc09e`,
+    pl_PL: `Aktualizuje SearXNG do 2026.6.18. Dodaje szwajcarską wyszukiwarkę search.ch/web i naprawia wyszukiwarkę chinaso, aby poprawnie obsługiwała puste wyniki z serwera źródłowego.
 
-Pełna lista zmian: https://github.com/searxng/searxng/compare/cf1410af8...502c820a2`,
-    fr_FR: `Met à jour SearXNG vers 2026.6.16. Une petite version de maintenance : un avertissement d'obsolescence pour la propriété obsolète \`about.language\` des moteurs et une correction pour la configuration minimale du conteneur.
+Pełna lista zmian: https://github.com/searxng/searxng/compare/502c820a2...bd73cc09e`,
+    fr_FR: `Met à jour SearXNG vers 2026.6.18. Ajoute le moteur suisse search.ch/web et corrige le moteur chinaso pour gérer correctement les résultats vides du fournisseur.
 
-Changements complets : https://github.com/searxng/searxng/compare/cf1410af8...502c820a2`,
+Changements complets : https://github.com/searxng/searxng/compare/502c820a2...bd73cc09e`,
   },
   migrations: {
     up: async ({ effects }) => {
