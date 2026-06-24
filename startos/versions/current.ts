@@ -3,43 +3,38 @@ import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
 export const current = VersionInfo.of({
-  version: '2026.6.22:0',
+  version: '2026.6.24:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.6.22.
+    en_US: `Updated SearXNG to 2026.6.24. A small maintenance release.
 
-- Adds several new search engines (tusksearch, giphy, iseek, findfiles, and others) and a new "blogs" category.
-- Image results now guess their mimetype from the file path.
-- Removes the discontinued AOL engine and bumps Python dependencies.
+- Fixes the Anaconda engine's missing "about" configuration.
+- Removes the terminated ChinaSo media engines.
 
-Full changes: https://github.com/searxng/searxng/compare/fd42d4fda...952896d29`,
-    es_ES: `Actualiza SearXNG a 2026.6.22.
+Full changes: https://github.com/searxng/searxng/compare/952896d29...e3126b89e`,
+    es_ES: `Actualiza SearXNG a 2026.6.24. Una pequeña versión de mantenimiento.
 
-- Añade varios motores de búsqueda nuevos (tusksearch, giphy, iseek, findfiles y otros) y una nueva categoría "blogs".
-- Los resultados de imágenes ahora deducen su tipo MIME a partir de la ruta del archivo.
-- Elimina el motor AOL descontinuado y actualiza las dependencias de Python.
+- Corrige la configuración "about" que faltaba en el motor Anaconda.
+- Elimina los motores de medios ChinaSo descontinuados.
 
-Cambios completos: https://github.com/searxng/searxng/compare/fd42d4fda...952896d29`,
-    de_DE: `Aktualisiert SearXNG auf 2026.6.22.
+Cambios completos: https://github.com/searxng/searxng/compare/952896d29...e3126b89e`,
+    de_DE: `Aktualisiert SearXNG auf 2026.6.24. Eine kleine Wartungsversion.
 
-- Fügt mehrere neue Suchmaschinen (tusksearch, giphy, iseek, findfiles und weitere) sowie eine neue Kategorie "Blogs" hinzu.
-- Bildergebnisse ermitteln ihren MIME-Typ jetzt anhand des Dateipfads.
-- Entfernt die eingestellte AOL-Suchmaschine und aktualisiert die Python-Abhängigkeiten.
+- Behebt die fehlende "about"-Konfiguration der Anaconda-Suchmaschine.
+- Entfernt die eingestellten ChinaSo-Medien-Suchmaschinen.
 
-Vollständige Änderungen: https://github.com/searxng/searxng/compare/fd42d4fda...952896d29`,
-    pl_PL: `Aktualizuje SearXNG do 2026.6.22.
+Vollständige Änderungen: https://github.com/searxng/searxng/compare/952896d29...e3126b89e`,
+    pl_PL: `Aktualizuje SearXNG do 2026.6.24. Niewielka wersja konserwacyjna.
 
-- Dodaje kilka nowych wyszukiwarek (tusksearch, giphy, iseek, findfiles i inne) oraz nową kategorię „blogi".
-- Wyniki obrazów określają teraz typ MIME na podstawie ścieżki pliku.
-- Usuwa wycofaną wyszukiwarkę AOL i aktualizuje zależności Pythona.
+- Naprawia brakującą konfigurację „about" w wyszukiwarce Anaconda.
+- Usuwa wycofane wyszukiwarki multimediów ChinaSo.
 
-Pełna lista zmian: https://github.com/searxng/searxng/compare/fd42d4fda...952896d29`,
-    fr_FR: `Met à jour SearXNG vers 2026.6.22.
+Pełna lista zmian: https://github.com/searxng/searxng/compare/952896d29...e3126b89e`,
+    fr_FR: `Met à jour SearXNG vers 2026.6.24. Une petite version de maintenance.
 
-- Ajoute plusieurs nouveaux moteurs de recherche (tusksearch, giphy, iseek, findfiles et d'autres) ainsi qu'une nouvelle catégorie « blogs ».
-- Les résultats d'images devinent désormais leur type MIME à partir du chemin du fichier.
-- Supprime le moteur AOL abandonné et met à jour les dépendances Python.
+- Corrige la configuration « about » manquante du moteur Anaconda.
+- Supprime les moteurs de médias ChinaSo arrêtés.
 
-Changements complets : https://github.com/searxng/searxng/compare/fd42d4fda...952896d29`,
+Changements complets : https://github.com/searxng/searxng/compare/952896d29...e3126b89e`,
   },
   migrations: {
     up: async ({ effects }) => {
