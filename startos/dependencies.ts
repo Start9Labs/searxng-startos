@@ -11,7 +11,7 @@ export const setDependencies = sdk.setupDependencies(
       return {
         tor: {
           kind: 'running',
-          versionRange: '>=0.4.9.5:0',
+          versionRange: '>=0.4.9.11:2',
           healthChecks: ['tor'],
         },
       }

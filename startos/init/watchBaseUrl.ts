@@ -1,5 +1,5 @@
 import { settingsYaml } from '../fileModels/settings.yml'
-import { uiId } from '../interfaces'
+import { mainHostId, uiId } from '../interfaces'
 import { sdk } from '../sdk'
 
 // Keep the primary URL valid without a required config step: whenever the
@@ -11,11 +11,20 @@ export const watchBaseUrl = sdk.setupOnInit(async (effects) => {
     .read((s) => s.server.base_url)
     .const(effects)
 
-  const addresses = await sdk.serviceInterface
-    .getOwn(effects, uiId, (i) => ({
-      available: i?.addressInfo?.nonLocal.format() ?? [],
-      mdns: i?.addressInfo?.filter({ kind: 'mdns' }).format()[0] ?? null,
-    }))
+  const addresses = await sdk.host
+    .getOwn(effects, mainHostId, (host) => {
+      const iface =
+        host &&
+        Object.values(host.bindings)
+          .flatMap((b) => Object.values(b.interfaces))
+          .find((i) => i.id === uiId)
+      return {
+        available: iface ? iface.addressInfo.nonLocal.format() : [],
+        mdns: iface
+          ? (iface.addressInfo.filter({ kind: 'mdns' }).format()[0] ?? null)
+          : null,
+      }
+    })
     .const()
 
   if (!addresses.mdns) return

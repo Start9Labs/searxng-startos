@@ -55,7 +55,7 @@ export const getCaddyfile = (): string => {
 	}
 
 	# Simple reverse proxy without health checks
-	reverse_proxy searxng.startos:8080
+	reverse_proxy 127.0.0.1:8080
 }
 `.trim()
 }
