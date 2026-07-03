@@ -3,43 +3,43 @@ import { readFile, rm } from 'fs/promises'
 import { settingsYaml } from '../fileModels/settings.yml'
 
 export const current = VersionInfo.of({
-  version: '2026.6.30:0',
+  version: '2026.7.3:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.6.30.
+    en_US: `Updated SearXNG to 2026.7.3.
 
-- Adds new image engines (picjumbo, StockSnap, Shopify stock images, magnific) and the neosearch general engine.
-- Adds related-search suggestions to the tiger engine and time-range support to bilibili.
-- Fixes results for baidu, naver, and qwant, and makes resulthunter result images clickable again.
+- Adds the sina general search engine.
+- Fixes searchzee results by circumventing bot-blocking.
+- Refreshes the web client and Python dependencies, translations, and CI; otherwise a maintenance release.
 
-Full changes: https://github.com/searxng/searxng/compare/e3126b89e...774616ada`,
-    es_ES: `Actualiza SearXNG a 2026.6.30.
+Full changes: https://github.com/searxng/searxng/compare/774616ada...747cec4c2`,
+    es_ES: `Actualiza SearXNG a 2026.7.3.
 
-- Añade nuevos motores de imágenes (picjumbo, StockSnap, imágenes de stock de Shopify, magnific) y el motor general neosearch.
-- Añade sugerencias de búsqueda relacionada al motor tiger y soporte de rango de tiempo a bilibili.
-- Corrige resultados de baidu, naver y qwant, y hace que las imágenes de resultados de resulthunter vuelvan a ser clicables.
+- Añade el motor de búsqueda general sina.
+- Corrige los resultados de searchzee evitando el bloqueo de bots.
+- Actualiza el cliente web y las dependencias de Python, las traducciones y la CI; por lo demás, es una versión de mantenimiento.
 
-Cambios completos: https://github.com/searxng/searxng/compare/e3126b89e...774616ada`,
-    de_DE: `Aktualisiert SearXNG auf 2026.6.30.
+Cambios completos: https://github.com/searxng/searxng/compare/774616ada...747cec4c2`,
+    de_DE: `Aktualisiert SearXNG auf 2026.7.3.
 
-- Fügt neue Bild-Suchmaschinen hinzu (picjumbo, StockSnap, Shopify-Stockbilder, magnific) sowie die allgemeine Suchmaschine neosearch.
-- Fügt verwandte Suchvorschläge zur tiger-Suchmaschine und Zeitbereichsunterstützung zu bilibili hinzu.
-- Behebt Ergebnisse für baidu, naver und qwant und macht resulthunter-Ergebnisbilder wieder anklickbar.
+- Fügt die allgemeine Suchmaschine sina hinzu.
+- Behebt searchzee-Ergebnisse durch Umgehung der Bot-Blockierung.
+- Aktualisiert Web-Client- und Python-Abhängigkeiten, Übersetzungen und CI; ansonsten eine Wartungsversion.
 
-Vollständige Änderungen: https://github.com/searxng/searxng/compare/e3126b89e...774616ada`,
-    pl_PL: `Aktualizuje SearXNG do 2026.6.30.
+Vollständige Änderungen: https://github.com/searxng/searxng/compare/774616ada...747cec4c2`,
+    pl_PL: `Aktualizuje SearXNG do 2026.7.3.
 
-- Dodaje nowe wyszukiwarki obrazów (picjumbo, StockSnap, obrazy stockowe Shopify, magnific) oraz ogólną wyszukiwarkę neosearch.
-- Dodaje sugestie powiązanych wyszukiwań do wyszukiwarki tiger oraz obsługę zakresu czasu do bilibili.
-- Naprawia wyniki dla baidu, naver i qwant oraz przywraca klikalność obrazów wyników resulthunter.
+- Dodaje ogólną wyszukiwarkę sina.
+- Naprawia wyniki searchzee, omijając blokowanie botów.
+- Odświeża klienta web i zależności Pythona, tłumaczenia oraz CI; poza tym jest to wydanie konserwacyjne.
 
-Pełna lista zmian: https://github.com/searxng/searxng/compare/e3126b89e...774616ada`,
-    fr_FR: `Met à jour SearXNG vers 2026.6.30.
+Pełna lista zmian: https://github.com/searxng/searxng/compare/774616ada...747cec4c2`,
+    fr_FR: `Met à jour SearXNG vers 2026.7.3.
 
-- Ajoute de nouveaux moteurs d'images (picjumbo, StockSnap, images de stock Shopify, magnific) et le moteur général neosearch.
-- Ajoute des suggestions de recherche associée au moteur tiger et la prise en charge de la plage horaire à bilibili.
-- Corrige les résultats de baidu, naver et qwant, et rend à nouveau cliquables les images de résultats de resulthunter.
+- Ajoute le moteur de recherche général sina.
+- Corrige les résultats de searchzee en contournant le blocage des bots.
+- Met à jour le client web et les dépendances Python, les traductions et la CI ; sinon une version de maintenance.
 
-Changements complets : https://github.com/searxng/searxng/compare/e3126b89e...774616ada`,
+Changements complets : https://github.com/searxng/searxng/compare/774616ada...747cec4c2`,
   },
   migrations: {
     up: async ({ effects }) => {
