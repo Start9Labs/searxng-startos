@@ -1,11 +1,15 @@
 import { settingsYaml } from '../fileModels/settings.yml'
 import { sdk } from '../sdk'
+import { bridgeAddress } from '../utils'
+import { socksHostId, socksPort } from 'tor-startos/startos/utils'
 
-// Keep the outgoing SOCKS proxy pointed at tor's current container IP. The user
+// Keep the outgoing SOCKS proxy pointed at tor's SOCKS bridge address. The user
 // toggles the intent (outgoing.using_tor_proxy) via the Config action; here we
 // resolve tor's bridge address and write the actual proxy URL, reacting to both
-// the toggle and tor's IP changing. `.startos` DNS is gone in 2.0 — tor's SOCKS
-// is not a StartOS binding, so we read the container IP directly.
+// the toggle and tor appearing/disappearing. No fallbackPort: this proxy
+// anonymizes ALL outbound queries, so when tor is absent the helper resolves
+// null and we write no proxy rather than dial a dead port. The .const() heals
+// automatically — installing tor later fires once and configures the proxy.
 export const watchTorProxy = sdk.setupOnInit(async (effects) => {
   const usingTor = await settingsYaml
     .read((s) => s.outgoing.using_tor_proxy ?? false)
@@ -20,15 +24,17 @@ export const watchTorProxy = sdk.setupOnInit(async (effects) => {
     return
   }
 
-  const torIp = await sdk.getContainerIp(effects, { packageId: 'tor' }).const()
+  const torSocks = await bridgeAddress(effects, {
+    packageId: 'tor',
+    hostId: socksHostId,
+    internalPort: socksPort,
+  }).const()
 
   await settingsYaml.merge(
     effects,
     {
       outgoing: {
-        proxies: torIp
-          ? { 'all://': [`socks5h://${torIp}:9050`] }
-          : undefined,
+        proxies: torSocks ? { 'all://': [`socks5h://${torSocks}`] } : undefined,
       },
     },
     { allowWriteAfterConst: true },

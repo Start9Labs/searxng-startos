@@ -156,7 +156,7 @@ Daemons start in order: Valkey → SearXNG → Caddy
 | **Required/Optional** | Optional — only required when "Proxy All Traffic Over Tor" is enabled |
 | **Health checks** | `tor` health check must pass |
 | **Mounted volumes** | None |
-| **Purpose** | Routes all outgoing search requests through the Tor SOCKS proxy (`socks5h://tor.startos:9050`), enabling Tor-only engines (Ahmia, Torch) and hiding server IP from search engines |
+| **Purpose** | Routes all outgoing search requests through Tor's SOCKS proxy (reached over the internal StartOS bridge on port 9050), enabling Tor-only engines (Ahmia, Torch) and hiding server IP from search engines |
 
 ## Limitations and Differences
 
