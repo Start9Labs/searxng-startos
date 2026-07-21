@@ -1,9 +1,7 @@
 import { settingsYaml } from '../fileModels/settings.yml'
 import { i18n } from '../i18n'
-import { uiId } from '../interfaces'
+import { mainHostId, uiId } from '../interfaces'
 import { sdk } from '../sdk'
-
-export const torProxy = 'socks5h://tor.startos:9050'
 
 const { InputSpec, Value } = sdk
 
@@ -17,8 +15,15 @@ export const inputSpec = InputSpec.of({
     default: 'My SearXNG',
   }),
   base_url: Value.dynamicSelect(async ({ effects }) => {
-    const urls = await sdk.serviceInterface
-      .getOwn(effects, uiId, (i) => i?.addressInfo?.nonLocal.format() || [])
+    const urls = await sdk.host
+      .getOwn(effects, mainHostId, (host) => {
+        const iface =
+          host &&
+          Object.values(host.bindings)
+            .flatMap((b) => Object.values(b.interfaces))
+            .find((i) => i.id === uiId)
+        return iface ? iface.addressInfo.nonLocal.format() : []
+      })
       .const()
 
     return {
@@ -78,9 +83,7 @@ export const setConfig = sdk.Action.withInput(
           instance_name: yaml.general.instance_name,
           base_url: yaml.server.base_url,
           enable_metrics: yaml.general.enable_metrics,
-          proxy_tor:
-            !!yaml.outgoing.using_tor_proxy &&
-            !!yaml.outgoing.proxies?.['all://']?.includes(torProxy),
+          proxy_tor: !!yaml.outgoing.using_tor_proxy,
         }
       : {}
   },
@@ -95,14 +98,10 @@ export const setConfig = sdk.Action.withInput(
       server: {
         base_url: input.base_url,
       },
-      outgoing: input.proxy_tor
-        ? {
-            proxies: { 'all://': [torProxy] },
-            using_tor_proxy: true,
-          }
-        : {
-            proxies: undefined,
-            using_tor_proxy: undefined,
-          },
+      // The tor SOCKS proxy address (outgoing.proxies) is written reactively by
+      // watchTorProxy from tor's container IP — here we only record the intent.
+      outgoing: {
+        using_tor_proxy: input.proxy_tor ? true : undefined,
+      },
     }),
 )

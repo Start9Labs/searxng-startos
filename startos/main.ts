@@ -10,14 +10,14 @@ export const main = sdk.setupMain(async ({ effects }) => {
   // restart on settings changes
   await settingsYaml.read().const(effects)
 
-  const valkeySub = await sdk.SubContainer.of(
+  const valkeySub = sdk.SubContainer.of(
     effects,
     { imageId: 'valkey' },
     null,
     'valkey-sub',
   )
 
-  const caddySub = await sdk.SubContainer.of(
+  const caddySub = sdk.SubContainer.of(
     effects,
     { imageId: 'caddy' },
     sdk.Mounts.of().mountVolume({
@@ -29,7 +29,7 @@ export const main = sdk.setupMain(async ({ effects }) => {
     'caddy-sub',
   )
 
-  const searxngSub = await sdk.SubContainer.of(
+  const searxngSub = sdk.SubContainer.of(
     effects,
     { imageId: 'searxng' },
     sdk.Mounts.of().mountVolume({
@@ -42,10 +42,12 @@ export const main = sdk.setupMain(async ({ effects }) => {
   )
 
   // Write Caddyfile to Caddy container's root filesystem
-  await writeFile(`${caddySub.rootfs}/Caddyfile`, getCaddyfile())
+  const caddyRootfs = await caddySub.rootfs
+  await writeFile(`${caddyRootfs}/Caddyfile`, getCaddyfile())
 
   // Create empty limiter.toml for now to suppress SearXNG warning
-  await writeFile(`${searxngSub.rootfs}/etc/searxng/limiter.toml`, '')
+  const searxngRootfs = await searxngSub.rootfs
+  await writeFile(`${searxngRootfs}/etc/searxng/limiter.toml`, '')
 
   return sdk.Daemons.of(effects)
     .addDaemon('valkey', {

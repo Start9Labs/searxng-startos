@@ -4,10 +4,14 @@ import { i18n } from './i18n'
 import { sdk } from './sdk'
 import { uiPort, uiUsername } from './utils'
 
+// Host id (the `sdk.MultiHost.of` group) carrying both the ui and metrics
+// interfaces — distinct from the interface ids exported on it. Used for
+// `sdk.host.getOwn` lookups (setConfig, watchBaseUrl).
+export const mainHostId = 'main'
 export const uiId = 'ui'
 
 export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
-  const uiMulti = sdk.MultiHost.of(effects, 'main')
+  const uiMulti = sdk.MultiHost.of(effects, mainHostId)
 
   // When a password is set (via the Manage Access action), the OS reverse
   // proxy enforces basic auth at the edge for everything on this port — both
