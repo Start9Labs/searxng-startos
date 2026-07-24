@@ -1,7 +1,7 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.7.19:0',
+  version: '2026.7.19:1',
   releaseNotes: {
     en_US: `Updated SearXNG to 2026.7.19.
 
