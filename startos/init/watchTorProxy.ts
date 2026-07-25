@@ -1,6 +1,5 @@
 import { settingsYaml } from '../fileModels/settings.yml'
 import { sdk } from '../sdk'
-import {} from '../utils'
 import { socksHostId, socksPort } from 'tor-startos/startos/utils'
 
 // Keep the outgoing SOCKS proxy pointed at tor's SOCKS bridge address. The user
