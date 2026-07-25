@@ -1,6 +1,6 @@
 import { settingsYaml } from '../fileModels/settings.yml'
 import { sdk } from '../sdk'
-import { bridgeAddress } from '../utils'
+import {} from '../utils'
 import { socksHostId, socksPort } from 'tor-startos/startos/utils'
 
 // Keep the outgoing SOCKS proxy pointed at tor's SOCKS bridge address. The user
@@ -24,11 +24,13 @@ export const watchTorProxy = sdk.setupOnInit(async (effects) => {
     return
   }
 
-  const torSocks = await bridgeAddress(effects, {
-    packageId: 'tor',
-    hostId: socksHostId,
-    internalPort: socksPort,
-  }).const()
+  const torSocks = await sdk.host
+    .getBridgeAddress(effects, {
+      packageId: 'tor',
+      hostId: socksHostId,
+      internalPort: socksPort,
+    })
+    .const()
 
   await settingsYaml.merge(
     effects,
