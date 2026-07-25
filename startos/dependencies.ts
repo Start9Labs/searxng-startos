@@ -1,22 +1,20 @@
 import { sdk } from './sdk'
 import { settingsYaml } from './fileModels/settings.yml'
 
-export const setDependencies = sdk.setupDependencies(
-  async ({ effects }) => {
-    const usingTor = await settingsYaml
-      .read((s) => s.outgoing.using_tor_proxy)
-      .const(effects)
+export const setDependencies = sdk.setupDependencies(async ({ effects }) => {
+  const usingTor = await settingsYaml
+    .read((s) => s.outgoing.using_tor_proxy)
+    .const(effects)
 
-    if (usingTor) {
-      return {
-        tor: {
-          kind: 'running',
-          versionRange: '>=0.4.9.11:4',
-          healthChecks: ['tor'],
-        },
-      }
+  if (usingTor) {
+    return {
+      tor: {
+        kind: 'running',
+        versionRange: '>=0.4.9.11:4',
+        healthChecks: ['tor'],
+      },
     }
+  }
 
-    return {}
-  },
-)
+  return {}
+})
