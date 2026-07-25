@@ -38,19 +38,19 @@ This package runs SearXNG behind a Caddy reverse proxy with security headers, us
 
 This package runs **3 containers**:
 
-| Container | Image | Purpose |
-|-----------|-------|---------|
-| searxng | `searxng/searxng` | Search metaengine |
-| caddy | `caddy` | Reverse proxy with security headers |
-| valkey | `valkey/valkey` | Redis-compatible caching |
+| Container | Image             | Purpose                             |
+| --------- | ----------------- | ----------------------------------- |
+| searxng   | `searxng/searxng` | Search metaengine                   |
+| caddy     | `caddy`           | Reverse proxy with security headers |
+| valkey    | `valkey/valkey`   | Redis-compatible caching            |
 
 - **Architectures:** x86_64, aarch64
 - **Entrypoint:** Default upstream entrypoint for SearXNG; default entrypoints for Caddy and Valkey
 
 ## Volume and Data Layout
 
-| Volume | Mount Point | Contents |
-|--------|-------------|----------|
+| Volume | Mount Point                                                   | Contents                                                    |
+| ------ | ------------------------------------------------------------- | ----------------------------------------------------------- |
 | `main` | `/etc/searxng` (searxng container), `/data` (caddy container) | SearXNG `settings.yml`, `store.json`, Caddy persistent data |
 
 StartOS manages a `store.json` file and a `settings.yml` file in the `main` volume for persistent configuration.
@@ -63,12 +63,12 @@ StartOS manages a `store.json` file and a `settings.yml` file in the `main` volu
 
 ## Configuration Management
 
-| StartOS-Managed | Upstream-Managed |
-|-----------------|------------------|
-| Instance name, primary URL, stats toggle, Tor proxy toggle (via Config action) | Search preferences, enabled engines, UI theme (via SearXNG web UI) |
-| `secret_key`, `limiter`, `image_proxy`, Valkey cache URL (auto-configured) | |
-| `search.formats: [html, json]` (auto-configured — enables `?format=json` for programmatic clients) | |
-| Caddy security headers (CSP, Permissions-Policy, X-Content-Type-Options, X-Robots-Tag) | |
+| StartOS-Managed                                                                                    | Upstream-Managed                                                   |
+| -------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
+| Instance name, primary URL, stats toggle, Tor proxy toggle (via Config action)                     | Search preferences, enabled engines, UI theme (via SearXNG web UI) |
+| `secret_key`, `limiter`, `image_proxy`, Valkey cache URL (auto-configured)                         |                                                                    |
+| `search.formats: [html, json]` (auto-configured — enables `?format=json` for programmatic clients) |                                                                    |
+| Caddy security headers (CSP, Permissions-Policy, X-Content-Type-Options, X-Robots-Tag)             |                                                                    |
 
 ### Programmatic Search (JSON API)
 
@@ -82,10 +82,10 @@ The HTML UI is unaffected.
 
 ## Network Access and Interfaces
 
-| Interface | ID | Type | Port | Path | Description |
-|-----------|----|------|------|------|-------------|
-| Web UI | `ui` | ui | 80 | `/` | Main search interface |
-| Stats Dashboard | `metrics` | ui | 80 | `/stats` | Usage statistics (only exported when "Enable Stats" is on) |
+| Interface       | ID        | Type | Port | Path     | Description                                                |
+| --------------- | --------- | ---- | ---- | -------- | ---------------------------------------------------------- |
+| Web UI          | `ui`      | ui   | 80   | `/`      | Main search interface                                      |
+| Stats Dashboard | `metrics` | ui   | 80   | `/stats` | Usage statistics (only exported when "Enable Stats" is on) |
 
 Both interfaces are **public by default** (no login). Use the **Manage Access** action to require a username (always `admin`) and a password. Authentication is enforced by the StartOS reverse proxy at the edge — both interfaces share port 80, so one login covers the Web UI and the Stats Dashboard.
 
@@ -95,27 +95,27 @@ Both interfaces are **public by default** (no login). Use the **Manage Access** 
 
 Configure your SearXNG instance settings.
 
-| Property | Value |
-|----------|-------|
-| **Name** | Config |
-| **Purpose** | Configure instance name, primary URL, stats collection, and Tor proxy |
-| **Visibility** | Enabled |
-| **Availability** | Any (running or stopped) |
-| **Inputs** | Instance Name (text, required, default: "My SearXNG"), Primary URL (dynamic select from available interfaces), Enable Stats (toggle, default: off), Proxy All Traffic Over Tor (toggle, default: off) |
-| **Outputs** | Settings are merged into `settings.yml`; service restarts to apply changes |
+| Property         | Value                                                                                                                                                                                                 |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**         | Config                                                                                                                                                                                                |
+| **Purpose**      | Configure instance name, primary URL, stats collection, and Tor proxy                                                                                                                                 |
+| **Visibility**   | Enabled                                                                                                                                                                                               |
+| **Availability** | Any (running or stopped)                                                                                                                                                                              |
+| **Inputs**       | Instance Name (text, required, default: "My SearXNG"), Primary URL (dynamic select from available interfaces), Enable Stats (toggle, default: off), Proxy All Traffic Over Tor (toggle, default: off) |
+| **Outputs**      | Settings are merged into `settings.yml`; service restarts to apply changes                                                                                                                            |
 
 ### Engine API Keys (`set-engine-keys`)
 
 Configure API keys for paid SearXNG search engines. Adding an entry both supplies the key and activates the engine (overriding the upstream `inactive: true` default). Removing an entry reverts that engine to its upstream default.
 
-| Property | Value |
-|----------|-------|
-| **Name** | Engine API Keys |
-| **Visibility** | Enabled |
-| **Availability** | Any (running or stopped) |
-| **Inputs** | A list where each entry selects an engine and supplies an API key. Curated entries: **Brave Search API** (`braveapi`), **Wolfram Alpha API** (`wolframalpha_api`). Choose **Other** to enter any other SearXNG engine module name (e.g. `kagi`) plus its key — the Engine ID must match an existing or installed SearXNG engine module. |
-| **Uniqueness** | Each engine can appear at most once. Multiple "Other" entries are allowed as long as their Engine IDs differ. |
-| **Outputs** | Entries are written to the `engines:` block of `settings.yml`, with `inactive: false` and `disabled: false` so each engine is usable immediately. The service restarts to apply changes. |
+| Property         | Value                                                                                                                                                                                                                                                                                                                                   |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**         | Engine API Keys                                                                                                                                                                                                                                                                                                                         |
+| **Visibility**   | Enabled                                                                                                                                                                                                                                                                                                                                 |
+| **Availability** | Any (running or stopped)                                                                                                                                                                                                                                                                                                                |
+| **Inputs**       | A list where each entry selects an engine and supplies an API key. Curated entries: **Brave Search API** (`braveapi`), **Wolfram Alpha API** (`wolframalpha_api`). Choose **Other** to enter any other SearXNG engine module name (e.g. `kagi`) plus its key — the Engine ID must match an existing or installed SearXNG engine module. |
+| **Uniqueness**   | Each engine can appear at most once. Multiple "Other" entries are allowed as long as their Engine IDs differ.                                                                                                                                                                                                                           |
+| **Outputs**      | Entries are written to the `engines:` block of `settings.yml`, with `inactive: false` and `disabled: false` so each engine is usable immediately. The service restarts to apply changes.                                                                                                                                                |
 
 API keys are stored in `settings.yml` (which lives in the `main` volume backup) and shown masked in the form.
 
@@ -123,13 +123,13 @@ API keys are stored in `settings.yml` (which lives in the `main` volume backup) 
 
 Make the instance public (the default) or require a login. The username is always `admin`; you set the password. Authentication is enforced by the StartOS reverse proxy at the edge and covers **both** the Web UI and the Stats Dashboard (they share port 80) — there is no SearXNG-level account system.
 
-| Property | Value |
-|----------|-------|
-| **Name** | Manage Access |
-| **Visibility** | Enabled |
-| **Availability** | Any (running or stopped) |
-| **Inputs** | Access mode — **Public** (no auth, default) or **Private** (a password; use the generate button for a strong random one, or type your own) |
-| **Outputs** | The password is written to `store.json`; the Web UI binding re-exports with HTTP Basic auth (no service restart). On **Private**, the credentials are shown once and are copyable. On **Public**, the password is cleared. |
+| Property         | Value                                                                                                                                                                                                                      |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Name**         | Manage Access                                                                                                                                                                                                              |
+| **Visibility**   | Enabled                                                                                                                                                                                                                    |
+| **Availability** | Any (running or stopped)                                                                                                                                                                                                   |
+| **Inputs**       | Access mode — **Public** (no auth, default) or **Private** (a password; use the generate button for a strong random one, or type your own)                                                                                 |
+| **Outputs**      | The password is written to `store.json`; the Web UI binding re-exports with HTTP Basic auth (no service restart). On **Private**, the credentials are shown once and are copyable. On **Public**, the password is cleared. |
 
 ## Backups and Restore
 
@@ -138,11 +138,11 @@ Make the instance public (the default) or require a login. The username is alway
 
 ## Health Checks
 
-| Check | Daemon | Method | Success Condition |
-|-------|--------|--------|-------------------|
-| Valkey | valkey | CLI ping (`valkey-cli ping`) | Returns "PONG" |
-| Web Interface | searxng | Port listening (8080) | Port 8080 responds |
-| Caddy | caddy | Port listening (80) | Port 80 responds |
+| Check         | Daemon  | Method                       | Success Condition  |
+| ------------- | ------- | ---------------------------- | ------------------ |
+| Valkey        | valkey  | CLI ping (`valkey-cli ping`) | Returns "PONG"     |
+| Web Interface | searxng | Port listening (8080)        | Port 8080 responds |
+| Caddy         | caddy   | Port listening (80)          | Port 80 responds   |
 
 Daemons start in order: Valkey → SearXNG → Caddy
 
@@ -150,13 +150,13 @@ Daemons start in order: Valkey → SearXNG → Caddy
 
 ### Tor (optional)
 
-| Property | Value |
-|----------|-------|
-| **Service** | Tor Network Daemon |
-| **Required/Optional** | Optional — only required when "Proxy All Traffic Over Tor" is enabled |
-| **Health checks** | `tor` health check must pass |
-| **Mounted volumes** | None |
-| **Purpose** | Routes all outgoing search requests through Tor's SOCKS proxy (reached over the internal StartOS bridge on port 9050), enabling Tor-only engines (Ahmia, Torch) and hiding server IP from search engines |
+| Property              | Value                                                                                                                                                                                                    |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Service**           | Tor Network Daemon                                                                                                                                                                                       |
+| **Required/Optional** | Optional — only required when "Proxy All Traffic Over Tor" is enabled                                                                                                                                    |
+| **Health checks**     | `tor` health check must pass                                                                                                                                                                             |
+| **Mounted volumes**   | None                                                                                                                                                                                                     |
+| **Purpose**           | Routes all outgoing search requests through Tor's SOCKS proxy (reached over the internal StartOS bridge on port 9050), enabling Tor-only engines (Ahmia, Torch) and hiding server IP from search engines |
 
 ## Limitations and Differences
 

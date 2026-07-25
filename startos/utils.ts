@@ -1,5 +1,3 @@
-import { sdk } from './sdk'
-
 export const uiPort = 80
 
 export const uiUsername = 'admin'
