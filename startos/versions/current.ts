@@ -1,23 +1,43 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.7.19:3',
+  version: '2026.7.28:0',
   releaseNotes: {
-    en_US: `Resolves the addresses of connected services more reliably.
+    en_US: `Updated SearXNG to 2026.7.28.
 
-SearXNG looked up where to reach its dependencies through a field that only applies to one of the two ways a service can publish a port. It now reads the address itself, so a dependency changing how it serves TLS can no longer leave SearXNG unable to find it. Nothing changes in normal operation.`,
-    es_ES: `Resuelve de forma más fiable las direcciones de los servicios conectados.
+- Adds the Exa Search API engine. It is off by default and only works with your own Exa API key.
+- Refreshed interface translations.
+- Routine dependency and build maintenance, plus a container fix for invalid port settings that StartOS does not use.
 
-SearXNG localizaba sus dependencias mediante un campo que solo se aplica a una de las dos formas en que un servicio puede publicar un puerto. Ahora lee la dirección en sí, de modo que si una dependencia cambia su forma de servir TLS, SearXNG seguirá encontrándola. En funcionamiento normal no cambia nada.`,
-    de_DE: `Ermittelt die Adressen verbundener Dienste zuverlässiger.
+Full upstream changes: https://github.com/searxng/searxng/compare/6da6eee26...c01178d03`,
+    es_ES: `SearXNG actualizado a 2026.7.28.
 
-SearXNG suchte seine Abhängigkeiten über ein Feld, das nur für eine der beiden Arten gilt, auf die ein Dienst einen Port veröffentlichen kann. Jetzt wird die Adresse selbst gelesen, sodass eine Abhängigkeit, die ihre TLS-Bereitstellung ändert, für SearXNG auffindbar bleibt. Im normalen Betrieb ändert sich nichts.`,
-    pl_PL: `Pewniej ustala adresy połączonych usług.
+- Añade el motor Exa Search API. Está desactivado de forma predeterminada y solo funciona con tu propia clave de API de Exa.
+- Traducciones de la interfaz actualizadas.
+- Mantenimiento rutinario de dependencias y del sistema de compilación, además de una corrección del contenedor para ajustes de puerto no válidos que StartOS no utiliza.
 
-SearXNG wyszukiwał swoje zależności przez pole, które dotyczy tylko jednego z dwóch sposobów publikowania portu przez usługę. Teraz odczytuje sam adres, więc zależność zmieniająca sposób udostępniania TLS nadal pozostanie odnajdywalna dla SearXNG. W normalnej pracy nic się nie zmienia.`,
-    fr_FR: `Détermine plus fiablement les adresses des services connectés.
+Todos los cambios originales: https://github.com/searxng/searxng/compare/6da6eee26...c01178d03`,
+    de_DE: `SearXNG auf 2026.7.28 aktualisiert.
 
-SearXNG localisait ses dépendances via un champ qui ne s'applique qu'à l'un des deux modes de publication d'un port par un service. Il lit désormais l'adresse elle-même : une dépendance qui change sa façon de servir TLS reste donc trouvable par SearXNG. Rien ne change en fonctionnement normal.`,
+- Ergänzt die Suchmaschine Exa Search API. Sie ist standardmäßig deaktiviert und funktioniert nur mit einem eigenen Exa-API-Schlüssel.
+- Aktualisierte Übersetzungen der Oberfläche.
+- Routinemäßige Wartung von Abhängigkeiten und Build-System sowie eine Container-Korrektur für ungültige Port-Einstellungen, die StartOS nicht verwendet.
+
+Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/6da6eee26...c01178d03`,
+    pl_PL: `Zaktualizowano SearXNG do wersji 2026.7.28.
+
+- Dodano wyszukiwarkę Exa Search API. Jest domyślnie wyłączona i działa wyłącznie z własnym kluczem API Exa.
+- Odświeżone tłumaczenia interfejsu.
+- Rutynowa aktualizacja zależności i systemu budowania oraz poprawka kontenera dotycząca nieprawidłowych ustawień portu, których StartOS nie używa.
+
+Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/6da6eee26...c01178d03`,
+    fr_FR: `SearXNG mis à jour vers 2026.7.28.
+
+- Ajoute le moteur Exa Search API. Il est désactivé par défaut et ne fonctionne qu'avec votre propre clé d'API Exa.
+- Traductions de l'interface actualisées.
+- Maintenance de routine des dépendances et du système de compilation, ainsi qu'un correctif du conteneur pour les réglages de port invalides que StartOS n'utilise pas.
+
+Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/6da6eee26...c01178d03`,
   },
   migrations: {},
 })
