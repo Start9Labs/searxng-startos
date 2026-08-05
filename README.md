@@ -72,13 +72,13 @@ StartOS manages a `store.json` file and a `settings.yml` file in the `main` volu
 
 ### Programmatic Search (JSON API)
 
-The instance is pre-configured to serve JSON-format search results, which makes it usable as a search backend for clients like Open WebUI's web-search feature. From any other StartOS package on the same server, the search endpoint is reachable at:
+The instance is pre-configured to serve JSON-format search results, which makes it usable as a search backend for clients like Open WebUI's web-search feature. The HTML UI is unaffected.
 
-```
-http://searxng.startos:80/search?q=<query>&format=json
-```
+A package consuming this endpoint resolves the address rather than hardcoding it — `sdk.host.getBridgeAddress` against this package's `mainHostId` and `uiPort` (both exported from `startos/interfaces.ts` and `startos/utils.ts`), giving `http://<bridge address>/search?q=<query>&format=json`. See [Service-to-Service Networking](https://docs.start9.com/packaging/service-to-service.html); [`open-webui-startos`](https://github.com/Start9Labs/open-webui-startos)'s `startos/main.ts` is a working example.
 
-The HTML UI is unaffected.
+> Earlier revisions of this document gave the endpoint as `http://searxng.startos:80/…`. That overlay DNS is deprecated and slated for removal, and it resolves to the container IP rather than the bridge — don't build against it.
+
+Note that the JSON endpoint is **not** behind the login the **Manage Access** action sets up: that gate is enforced by the StartOS reverse proxy on the TLS interface, while packages on the same server dial the plain-HTTP binding over the bridge. Turning on a password does not cut off a service you've connected.
 
 ## Network Access and Interfaces
 
