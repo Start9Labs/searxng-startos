@@ -1,53 +1,48 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.8.3:0',
+  version: '2026.8.4:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.8.3.
+    en_US: `Updated SearXNG to 2026.8.4.
 
-- Fixes search autocomplete: suggestions no longer show raw HTML escape codes, and requests use GET again.
-- Removes the Reddit engine, which now requires authentication upstream, and the Presearch engine.
-- Adds the Keenable general search engine.
-- Adds Kagi as an optional favicon resolver.
-- Refreshed search data: engine capabilities, currencies, and the Ahmia blacklist.
+A small maintenance release:
 
-Full upstream changes: https://github.com/searxng/searxng/compare/c01178d03...aa059419f`,
-    es_ES: `SearXNG actualizado a 2026.8.3.
+- Adds Kagi as an option for search autocomplete suggestions, selectable under Preferences.
+- Refreshed the unit data used to convert measurements in answers.
 
-- Corrige el autocompletado de búsqueda: las sugerencias ya no muestran códigos de escape HTML y las peticiones vuelven a usar GET.
-- Elimina el motor Reddit, que ahora requiere autenticación en el proyecto original, y el motor Presearch.
-- Añade el motor de búsqueda general Keenable.
-- Añade Kagi como resolutor opcional de favicons.
-- Datos de búsqueda actualizados: capacidades de los motores, monedas y la lista negra de Ahmia.
+Full upstream changes: https://github.com/searxng/searxng/compare/aa059419f...c63835bd2`,
+    es_ES: `SearXNG actualizado a 2026.8.4.
 
-Todos los cambios originales: https://github.com/searxng/searxng/compare/c01178d03...aa059419f`,
-    de_DE: `SearXNG auf 2026.8.3 aktualisiert.
+Una pequeña versión de mantenimiento:
 
-- Behebt die Suchvervollständigung: Vorschläge zeigen keine HTML-Escape-Codes mehr, und Anfragen verwenden wieder GET.
-- Entfernt die Suchmaschine Reddit, die im Originalprojekt nun eine Anmeldung erfordert, sowie die Suchmaschine Presearch.
-- Ergänzt die allgemeine Suchmaschine Keenable.
-- Ergänzt Kagi als optionalen Favicon-Resolver.
-- Aktualisierte Suchdaten: Funktionen der Suchmaschinen, Währungen und die Ahmia-Sperrliste.
+- Añade Kagi como opción para las sugerencias de autocompletado, seleccionable en Preferencias.
+- Datos de unidades actualizados para convertir medidas en las respuestas.
 
-Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/c01178d03...aa059419f`,
-    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.3.
+Todos los cambios originales: https://github.com/searxng/searxng/compare/aa059419f...c63835bd2`,
+    de_DE: `SearXNG auf 2026.8.4 aktualisiert.
 
-- Poprawiono autouzupełnianie wyszukiwania: podpowiedzi nie zawierają już kodów HTML, a żądania ponownie używają metody GET.
-- Usunięto wyszukiwarkę Reddit, która w projekcie źródłowym wymaga teraz uwierzytelniania, oraz wyszukiwarkę Presearch.
-- Dodano ogólną wyszukiwarkę Keenable.
-- Dodano Kagi jako opcjonalne źródło ikon favicon.
-- Odświeżone dane wyszukiwania: możliwości wyszukiwarek, waluty i czarna lista Ahmia.
+Eine kleine Wartungsversion:
 
-Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/c01178d03...aa059419f`,
-    fr_FR: `SearXNG mis à jour vers 2026.8.3.
+- Ergänzt Kagi als Option für die Suchvervollständigung, auswählbar unter Einstellungen.
+- Aktualisierte Einheitendaten für die Umrechnung von Maßangaben in Antworten.
 
-- Corrige l'autocomplétion : les suggestions n'affichent plus de codes d'échappement HTML et les requêtes utilisent de nouveau GET.
-- Supprime le moteur Reddit, qui exige désormais une authentification en amont, ainsi que le moteur Presearch.
-- Ajoute le moteur de recherche généraliste Keenable.
-- Ajoute Kagi comme résolveur de favicons optionnel.
-- Données de recherche actualisées : capacités des moteurs, devises et liste noire Ahmia.
+Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/aa059419f...c63835bd2`,
+    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.4.
 
-Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/c01178d03...aa059419f`,
+Niewielkie wydanie konserwacyjne:
+
+- Dodano Kagi jako źródło podpowiedzi autouzupełniania, do wyboru w Preferencjach.
+- Odświeżono dane jednostek używane do przeliczania miar w odpowiedziach.
+
+Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/aa059419f...c63835bd2`,
+    fr_FR: `SearXNG mis à jour vers 2026.8.4.
+
+Une petite version de maintenance :
+
+- Ajoute Kagi comme source de suggestions d'autocomplétion, sélectionnable dans les Préférences.
+- Données d'unités actualisées pour la conversion des mesures dans les réponses.
+
+Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/aa059419f...c63835bd2`,
   },
   migrations: {},
 })
