@@ -1,53 +1,33 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.8.12:0',
+  version: '2026.8.16:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.8.12.
+    en_US: `Updated SearXNG to 2026.8.16.
 
-- Searches now use GET instead of POST by default, so the browser back button works and result pages can be bookmarked and shared.
-- Autocomplete suggestions are now on by default, powered by DuckDuckGo.
-- Adds Jina as a general search engine.
-- Dogpile no longer fails with access-denied errors, but is now inactive by default.
-- Updated Persian, Irish and Hebrew translations.
+A small maintenance release: it adds Yandex Search API as an optional general search engine, inactive by default and requiring your own Yandex API key. Everything else in this range is dependency and build-tooling updates.
 
-Full upstream changes: https://github.com/searxng/searxng/compare/c63835bd2...cdfdaa5a8`,
-    es_ES: `SearXNG actualizado a 2026.8.12.
+Full upstream changes: https://github.com/searxng/searxng/compare/cdfdaa5a8...b2da6b90f`,
+    es_ES: `SearXNG actualizado a 2026.8.16.
 
-- Las búsquedas usan ahora GET en lugar de POST de forma predeterminada, por lo que el botón de retroceso del navegador funciona y las páginas de resultados se pueden guardar en marcadores y compartir.
-- Las sugerencias de autocompletado están activadas de forma predeterminada, mediante DuckDuckGo.
-- Añade Jina como motor de búsqueda general.
-- Dogpile ya no falla con errores de acceso denegado, pero queda inactivo de forma predeterminada.
-- Traducciones actualizadas al persa, irlandés y hebreo.
+Una pequeña versión de mantenimiento: añade la API de búsqueda de Yandex como motor de búsqueda general opcional, inactivo de forma predeterminada y que requiere tu propia clave de API de Yandex. El resto de los cambios de este rango son actualizaciones de dependencias y de herramientas de compilación.
 
-Todos los cambios originales: https://github.com/searxng/searxng/compare/c63835bd2...cdfdaa5a8`,
-    de_DE: `SearXNG auf 2026.8.12 aktualisiert.
+Todos los cambios originales: https://github.com/searxng/searxng/compare/cdfdaa5a8...b2da6b90f`,
+    de_DE: `SearXNG auf 2026.8.16 aktualisiert.
 
-- Suchanfragen verwenden jetzt standardmäßig GET statt POST, sodass die Zurück-Schaltfläche des Browsers funktioniert und Ergebnisseiten als Lesezeichen gespeichert und geteilt werden können.
-- Vorschläge zur Autovervollständigung sind jetzt standardmäßig aktiv und nutzen DuckDuckGo.
-- Ergänzt Jina als allgemeine Suchmaschine.
-- Dogpile scheitert nicht mehr an Zugriffsfehlern, ist aber jetzt standardmäßig inaktiv.
-- Aktualisierte Übersetzungen für Persisch, Irisch und Hebräisch.
+Eine kleine Wartungsversion: Sie ergänzt die Yandex-Such-API als optionale allgemeine Suchmaschine, die standardmäßig inaktiv ist und einen eigenen Yandex-API-Schlüssel erfordert. Alle übrigen Änderungen in diesem Bereich sind Aktualisierungen von Abhängigkeiten und Build-Werkzeugen.
 
-Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/c63835bd2...cdfdaa5a8`,
-    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.12.
+Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/cdfdaa5a8...b2da6b90f`,
+    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.16.
 
-- Wyszukiwania domyślnie korzystają teraz z metody GET zamiast POST, dzięki czemu działa przycisk wstecz w przeglądarce, a strony wyników można dodawać do zakładek i udostępniać.
-- Podpowiedzi autouzupełniania są domyślnie włączone i korzystają z DuckDuckGo.
-- Dodano Jina jako ogólną wyszukiwarkę.
-- Dogpile nie kończy się już błędami odmowy dostępu, ale jest domyślnie nieaktywny.
-- Zaktualizowano tłumaczenia na perski, irlandzki i hebrajski.
+Niewielka aktualizacja konserwacyjna: dodaje API wyszukiwania Yandex jako opcjonalną ogólną wyszukiwarkę, domyślnie nieaktywną i wymagającą własnego klucza API Yandex. Pozostałe zmiany w tym zakresie to aktualizacje zależności i narzędzi kompilacji.
 
-Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/c63835bd2...cdfdaa5a8`,
-    fr_FR: `SearXNG mis à jour vers 2026.8.12.
+Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/cdfdaa5a8...b2da6b90f`,
+    fr_FR: `SearXNG mis à jour vers 2026.8.16.
 
-- Les recherches utilisent désormais GET plutôt que POST par défaut : le bouton retour du navigateur fonctionne et les pages de résultats peuvent être mises en favori et partagées.
-- Les suggestions d'autocomplétion sont activées par défaut, via DuckDuckGo.
-- Ajoute Jina comme moteur de recherche généraliste.
-- Dogpile n'échoue plus avec des erreurs d'accès refusé, mais est désormais inactif par défaut.
-- Traductions persane, irlandaise et hébraïque mises à jour.
+Une petite version de maintenance : elle ajoute l'API de recherche Yandex comme moteur de recherche généraliste optionnel, inactif par défaut et nécessitant votre propre clé d'API Yandex. Le reste des modifications de cette plage concerne des mises à jour de dépendances et de l'outillage de compilation.
 
-Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/c63835bd2...cdfdaa5a8`,
+Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/cdfdaa5a8...b2da6b90f`,
   },
   migrations: {},
 })
