@@ -15,10 +15,6 @@ const serverSchema = z.object({
   base_url: z.string().catch(''),
 })
 
-const uiSchema = z.object({
-  static_use_hash: z.literal(true).catch(true),
-})
-
 const valkeySchema = z.object({
   url: z
     .literal('valkey:///var/run/valkey.sock')
@@ -59,7 +55,6 @@ export type EngineEntry = z.infer<typeof engineSchema>
 const shape = z.object({
   use_default_settings: z.literal(true).catch(true),
   server: serverSchema.catch(() => serverSchema.parse({})),
-  ui: uiSchema.catch(() => uiSchema.parse({})),
   valkey: valkeySchema.catch(() => valkeySchema.parse({})),
   general: generalSchema.catch(() => generalSchema.parse({})),
   outgoing: outgoingSchema.catch(() => outgoingSchema.parse({})),
