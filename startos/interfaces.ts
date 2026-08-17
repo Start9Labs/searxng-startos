@@ -44,6 +44,9 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
     }),
   ]
 
+  // The metrics interface is exported only while general.enable_metrics is on,
+  // so this read is reactive: changing how that key is stored changes when the
+  // interface appears and disappears.
   const enableMetrics = await settingsYaml
     .read((s) => s.general?.enable_metrics)
     .const(effects)
