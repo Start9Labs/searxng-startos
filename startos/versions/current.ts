@@ -1,9 +1,9 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.8.28:0',
+  version: '2026.8.29:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.8.28.
+    en_US: `Updated SearXNG to 2026.8.29.
 
 **Security**
 
@@ -18,10 +18,11 @@ export const current = VersionInfo.of({
 
 **Other**
 
-- Refreshed two bundled libraries. Nothing else changed in this last step.
+- Refreshed two bundled libraries.
+- Refreshed the browser identity SearXNG presents when it queries search engines, the per-engine table of supported languages and regions, and the blocklist used by the Ahmia engine.
 
-Full upstream changes: https://github.com/searxng/searxng/compare/b2da6b90f...a30b2d474`,
-    es_ES: `SearXNG actualizado a 2026.8.28.
+Full upstream changes: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
+    es_ES: `SearXNG actualizado a 2026.8.29.
 
 **Seguridad**
 
@@ -36,10 +37,11 @@ Full upstream changes: https://github.com/searxng/searxng/compare/b2da6b90f...a3
 
 **Otros cambios**
 
-- Se actualizaron dos bibliotecas incluidas. Nada más cambió en este último paso.
+- Se actualizaron dos bibliotecas incluidas.
+- Se actualizó la identidad de navegador que SearXNG presenta al consultar los motores de búsqueda, la tabla de idiomas y regiones que admite cada motor, y la lista de bloqueo que usa el motor Ahmia.
 
-Todos los cambios originales: https://github.com/searxng/searxng/compare/b2da6b90f...a30b2d474`,
-    de_DE: `SearXNG auf 2026.8.28 aktualisiert.
+Todos los cambios originales: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
+    de_DE: `SearXNG auf 2026.8.29 aktualisiert.
 
 **Sicherheit**
 
@@ -54,10 +56,11 @@ Todos los cambios originales: https://github.com/searxng/searxng/compare/b2da6b9
 
 **Sonstiges**
 
-- Zwei mitgelieferte Bibliotheken wurden aufgefrischt. Sonst hat sich in diesem letzten Schritt nichts geändert.
+- Zwei mitgelieferte Bibliotheken wurden aufgefrischt.
+- Aufgefrischt wurden außerdem die Browser-Kennung, mit der sich SearXNG bei Suchmaschinen meldet, die Tabelle der von jeder Suchmaschine unterstützten Sprachen und Regionen sowie die Sperrliste der Suchmaschine Ahmia.
 
-Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/b2da6b90f...a30b2d474`,
-    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.28.
+Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
+    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.29.
 
 **Bezpieczeństwo**
 
@@ -72,10 +75,11 @@ Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/
 
 **Pozostałe**
 
-- Odświeżono dwie dołączone biblioteki. Poza tym w tym ostatnim kroku nic się nie zmieniło.
+- Odświeżono dwie dołączone biblioteki.
+- Odświeżono również tożsamość przeglądarki, którą SearXNG przedstawia wyszukiwarkom, tabelę języków i regionów obsługiwanych przez poszczególne wyszukiwarki oraz listę blokowanych stron używaną przez wyszukiwarkę Ahmia.
 
-Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/b2da6b90f...a30b2d474`,
-    fr_FR: `SearXNG mis à jour vers 2026.8.28.
+Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
+    fr_FR: `SearXNG mis à jour vers 2026.8.29.
 
 **Sécurité**
 
@@ -90,9 +94,10 @@ Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/
 
 **Autres**
 
-- Deux bibliothèques incluses ont été rafraîchies. Rien d'autre n'a changé lors de cette dernière étape.
+- Deux bibliothèques incluses ont été rafraîchies.
+- Ont également été rafraîchies l'identité de navigateur que SearXNG présente aux moteurs de recherche, le tableau des langues et régions prises en charge par chaque moteur, et la liste de blocage utilisée par le moteur Ahmia.
 
-Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/b2da6b90f...a30b2d474`,
+Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
   },
   migrations: {},
 })
