@@ -44,7 +44,7 @@ Three upstream images, unmodified, run as three daemons in a fixed chain.
 
 | Subcontainer  | Daemon    | Starts after | Purpose                                                      |
 | ------------- | --------- | ------------ | ------------------------------------------------------------ |
-| `valkey-sub`  | `valkey`  | —            | The cache SearXNG needs, over a unix socket                  |
+| `valkey-sub`  | `valkey`  | —            | The cache SearXNG needs, on loopback                         |
 | `searxng-sub` | `searxng` | `valkey`     | SearXNG itself, on an internal port — the one to `attach` to |
 | `caddy-sub`   | `caddy`   | `searxng`    | The reverse proxy that actually serves the interface         |
 
@@ -52,7 +52,7 @@ Three upstream images, unmodified, run as three daemons in a fixed chain.
 
 Two files are written into container root filesystems at start rather than onto a volume: Caddy's `Caddyfile`, generated from the package source so it cannot drift, and an empty `limiter.toml` that suppresses a SearXNG startup warning. Neither persists, and neither is yours to edit.
 
-Valkey runs with persistence disabled entirely — no snapshots, no append-only log — because everything in it is a cache.
+Valkey runs with persistence disabled entirely — no snapshots, no append-only log — because everything in it is a cache. It binds loopback only, which every subcontainer shares, so SearXNG reaches it and nothing off the box can.
 
 ## Volume and Data Layout
 
@@ -92,7 +92,7 @@ Five settings depart from upstream's defaults:
 | `general.enable_metrics`   | `false`           | `true`   | Off unless you ask for it; turning it on also publishes the Stats Dashboard interface |
 | `search.formats`           | `html`, `json`    | `html`   | Enables the JSON API, so other tools can query the instance                           |
 | `outgoing.request_timeout` | 3.5 s             | 3.0 s    | A little more headroom for engines reached over a home connection                     |
-| `valkey.url`               | a unix socket     | none     | Points SearXNG at the bundled Valkey                                                  |
+| `valkey.url`               | loopback TCP      | none     | Points SearXNG at the bundled Valkey                                                  |
 
 `store.json` holds only `uiPassword` — present when the instance is private, absent when it is public.
 
@@ -209,7 +209,7 @@ architectures:
   - x86_64
   - aarch64
 subcontainers:
-  - valkey-sub # cache, unix socket, no persistence
+  - valkey-sub # cache, loopback TCP, no persistence
   - searxng-sub # the application; the one to attach to
   - caddy-sub # reverse proxy; what the interface actually reaches
 volumes:

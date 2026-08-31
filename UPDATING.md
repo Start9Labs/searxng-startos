@@ -20,7 +20,7 @@ Pinned in `startos/manifest/index.ts` as `images.searxng.source.dockerTag`.
 
 [valkey-io/valkey releases](https://github.com/valkey-io/valkey/releases) · [valkey/valkey on Docker Hub](https://hub.docker.com/r/valkey/valkey/tags)
 
-The manifest pins the rolling major tag `valkey/valkey:8-alpine`, so Docker pulls the latest 8.x point release automatically and a bump is only required when Valkey's major version changes (8 → 9 → …) or when we deliberately want to pin to a specific point release. Watch upstream GitHub releases for the current major:
+The manifest pins the rolling major tag `valkey/valkey:9-alpine`, so Docker pulls the latest 9.x point release automatically and a bump is only required when Valkey's major version changes (9 → 10 → …) or when we deliberately want to pin to a specific point release. Watch upstream GitHub releases for the current major:
 
 ```sh
 gh release view -R valkey-io/valkey --json tagName -q .tagName
@@ -45,7 +45,7 @@ Pinned in `startos/manifest/index.ts` as `images.caddy.source.dockerTag`.
 All three pins live in `startos/manifest/index.ts`. Edit the relevant `dockerTag` string under `images.<name>.source`:
 
 - **SearXNG**: set `images.searxng.source.dockerTag` to `searxng/searxng:<YYYY.M.D>-<hash>` using the full tag string copied from Docker Hub.
-- **Valkey** (only when changing major or pinning a point release): set `images.valkey.source.dockerTag` to e.g. `valkey/valkey:9-alpine`.
+- **Valkey** (only when changing major or pinning a point release): set `images.valkey.source.dockerTag` to e.g. `valkey/valkey:10-alpine`.
 - **Caddy** (only when changing major or pinning a point release): set `images.caddy.source.dockerTag` to e.g. `caddy:3-alpine`.
 
 Then bump `version` and `releaseNotes` in `startos/versions/index.ts` (or the current version file) per the standard packaging conventions.

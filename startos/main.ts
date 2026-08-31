@@ -1,6 +1,6 @@
 import { writeFile } from 'fs/promises'
 import { sdk } from './sdk'
-import { uiPort, getCaddyfile } from './utils'
+import { uiPort, valkeyPort, getCaddyfile } from './utils'
 import { i18n } from './i18n'
 import { settingsYaml } from './fileModels/settings.yml'
 
@@ -59,8 +59,10 @@ export const main = sdk.setupMain(async ({ effects }) => {
           ``,
           '--appendonly',
           `no`,
-          '--unixsocket',
-          '/var/run/valkey.sock',
+          '--bind',
+          '127.0.0.1',
+          '--port',
+          `${valkeyPort}`,
         ],
       },
       ready: {

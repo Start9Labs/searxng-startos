@@ -1,5 +1,7 @@
 export const uiPort = 80
 
+export const valkeyPort = 6379
+
 export const uiUsername = 'admin'
 
 export const getCaddyfile = (): string => {

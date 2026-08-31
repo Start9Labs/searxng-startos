@@ -1,5 +1,6 @@
 import { FileHelper, z, utils } from '@start9labs/start-sdk'
 import { sdk } from '../sdk'
+import { valkeyPort } from '../utils'
 
 function randomPassword() {
   return {
@@ -15,10 +16,10 @@ const serverSchema = z.object({
   base_url: z.string().catch(''),
 })
 
+const valkeyUrl = `valkey://127.0.0.1:${valkeyPort}/0` as const
+
 const valkeySchema = z.object({
-  url: z
-    .literal('valkey:///var/run/valkey.sock')
-    .catch('valkey:///var/run/valkey.sock'),
+  url: z.literal(valkeyUrl).catch(valkeyUrl),
 })
 
 const generalSchema = z.object({
