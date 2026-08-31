@@ -14,7 +14,7 @@ export const manifest = setupManifest({
   images: {
     valkey: {
       source: {
-        dockerTag: 'valkey/valkey:8-alpine',
+        dockerTag: 'valkey/valkey:9-alpine',
       },
       arch: ['x86_64', 'aarch64'],
     },

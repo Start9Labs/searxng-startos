@@ -1,103 +1,48 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.8.29:0',
+  version: '2026.8.29:1',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.8.29.
+    en_US: `Updated the bundled Valkey cache to version 9, and repaired the link between SearXNG and it.
 
-**Security**
+SearXNG itself is unchanged.
 
-- Closed a cross-site scripting hole in the calculator answer box.
-- Fixed the handling of client addresses behind a reverse proxy, where a client could mask its own IP address from the server.
-- Capped how far a compressed preferences link is expanded, so an oversized one can no longer exhaust memory.
+- The cache moved onto Valkey 9, the major version the SearXNG project now recommends. It holds nothing that outlives a restart, so nothing is migrated.
+- SearXNG was pointed at a cache address it could never reach, so it had been running with no cache behind it. It now reaches Valkey over the loopback address the two share.
 
-**Engines**
+What is new in Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
+    es_ES: `Se actualizó la caché Valkey incluida a la versión 9 y se reparó el enlace entre SearXNG y ella.
 
-- The Google engines were repaired. Google Videos and Google News search out of the box, and Google and Google Images now appear in Preferences, switched off, so you can turn them on yourself.
-- The DeviantArt image engine no longer works, because DeviantArt denies it access. Upstream withdrew it, so it has left the engine list.
+SearXNG en sí no cambia.
 
-**Other**
+- La caché pasó a Valkey 9, la versión principal que el proyecto SearXNG recomienda ahora. No guarda nada que sobreviva a un reinicio, así que no se migra nada.
+- SearXNG apuntaba a una dirección de caché que nunca podía alcanzar, de modo que funcionaba sin caché detrás. Ahora llega a Valkey por la dirección de bucle local que ambos comparten.
 
-- Refreshed two bundled libraries.
-- Refreshed the browser identity SearXNG presents when it queries search engines, the per-engine table of supported languages and regions, and the blocklist used by the Ahmia engine.
+Novedades de Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
+    de_DE: `Der mitgelieferte Valkey-Cache wurde auf Version 9 aktualisiert und die Verbindung zwischen SearXNG und dem Cache repariert.
 
-Full upstream changes: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
-    es_ES: `SearXNG actualizado a 2026.8.29.
+SearXNG selbst bleibt unverändert.
 
-**Seguridad**
+- Der Cache läuft jetzt auf Valkey 9, der Hauptversion, die das SearXNG-Projekt inzwischen empfiehlt. Er enthält nichts, was einen Neustart überdauert, es wird also nichts migriert.
+- SearXNG war auf eine Cache-Adresse gerichtet, die es nie erreichen konnte, lief also ganz ohne Cache. Es erreicht Valkey jetzt über die Loopback-Adresse, die sich beide teilen.
 
-- Se cerró un fallo de secuencias de comandos entre sitios (XSS) en el cuadro de respuesta de la calculadora.
-- Se corrigió el tratamiento de las direcciones de cliente detrás de un proxy inverso, donde un cliente podía ocultar su propia dirección IP al servidor.
-- Se limitó cuánto se expande un enlace de preferencias comprimido, de modo que uno demasiado grande ya no puede agotar la memoria.
+Neuerungen in Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
+    pl_PL: `Zaktualizowano dołączoną pamięć podręczną Valkey do wersji 9 i naprawiono połączenie między SearXNG a nią.
 
-**Motores de búsqueda**
+Sam SearXNG się nie zmienia.
 
-- Se repararon los motores de Google. Google Videos y Google News buscan de forma predeterminada, y Google y Google Imágenes aparecen ahora en Preferencias, desactivados, para que puedas activarlos tú.
-- El motor de imágenes DeviantArt ya no funciona, porque DeviantArt le deniega el acceso. El proyecto original lo retiró, así que ha desaparecido de la lista de motores.
+- Pamięć podręczna przeszła na Valkey 9, wersję główną zalecaną obecnie przez projekt SearXNG. Nie przechowuje niczego, co przetrwa ponowne uruchomienie, więc nic nie jest migrowane.
+- SearXNG wskazywał adres pamięci podręcznej, do którego nigdy nie mógł dotrzeć, więc działał w ogóle bez pamięci podręcznej. Teraz łączy się z Valkey przez adres pętli zwrotnej, który oba dzielą.
 
-**Otros cambios**
+Nowości w Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
+    fr_FR: `Le cache Valkey intégré a été mis à jour vers la version 9 et le lien entre SearXNG et lui a été réparé.
 
-- Se actualizaron dos bibliotecas incluidas.
-- Se actualizó la identidad de navegador que SearXNG presenta al consultar los motores de búsqueda, la tabla de idiomas y regiones que admite cada motor, y la lista de bloqueo que usa el motor Ahmia.
+SearXNG lui-même ne change pas.
 
-Todos los cambios originales: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
-    de_DE: `SearXNG auf 2026.8.29 aktualisiert.
+- Le cache est passé à Valkey 9, la version majeure que le projet SearXNG recommande désormais. Il ne conserve rien qui survive à un redémarrage, rien n'est donc migré.
+- SearXNG pointait vers une adresse de cache qu'il ne pouvait jamais atteindre : il fonctionnait donc sans aucun cache. Il joint maintenant Valkey par l'adresse de bouclage que les deux partagent.
 
-**Sicherheit**
-
-- Eine Cross-Site-Scripting-Lücke im Antwortfeld des Taschenrechners wurde geschlossen.
-- Die Behandlung von Client-Adressen hinter einem Reverse-Proxy wurde korrigiert; ein Client konnte seine eigene IP-Adresse vor dem Server verbergen.
-- Es wird jetzt begrenzt, wie weit ein komprimierter Einstellungs-Link entpackt wird, sodass ein übergroßer Link den Speicher nicht mehr erschöpfen kann.
-
-**Suchmaschinen**
-
-- Die Google-Suchmaschinen wurden repariert. Google Videos und Google News suchen standardmäßig mit, und Google sowie Google Bilder stehen jetzt in den Einstellungen bereit, aber ausgeschaltet, sodass du sie selbst aktivieren kannst.
-- Die Bildersuchmaschine DeviantArt funktioniert nicht mehr, weil DeviantArt ihr den Zugriff verweigert. Das Originalprojekt hat sie zurückgezogen, sie ist daher aus der Liste der Suchmaschinen verschwunden.
-
-**Sonstiges**
-
-- Zwei mitgelieferte Bibliotheken wurden aufgefrischt.
-- Aufgefrischt wurden außerdem die Browser-Kennung, mit der sich SearXNG bei Suchmaschinen meldet, die Tabelle der von jeder Suchmaschine unterstützten Sprachen und Regionen sowie die Sperrliste der Suchmaschine Ahmia.
-
-Alle Änderungen im Originalprojekt: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
-    pl_PL: `Zaktualizowano SearXNG do wersji 2026.8.29.
-
-**Bezpieczeństwo**
-
-- Usunięto lukę typu cross-site scripting (XSS) w polu odpowiedzi kalkulatora.
-- Poprawiono obsługę adresów klientów za odwrotnym proxy, gdzie klient mógł ukryć własny adres IP przed serwerem.
-- Ograniczono, jak bardzo rozpakowywany jest skompresowany link z preferencjami, dzięki czemu zbyt duży link nie wyczerpie już pamięci.
-
-**Wyszukiwarki**
-
-- Naprawiono wyszukiwarki Google. Google Videos i Google News wyszukują domyślnie, a Google i Google Grafika pojawiają się teraz w Preferencjach jako wyłączone, więc możesz je włączyć samodzielnie.
-- Wyszukiwarka grafik DeviantArt przestała działać, ponieważ DeviantArt odmawia jej dostępu. Projekt źródłowy ją wycofał, więc zniknęła z listy wyszukiwarek.
-
-**Pozostałe**
-
-- Odświeżono dwie dołączone biblioteki.
-- Odświeżono również tożsamość przeglądarki, którą SearXNG przedstawia wyszukiwarkom, tabelę języków i regionów obsługiwanych przez poszczególne wyszukiwarki oraz listę blokowanych stron używaną przez wyszukiwarkę Ahmia.
-
-Pełna lista zmian w projekcie źródłowym: https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
-    fr_FR: `SearXNG mis à jour vers 2026.8.29.
-
-**Sécurité**
-
-- Une faille de script intersites (XSS) dans l'encadré de réponse de la calculatrice a été corrigée.
-- Le traitement des adresses clientes derrière un proxy inverse a été corrigé : un client pouvait masquer sa propre adresse IP au serveur.
-- L'expansion d'un lien de préférences compressé est désormais plafonnée, de sorte qu'un lien surdimensionné ne peut plus épuiser la mémoire.
-
-**Moteurs de recherche**
-
-- Les moteurs Google ont été réparés. Google Videos et Google News effectuent des recherches par défaut, et Google et Google Images figurent désormais dans les Préférences, désactivés, à vous de les activer.
-- Le moteur d'images DeviantArt ne fonctionne plus, car DeviantArt lui refuse l'accès. Le projet amont l'a retiré, il a donc disparu de la liste des moteurs.
-
-**Autres**
-
-- Deux bibliothèques incluses ont été rafraîchies.
-- Ont également été rafraîchies l'identité de navigateur que SearXNG présente aux moteurs de recherche, le tableau des langues et régions prises en charge par chaque moteur, et la liste de blocage utilisée par le moteur Ahmia.
-
-Ensemble des modifications en amont : https://github.com/searxng/searxng/compare/b2da6b90f...d226b78bc`,
+Nouveautés de Valkey 9 : https://valkey.io/blog/introducing-valkey-9/`,
   },
   migrations: {},
 })
