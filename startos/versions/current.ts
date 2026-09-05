@@ -1,48 +1,43 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.8.29:1',
+  version: '2026.9.4:0',
   releaseNotes: {
-    en_US: `Updated the bundled Valkey cache to version 9, and repaired the link between SearXNG and it.
+    en_US: `Updated SearXNG to 2026.9.4.
 
-SearXNG itself is unchanged.
+- Video results can now provide embedded playback links automatically.
+- Wikidata results are more reliable because property data is bundled instead of fetched during startup.
+- Fixes improve DuckDuckGo weather queries and the Brave API, ChatNoir, and Meilisearch engines.
 
-- The cache moved onto Valkey 9, the major version the SearXNG project now recommends. It holds nothing that outlives a restart, so nothing is migrated.
-- SearXNG was pointed at a cache address it could never reach, so it had been running with no cache behind it. It now reaches Valkey over the loopback address the two share.
+Complete upstream changes: https://github.com/searxng/searxng/compare/d226b78bc...15b0c8ef3`,
+    es_ES: `Se actualizó SearXNG a 2026.9.4.
 
-What is new in Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
-    es_ES: `Se actualizó la caché Valkey incluida a la versión 9 y se reparó el enlace entre SearXNG y ella.
+- Los resultados de vídeo ahora pueden proporcionar automáticamente enlaces de reproducción integrados.
+- Los resultados de Wikidata son más fiables porque los datos de propiedades vienen incluidos en lugar de obtenerse durante el arranque.
+- Las correcciones mejoran las consultas meteorológicas de DuckDuckGo y los motores Brave API, ChatNoir y Meilisearch.
 
-SearXNG en sí no cambia.
+Cambios completos del proyecto original: https://github.com/searxng/searxng/compare/d226b78bc...15b0c8ef3`,
+    de_DE: `SearXNG wurde auf 2026.9.4 aktualisiert.
 
-- La caché pasó a Valkey 9, la versión principal que el proyecto SearXNG recomienda ahora. No guarda nada que sobreviva a un reinicio, así que no se migra nada.
-- SearXNG apuntaba a una dirección de caché que nunca podía alcanzar, de modo que funcionaba sin caché detrás. Ahora llega a Valkey por la dirección de bucle local que ambos comparten.
+- Videoergebnisse können jetzt automatisch eingebettete Wiedergabelinks bereitstellen.
+- Wikidata-Ergebnisse sind zuverlässiger, da die Eigenschaftsdaten mitgeliefert und nicht beim Start abgerufen werden.
+- Korrekturen verbessern DuckDuckGo-Wetteranfragen sowie die Brave-API-, ChatNoir- und Meilisearch-Suchmaschinen.
 
-Novedades de Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
-    de_DE: `Der mitgelieferte Valkey-Cache wurde auf Version 9 aktualisiert und die Verbindung zwischen SearXNG und dem Cache repariert.
+Vollständige Änderungen des Upstream-Projekts: https://github.com/searxng/searxng/compare/d226b78bc...15b0c8ef3`,
+    pl_PL: `Zaktualizowano SearXNG do wersji 2026.9.4.
 
-SearXNG selbst bleibt unverändert.
+- Wyniki wideo mogą teraz automatycznie udostępniać osadzone odnośniki do odtwarzania.
+- Wyniki Wikidata są bardziej niezawodne, ponieważ dane właściwości są dołączone zamiast pobierane podczas uruchamiania.
+- Poprawki usprawniają zapytania pogodowe DuckDuckGo oraz wyszukiwarki Brave API, ChatNoir i Meilisearch.
 
-- Der Cache läuft jetzt auf Valkey 9, der Hauptversion, die das SearXNG-Projekt inzwischen empfiehlt. Er enthält nichts, was einen Neustart überdauert, es wird also nichts migriert.
-- SearXNG war auf eine Cache-Adresse gerichtet, die es nie erreichen konnte, lief also ganz ohne Cache. Es erreicht Valkey jetzt über die Loopback-Adresse, die sich beide teilen.
+Pełna lista zmian projektu nadrzędnego: https://github.com/searxng/searxng/compare/d226b78bc...15b0c8ef3`,
+    fr_FR: `SearXNG a été mis à jour vers la version 2026.9.4.
 
-Neuerungen in Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
-    pl_PL: `Zaktualizowano dołączoną pamięć podręczną Valkey do wersji 9 i naprawiono połączenie między SearXNG a nią.
+- Les résultats vidéo peuvent désormais fournir automatiquement des liens de lecture intégrés.
+- Les résultats Wikidata sont plus fiables, car les données de propriétés sont intégrées au lieu d'être récupérées au démarrage.
+- Des correctifs améliorent les requêtes météo DuckDuckGo ainsi que les moteurs Brave API, ChatNoir et Meilisearch.
 
-Sam SearXNG się nie zmienia.
-
-- Pamięć podręczna przeszła na Valkey 9, wersję główną zalecaną obecnie przez projekt SearXNG. Nie przechowuje niczego, co przetrwa ponowne uruchomienie, więc nic nie jest migrowane.
-- SearXNG wskazywał adres pamięci podręcznej, do którego nigdy nie mógł dotrzeć, więc działał w ogóle bez pamięci podręcznej. Teraz łączy się z Valkey przez adres pętli zwrotnej, który oba dzielą.
-
-Nowości w Valkey 9: https://valkey.io/blog/introducing-valkey-9/`,
-    fr_FR: `Le cache Valkey intégré a été mis à jour vers la version 9 et le lien entre SearXNG et lui a été réparé.
-
-SearXNG lui-même ne change pas.
-
-- Le cache est passé à Valkey 9, la version majeure que le projet SearXNG recommande désormais. Il ne conserve rien qui survive à un redémarrage, rien n'est donc migré.
-- SearXNG pointait vers une adresse de cache qu'il ne pouvait jamais atteindre : il fonctionnait donc sans aucun cache. Il joint maintenant Valkey par l'adresse de bouclage que les deux partagent.
-
-Nouveautés de Valkey 9 : https://valkey.io/blog/introducing-valkey-9/`,
+Modifications complètes du projet en amont : https://github.com/searxng/searxng/compare/d226b78bc...15b0c8ef3`,
   },
   migrations: {},
 })
