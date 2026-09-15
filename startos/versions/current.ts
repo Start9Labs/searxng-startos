@@ -1,53 +1,53 @@
 import { VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.9.10:0',
+  version: '2026.9.15:0',
   releaseNotes: {
-    en_US: `Updated SearXNG to 2026.9.10.
+    en_US: `Updated SearXNG to 2026.9.15.
 
-- Adds SearchRockit for general, news, and image searches, plus Europe PMC for life-science publications.
-- Improves outbound requests and compatibility with DuckDuckGo and Startpage anti-bot challenges.
-- Fixes compatibility across Brave, SearchZee, NeoSearch, Dogpile, TuskSearch, ResultHunter, ChatNoir, Marginalia, and CORE.ac.uk. Brave API searches now explicitly request JSON responses.
-- Startpage search is now inactive by default because its challenge can require CPU-intensive proof-of-work.
-- Removes the Cara engine because it now requires an account, and removes the disabled legacy SearX engine.
+- Fixes search compatibility across Yahoo, Bing web and images, Dogpile, 500px, Naver Images, Pinterest, Public Domain Image Archive, and Flaticon searches containing non-ASCII characters.
+- Enriches Openverse image results with thumbnails, resolution, and author information; Openverse is now disabled by default because its upstream service is unreliable.
+- Improves the interface when JavaScript is disabled and limits excessively long result titles and descriptions.
+- Removes the Adobe Stock engines because their searches are blocked by a captcha.
+- Updates Python formatting tooling and the container build pipeline.
 
-Complete upstream changes: https://github.com/searxng/searxng/compare/15b0c8ef3...931fd9787`,
-    es_ES: `Se actualizó SearXNG a 2026.9.10.
+Complete upstream changes: https://github.com/searxng/searxng/compare/931fd9787...ca4965040`,
+    es_ES: `Se actualizó SearXNG a 2026.9.15.
 
-- Añade SearchRockit para búsquedas generales, de noticias y de imágenes, además de Europe PMC para publicaciones de ciencias de la vida.
-- Mejora las solicitudes salientes y la compatibilidad con los desafíos antibot de DuckDuckGo y Startpage.
-- Corrige la compatibilidad con Brave, SearchZee, NeoSearch, Dogpile, TuskSearch, ResultHunter, ChatNoir, Marginalia y CORE.ac.uk. Las búsquedas de la API de Brave ahora solicitan explícitamente respuestas JSON.
-- La búsqueda de Startpage ahora está inactiva de forma predeterminada porque su desafío puede requerir una prueba de trabajo que consume muchos recursos de CPU.
-- Elimina el motor Cara porque ahora requiere una cuenta y elimina el motor SearX heredado que estaba desactivado.
+- Corrige la compatibilidad de búsqueda con Yahoo, Bing web e imágenes, Dogpile, 500px, Naver Images, Pinterest, Public Domain Image Archive y las búsquedas de Flaticon que contienen caracteres no ASCII.
+- Enriquece los resultados de imágenes de Openverse con miniaturas, resolución e información del autor; Openverse ahora está desactivado de forma predeterminada porque su servicio original no es fiable.
+- Mejora la interfaz cuando JavaScript está desactivado y limita los títulos y las descripciones excesivamente largos.
+- Elimina los motores de Adobe Stock porque sus búsquedas están bloqueadas por un captcha.
+- Actualiza las herramientas de formato de Python y el proceso de compilación del contenedor.
 
-Cambios completos del proyecto original: https://github.com/searxng/searxng/compare/15b0c8ef3...931fd9787`,
-    de_DE: `SearXNG wurde auf 2026.9.10 aktualisiert.
+Cambios completos del proyecto original: https://github.com/searxng/searxng/compare/931fd9787...ca4965040`,
+    de_DE: `SearXNG wurde auf 2026.9.15 aktualisiert.
 
-- Fügt SearchRockit für allgemeine Suchen sowie Nachrichten- und Bildsuchen und Europe PMC für biowissenschaftliche Veröffentlichungen hinzu.
-- Verbessert ausgehende Anfragen und die Kompatibilität mit den Anti-Bot-Abfragen von DuckDuckGo und Startpage.
-- Behebt Kompatibilitätsprobleme mit Brave, SearchZee, NeoSearch, Dogpile, TuskSearch, ResultHunter, ChatNoir, Marginalia und CORE.ac.uk. Brave-API-Suchen fordern nun ausdrücklich JSON-Antworten an.
-- Die Startpage-Suche ist jetzt standardmäßig inaktiv, da ihre Abfrage eine rechenintensive Arbeitsnachweisberechnung erfordern kann.
-- Entfernt die Cara-Suchmaschine, da sie jetzt ein Konto erfordert, sowie die deaktivierte veraltete SearX-Suchmaschine.
+- Behebt Kompatibilitätsprobleme bei Yahoo, der Web- und Bildersuche von Bing sowie bei Dogpile, 500px, Naver Images, Pinterest, Public Domain Image Archive und Flaticon-Suchen mit Nicht-ASCII-Zeichen.
+- Ergänzt Openverse-Bildergebnisse um Vorschaubilder, Auflösung und Autoreninformationen; Openverse ist jetzt standardmäßig deaktiviert, weil der Upstream-Dienst unzuverlässig ist.
+- Verbessert die Benutzeroberfläche bei deaktiviertem JavaScript und begrenzt übermäßig lange Titel und Beschreibungen.
+- Entfernt die Adobe-Stock-Suchmaschinen, da ihre Suchen durch ein Captcha blockiert werden.
+- Aktualisiert die Python-Formatierungswerkzeuge und die Container-Build-Pipeline.
 
-Vollständige Änderungen des Upstream-Projekts: https://github.com/searxng/searxng/compare/15b0c8ef3...931fd9787`,
-    pl_PL: `Zaktualizowano SearXNG do wersji 2026.9.10.
+Vollständige Änderungen des Upstream-Projekts: https://github.com/searxng/searxng/compare/931fd9787...ca4965040`,
+    pl_PL: `Zaktualizowano SearXNG do wersji 2026.9.15.
 
-- Dodano SearchRockit do wyszukiwania ogólnego, wiadomości i obrazów oraz Europe PMC do wyszukiwania publikacji z dziedziny nauk przyrodniczych.
-- Ulepszono żądania wychodzące i zgodność z zabezpieczeniami antybotowymi DuckDuckGo i Startpage.
-- Naprawiono zgodność z Brave, SearchZee, NeoSearch, Dogpile, TuskSearch, ResultHunter, ChatNoir, Marginalia i CORE.ac.uk. Wyszukiwania przez API Brave teraz jawnie żądają odpowiedzi JSON.
-- Wyszukiwarka Startpage jest teraz domyślnie nieaktywna, ponieważ jej zabezpieczenie może wymagać obciążającego procesor dowodu pracy.
-- Usunięto wyszukiwarkę Cara, ponieważ teraz wymaga konta, oraz nieaktywną przestarzałą wyszukiwarkę SearX.
+- Naprawiono zgodność wyszukiwania w Yahoo, wyszukiwania internetowego i obrazów Bing oraz wyszukiwarek Dogpile, 500px, Naver Images, Pinterest, Public Domain Image Archive i zapytań Flaticon zawierających znaki spoza ASCII.
+- Rozszerzono wyniki wyszukiwania obrazów Openverse o miniatury, rozdzielczość i informacje o autorze; Openverse jest teraz domyślnie wyłączony z powodu zawodności usługi nadrzędnej.
+- Ulepszono interfejs przy wyłączonej obsłudze JavaScript i ograniczono nadmiernie długie tytuły oraz opisy.
+- Usunięto wyszukiwarki Adobe Stock, ponieważ ich wyszukiwanie jest blokowane przez captcha.
+- Zaktualizowano narzędzia formatowania kodu Python i proces budowania kontenera.
 
-Pełna lista zmian projektu nadrzędnego: https://github.com/searxng/searxng/compare/15b0c8ef3...931fd9787`,
-    fr_FR: `SearXNG a été mis à jour vers la version 2026.9.10.
+Pełna lista zmian projektu nadrzędnego: https://github.com/searxng/searxng/compare/931fd9787...ca4965040`,
+    fr_FR: `SearXNG a été mis à jour vers la version 2026.9.15.
 
-- Ajoute SearchRockit pour les recherches générales, d'actualités et d'images, ainsi qu'Europe PMC pour les publications en sciences de la vie.
-- Améliore les requêtes sortantes et la compatibilité avec les défis antibots de DuckDuckGo et Startpage.
-- Corrige la compatibilité avec Brave, SearchZee, NeoSearch, Dogpile, TuskSearch, ResultHunter, ChatNoir, Marginalia et CORE.ac.uk. Les recherches via l'API Brave demandent désormais explicitement des réponses JSON.
-- La recherche Startpage est désormais inactive par défaut, car son défi peut nécessiter une preuve de travail gourmande en ressources processeur.
-- Supprime le moteur Cara, qui nécessite désormais un compte, ainsi que l'ancien moteur SearX désactivé.
+- Corrige la compatibilité des recherches Yahoo, des recherches web et d'images de Bing, ainsi que de Dogpile, 500px, Naver Images, Pinterest, Public Domain Image Archive et des recherches Flaticon contenant des caractères non ASCII.
+- Enrichit les résultats d'images Openverse avec des miniatures, la résolution et les informations sur l'auteur ; Openverse est désormais désactivé par défaut, car son service en amont n'est pas fiable.
+- Améliore l'interface lorsque JavaScript est désactivé et limite les titres et descriptions excessivement longs.
+- Supprime les moteurs Adobe Stock, car leurs recherches sont bloquées par un captcha.
+- Met à jour les outils de formatage Python et la chaîne de construction du conteneur.
 
-Modifications complètes du projet en amont : https://github.com/searxng/searxng/compare/15b0c8ef3...931fd9787`,
+Modifications complètes du projet en amont : https://github.com/searxng/searxng/compare/931fd9787...ca4965040`,
   },
   migrations: {},
 })
