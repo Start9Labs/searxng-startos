@@ -8,7 +8,14 @@ SearXNG bundles three upstream Docker images — `searxng/searxng` (the search e
 
 [searxng/searxng on Docker Hub](https://hub.docker.com/r/searxng/searxng/tags) · [searxng/searxng on GitHub](https://github.com/searxng/searxng)
 
-SearXNG does **not** cut GitHub releases or tags — the project ships continuously by publishing dated Docker images. Tags are formatted `<YYYY.M.D>-<git-short-hash>` (e.g. `2026.5.13-8e5aa9d39`). The newest non-`latest` tag on Docker Hub is the upstream version.
+SearXNG does **not** cut GitHub releases or tags — the project ships continuously, publishing a dated Docker image for nearly every merge. Tags are formatted `<YYYY.M.D>-<git-short-hash>` (e.g. `2026.5.13-8e5aa9d39`). With no release to wait for, this package updates **monthly**: **upstream moved only when the pinned tag's date is at least 30 days old.** A newer image inside that window is never a reason to bump. Check the age of the current pin first:
+
+```sh
+PIN=$(grep -oE 'searxng/searxng:[^'"'"']+' startos/manifest/index.ts | cut -d: -f2)
+echo "$PIN is $(( ($(date +%s) - $(date -d "$(echo "$PIN" | cut -d- -f1 | tr . -)" +%s)) / 86400 )) days old"
+```
+
+Under 30 days, there is no update. Otherwise the newest non-`latest` tag on Docker Hub is the target:
 
 ```sh
 curl -fsSL "https://hub.docker.com/v2/repositories/searxng/searxng/tags?page_size=20&ordering=last_updated" | jq -r '.results[].name' | grep -v '^latest$' | head -1
