@@ -9,7 +9,7 @@ export const inputSpec = InputSpec.of({
   instance_name: Value.text({
     name: i18n('Instance Name'),
     description: i18n(
-      'Enter a name for your SearXNG instance. This is the name that will be listed if you want to share your SearXNG engine publicly.',
+      'The name SearXNG shows for this instance, in the browser tab title and when a browser adds it as a search engine.',
     ),
     required: true,
     default: 'My SearXNG',
@@ -29,7 +29,7 @@ export const inputSpec = InputSpec.of({
     return {
       name: i18n('Primary URL'),
       description: i18n(
-        'Choose which of your SearXNG URLs should serve as the primary URL for the purposes of creating links, sending invites, etc.',
+        'The address SearXNG uses in links that point back to itself. Choose the one you open it at.',
       ),
       values: urls.reduce(
         (obj, url) => ({
@@ -39,13 +39,13 @@ export const inputSpec = InputSpec.of({
         {} as Record<string, string>,
       ),
       default:
-        urls.find((u) => u.startsWith('http:') && u.includes('.onion')) || '',
+        urls.find((u) => u.startsWith('http:') && u.includes('.onion')) ?? null,
     }
   }),
   enable_metrics: Value.toggle({
     name: i18n('Enable Stats'),
     description: i18n(
-      'Your SearXNG instance will collect anonymous stats about its own usage and performance.',
+      'Record how each search engine performs and show it on the Stats Dashboard interface, which exists only while this is on.',
     ),
     default: false,
   }),

@@ -67,12 +67,12 @@ There is no search history, no user database, and no index — SearXNG stores no
 
 ## File Models
 
-Two models: SearXNG's settings, and a small store for the one credential the package holds.
+Two models: SearXNG's settings, and a small store for the access password and one migration flag.
 
-| File           | Format | Modelled                | Written by                  |
-| -------------- | ------ | ----------------------- | --------------------------- |
-| `settings.yml` | YAML   | Yes — `FileHelper.yaml` | Every init, and two actions |
-| `store.json`   | JSON   | Yes — `FileHelper.json` | The Manage Access action    |
+| File           | Format | Modelled                | Written by                                              |
+| -------------- | ------ | ----------------------- | ------------------------------------------------------- |
+| `settings.yml` | YAML   | Yes — `FileHelper.yaml` | Every init, and two actions                             |
+| `store.json`   | JSON   | Yes — `FileHelper.json` | The Manage Access action, and the 2026.9.30:1 migration |
 
 **`settings.yml` is a delta, not a replacement.** `use_default_settings: true` is enforced, so SearXNG loads its own shipped settings first and merges this file over the top. Anything the file does not mention keeps upstream's value, and the engine list in particular is upstream's — this package does not curate it.
 
@@ -94,7 +94,7 @@ Five settings depart from upstream's defaults:
 | `outgoing.request_timeout` | 3.5 s             | 3.0 s    | A little more headroom for engines reached over a home connection                     |
 | `valkey.url`               | loopback TCP      | none     | Points SearXNG at the bundled Valkey                                                  |
 
-`store.json` holds only `uiPassword` — present when the instance is private, absent when it is public.
+`store.json` holds `uiPassword` — present when the instance is private, absent when it is public — and `reattachTorOnions`, set by the 2026.9.30:1 migration on a server carried over from StartOS 0.3.5 and cleared once its Tor address has moved (see Network Access).
 
 ## Dependencies
 
@@ -116,6 +116,8 @@ One or two interfaces, both on the same port and the same binding.
 | Stats Dashboard | `metrics` | ui   | 80   | `/stats` | Metrics are enabled |
 
 Neither is masked. The port is bound on the `main` MultiHost, and it is Caddy that answers on it.
+
+**A server carried over from StartOS 0.3.5** had its web interface on internal port 8080 of the same `main` host. The 2026.9.30:1 migration retires that binding. Once Tor 0.4.9.13:1 or later is installed, init moves that version's `.onion` address onto the Web UI binding on port 80, keeping the hostname, through Tor's `setupOnionReattachment`; until then `store.json`'s `reattachTorOnions` stays `true`.
 
 **A password turns the binding into an authenticated one.** Setting one through Manage Access adds HTTP basic auth at the StartOS reverse proxy — outside both Caddy and SearXNG — which is why it covers the Stats Dashboard as well as the search UI, and why neither application has to know about it. The username is always `admin`.
 
@@ -216,7 +218,7 @@ volumes:
   main: /etc/searxng (searxng-sub); its caddy/ subpath at /data (caddy-sub)
 file_models:
   - /etc/searxng/settings.yml
-  - store.json
+  - store.json # uiPassword; reattachTorOnions flag
 startos_managed_env_vars:
   - PYTHONWARNINGS # searxng-sub
   - HOME # caddy-sub

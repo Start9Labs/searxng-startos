@@ -9,7 +9,7 @@ function randomPassword() {
   }
 }
 
-const serverSchema = z.object({
+const serverSchema = z.looseObject({
   secret_key: z.string().catch(utils.getDefaultString(randomPassword())),
   limiter: z.boolean().catch(false),
   image_proxy: z.literal(true).catch(true),
@@ -18,17 +18,17 @@ const serverSchema = z.object({
 
 const valkeyUrl = `valkey://127.0.0.1:${valkeyPort}/0` as const
 
-const valkeySchema = z.object({
+const valkeySchema = z.looseObject({
   url: z.literal(valkeyUrl).catch(valkeyUrl),
 })
 
-const generalSchema = z.object({
+const generalSchema = z.looseObject({
   debug: z.literal(false).catch(false),
   instance_name: z.string().catch('My SearXNG'),
   enable_metrics: z.boolean().catch(false),
 })
 
-const outgoingSchema = z.object({
+const outgoingSchema = z.looseObject({
   request_timeout: z.number().catch(3.5),
   proxies: z
     .record(z.string(), z.array(z.string()))
@@ -37,23 +37,21 @@ const outgoingSchema = z.object({
   using_tor_proxy: z.boolean().optional().catch(undefined),
 })
 
-const searchSchema = z.object({
+const searchSchema = z.looseObject({
   formats: z.array(z.string()).catch(() => ['html', 'json']),
 })
 
-const engineSchema = z
-  .object({
-    name: z.string(),
-    engine: z.string().optional(),
-    api_key: z.string().optional(),
-    inactive: z.boolean().optional(),
-    disabled: z.boolean().optional(),
-  })
-  .passthrough()
+const engineSchema = z.looseObject({
+  name: z.string(),
+  engine: z.string().optional(),
+  api_key: z.string().optional(),
+  inactive: z.boolean().optional(),
+  disabled: z.boolean().optional(),
+})
 
 export type EngineEntry = z.infer<typeof engineSchema>
 
-const shape = z.object({
+const shape = z.looseObject({
   use_default_settings: z.literal(true).catch(true),
   server: serverSchema.catch(() => serverSchema.parse({})),
   valkey: valkeySchema.catch(() => valkeySchema.parse({})),

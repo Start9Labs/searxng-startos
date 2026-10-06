@@ -11,7 +11,7 @@ export const inputSpec = InputSpec.of({
   access: Value.union({
     name: i18n('Access'),
     description: i18n(
-      'Choose who can use your SearXNG instance. Public: anyone with the address can use it. Private: require a username and password to log in.',
+      '- Public: anyone who can reach one of its addresses can search with it\n- Private (require login): a username and password are required, for the Web UI and the Stats Dashboard',
     ),
     default: 'public',
     variants: Variants.of({
@@ -71,15 +71,16 @@ export const manageAccess = sdk.Action.withInput(
       await storeJson.merge(effects, { uiPassword: password })
       return {
         version: '1',
-        title: 'Login Required',
-        message:
+        title: i18n('Login Required'),
+        message: i18n(
           'Your SearXNG instance now requires a login. Use these credentials in your browser; they also cover the Stats Dashboard.',
+        ),
         result: {
           type: 'group',
           value: [
             {
               type: 'single',
-              name: 'Username',
+              name: i18n('Username'),
               description: null,
               value: uiUsername,
               masked: false,
@@ -88,7 +89,7 @@ export const manageAccess = sdk.Action.withInput(
             },
             {
               type: 'single',
-              name: 'Password',
+              name: i18n('Password'),
               description: null,
               value: password,
               masked: true,
@@ -103,9 +104,10 @@ export const manageAccess = sdk.Action.withInput(
     await storeJson.merge(effects, { uiPassword: undefined })
     return {
       version: '1',
-      title: 'Now Public',
-      message:
+      title: i18n('Now Public'),
+      message: i18n(
         'Your SearXNG instance is now public — anyone with the address can use it.',
+      ),
       result: null,
     }
   },
