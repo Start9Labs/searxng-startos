@@ -48,7 +48,7 @@ Three upstream images, unmodified, run as three daemons in a fixed chain.
 | `searxng-sub` | `searxng` | `valkey`     | SearXNG itself, on an internal port — the one to `attach` to |
 | `caddy-sub`   | `caddy`   | `searxng`    | The reverse proxy that actually serves the interface         |
 
-**Caddy, not SearXNG, is what the interface reaches.** SearXNG binds an internal port and Caddy fronts it, adding the security headers upstream's own reference deployment expects — a strict Content-Security-Policy, a `Permissions-Policy` denying every device API, `noindex` robots directives, and compression and cache rules. Running SearXNG unproxied would serve the same search results without any of that.
+**Caddy, not SearXNG, is what the interface reaches.** SearXNG binds an internal port and Caddy fronts it, adding the security headers upstream's own reference deployment expects — a strict Content-Security-Policy, a `Permissions-Policy` denying every device API, `noindex` robots directives, and compression and cache rules. Running SearXNG unproxied would serve the same search results without any of that. Caddy marks responses from the image proxy at `/image` cacheable for one hour.
 
 Two files are written into container root filesystems at start rather than onto a volume: Caddy's `Caddyfile`, generated from the package source so it cannot drift, and an empty `limiter.toml` that suppresses a SearXNG startup warning. Neither persists, and neither is yours to edit.
 

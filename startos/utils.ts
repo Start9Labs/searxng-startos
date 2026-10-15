@@ -33,7 +33,7 @@ export const getCaddyfile = (): string => {
 	}
 
 	@imageproxy {
-		path /image_proxy
+		path /image
 	}
 
 	header {
