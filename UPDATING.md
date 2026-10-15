@@ -55,4 +55,4 @@ All three pins live in `startos/manifest/index.ts`. Edit the relevant `dockerTag
 - **Valkey** (only when changing major or pinning a point release): set `images.valkey.source.dockerTag` to e.g. `valkey/valkey:10-alpine`.
 - **Caddy** (only when changing major or pinning a point release): set `images.caddy.source.dockerTag` to e.g. `caddy:3-alpine`.
 
-Then bump `version` and `releaseNotes` in `startos/versions/index.ts` (or the current version file) per the standard packaging conventions.
+Then bump `version` and `releaseNotes` in `startos/versions/current.ts` per the standard packaging conventions. Check `getCaddyfile()` in `startos/utils.ts` against upstream endpoint changes; its image-cache matcher must follow the image proxy path.

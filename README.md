@@ -48,7 +48,7 @@ Three upstream images, unmodified, run as three daemons in a fixed chain.
 | `searxng-sub` | `searxng` | `valkey`     | SearXNG itself, on an internal port — the one to `attach` to |
 | `caddy-sub`   | `caddy`   | `searxng`    | The reverse proxy that actually serves the interface         |
 
-**Caddy, not SearXNG, is what the interface reaches.** SearXNG binds an internal port and Caddy fronts it, adding the security headers upstream's own reference deployment expects — a strict Content-Security-Policy, a `Permissions-Policy` denying every device API, `noindex` robots directives, and compression and cache rules. Running SearXNG unproxied would serve the same search results without any of that.
+**Caddy, not SearXNG, is what the interface reaches.** SearXNG binds an internal port and Caddy fronts it, adding the security headers upstream's own reference deployment expects — a strict Content-Security-Policy, a `Permissions-Policy` denying every device API, `noindex` robots directives, and compression and cache rules. Running SearXNG unproxied would serve the same search results without any of that. Caddy marks responses from the image proxy at `/image` cacheable for one hour.
 
 Two files are written into container root filesystems at start rather than onto a volume: Caddy's `Caddyfile`, generated from the package source so it cannot drift, and an empty `limiter.toml` that suppresses a SearXNG startup warning. Neither persists, and neither is yours to edit.
 
@@ -158,9 +158,9 @@ A list of engine-id and API-key pairs, for the search engines that charge for ac
 Public, or private behind a username and password.
 
 - **What it changes:** `uiPassword` in `store.json`, and through it the interface's binding.
-- **Cost:** seconds, then a restart.
+- **Cost:** seconds; no service restart required.
 - **Repeat safety:** idempotent; the form is pre-filled with the current password, and switching to public clears it.
-- **Outputs:** on going private, the username and password, masked and copyable.
+- **Outputs:** on going private, a copyable username and masked, copyable password. Neither is a launch link.
 - **This covers both interfaces**, because it is enforced at the StartOS proxy rather than inside the app.
 
 ## Tasks

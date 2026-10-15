@@ -28,7 +28,7 @@ Open the **Web UI** interface to search. Per-user preferences (theme, enabled en
 
 - **Config** — change the instance name, switch the primary URL, toggle the stats dashboard, or turn the Tor outbound proxy on or off. Turning the Tor proxy on routes every outgoing search request through the StartOS Tor service (which becomes a required dependency) and enables Tor-only engines like Ahmia and Torch; searches will be slower.
 - **Engine API Keys** — add or remove API keys for paid engines (e.g. Brave Search, Wolfram Alpha, Kagi). The **Engine ID** must match the SearXNG engine module name. Adding an entry both supplies the key and activates the engine; removing an entry reverts it to the upstream default. Keys are stored masked.
-- **Manage Access** — keep your instance public (the default) or require a login. Switch to **Private** and set a password (use the generate button for a strong random one, or type your own); the username is always `admin`. StartOS enforces the login in front of SearXNG, so it protects both the Web UI and the Stats Dashboard. The new password takes effect without restarting the service. Switch back to **Public** to remove the login.
+- **Manage Access** — keep your instance public (the default) or require a login. Switch to **Private** and set a password (use the generate button for a strong random one, or type your own); the username is always `admin`. StartOS enforces the login in front of SearXNG, so it protects both the Web UI and the Stats Dashboard. The result shows a copyable username and a masked, copyable password, not links to open. The new password takes effect without restarting the service. Switch back to **Public** to remove the login.
 
 ### Optional: routing search traffic over Tor
 
