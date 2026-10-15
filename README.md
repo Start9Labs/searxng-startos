@@ -158,9 +158,9 @@ A list of engine-id and API-key pairs, for the search engines that charge for ac
 Public, or private behind a username and password.
 
 - **What it changes:** `uiPassword` in `store.json`, and through it the interface's binding.
-- **Cost:** seconds, then a restart.
+- **Cost:** seconds; no service restart required.
 - **Repeat safety:** idempotent; the form is pre-filled with the current password, and switching to public clears it.
-- **Outputs:** on going private, the username and password, masked and copyable.
+- **Outputs:** on going private, a copyable username and masked, copyable password. Neither is a launch link.
 - **This covers both interfaces**, because it is enforced at the StartOS proxy rather than inside the app.
 
 ## Tasks
