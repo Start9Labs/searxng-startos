@@ -35,7 +35,7 @@
 
 ## Image and Container Runtime
 
-Three upstream images, unmodified, run as three daemons in a fixed chain.
+Three upstream images run as three daemons in a fixed chain. `caddy` and `valkey/valkey` are unmodified; the root `Dockerfile` removes the compromised emSign ECC Root CA - G3 from `searxng/searxng`'s CA store until upstream ships an image built on a fixed one.
 
 | Property      | Value                                       |
 | ------------- | ------------------------------------------- |
@@ -206,7 +206,7 @@ The `main` volume is copied wholesale — `sdk.Backups.ofVolumes('main')`. No du
 
 ```yaml
 package_id: searxng
-image: searxng/searxng # plus caddy and valkey/valkey
+image: searxng/searxng + root Dockerfile (CA store fix) # plus caddy and valkey/valkey
 architectures:
   - x86_64
   - aarch64
