@@ -1,8 +1,9 @@
+import { credentialsJson } from './fileModels/credentials.json'
 import { settingsYaml } from './fileModels/settings.yml'
 import { storeJson } from './fileModels/store.json'
 import { i18n } from './i18n'
 import { sdk } from './sdk'
-import { uiPort, uiUsername } from './utils'
+import { dependentUsername, uiPort, uiUsername } from './utils'
 
 // Host id (the `sdk.MultiHost.of` group) carrying both the ui and metrics
 // interfaces — distinct from the interface ids exported on it. Used for
@@ -14,9 +15,11 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
   const uiMulti = sdk.MultiHost.of(effects, mainHostId)
 
   // When a password is set (via the Manage Access action), the OS reverse
-  // proxy enforces basic auth at the edge for everything on this port — both
-  // the Web UI and the Stats Dashboard. No password set ⇒ public.
+  // proxy enforces basic auth on every address of this port, the bridge
+  // included, so dependents log in with the key published on `public`.
+  // No password set ⇒ public.
   const password = await storeJson.read((s) => s?.uiPassword).const(effects)
+  const apiKey = await credentialsJson.read((c) => c.apiKey).const(effects)
 
   const uiMultiOrigin = await uiMulti.bindPort(uiPort, {
     protocol: 'http',
@@ -24,7 +27,12 @@ export const setInterfaces = sdk.setupInterfaces(async ({ effects }) => {
       ? {
           auth: {
             type: 'basic',
-            credentials: [{ username: uiUsername, password }],
+            credentials: [
+              { username: uiUsername, password },
+              ...(apiKey
+                ? [{ username: dependentUsername, password: apiKey }]
+                : []),
+            ],
             realm: 'SearXNG',
           },
         }

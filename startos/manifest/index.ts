@@ -10,7 +10,7 @@ export const manifest = setupManifest({
   marketingUrl: 'https://docs.searxng.org',
   donationUrl: 'https://docs.searxng.org/donate.html',
   description: i18n.description,
-  volumes: ['main'],
+  volumes: ['main', 'public'],
   images: {
     valkey: {
       source: {
