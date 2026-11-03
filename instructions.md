@@ -8,9 +8,9 @@
 
 - A **Web UI** interface — your private metasearch frontend aggregating results from 70+ search engines.
 - A **Stats Dashboard** interface, exported only when you turn stats on, showing usage and engine performance at `/stats`.
-- A `?format=json` search endpoint on the same Web UI, suitable as a backend for tools like Open WebUI's web-search feature. Other services on the same server connect to it privately, without going over the LAN or the internet — [Open WebUI](https://github.com/Start9Labs/open-webui-startos) fills the address in for you, so there is nothing to copy by hand.
+- A `?format=json` search endpoint on the same Web UI, suitable as a backend for tools like Open WebUI's web-search feature. Other services on the same server connect to it privately, without going over the LAN or the internet — [Open WebUI](https://github.com/Start9Labs/open-webui-startos) fills the address in for you, and the login when you require one, so there is nothing to copy by hand.
 - Caddy in front of SearXNG handling security headers, and Valkey behind it for caching — you don't manage either.
-- Your instance is **public by default** — anyone with the address can use it. You can optionally require a login (username `admin` plus a password) with the **Manage Access** action; it covers both the Web UI and the Stats Dashboard.
+- Your instance is **public by default** — anyone with the address can use it. You can optionally require a login (username `admin` plus a password) with the **Manage Access** action; it covers both the Web UI and the Stats Dashboard. Services on this server that use SearXNG, like Open WebUI, log in on their own.
 
 ## Getting set up
 

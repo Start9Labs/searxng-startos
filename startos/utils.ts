@@ -4,6 +4,8 @@ export const valkeyPort = 6379
 
 export const uiUsername = 'admin'
 
+export const dependentUsername = 'dependent'
+
 export const getCaddyfile = (): string => {
   return `
 {
