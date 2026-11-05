@@ -1,18 +1,18 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '2026.10.15:2',
+  version: '2026.10.15:3',
   releaseNotes: {
     en_US:
-      'Services on this server, such as Open WebUI web search, can use SearXNG while it requires a login. Update Open WebUI too.',
+      'Requires StartOS 0.4.1 or later. Fixes memory use growing while the service runs.',
     es_ES:
-      'Los servicios de este servidor, como la búsqueda web de Open WebUI, pueden usar SearXNG mientras requiere inicio de sesión. Actualice también Open WebUI.',
+      'Requiere StartOS 0.4.1 o posterior. Corrige el aumento del uso de memoria mientras el servicio está en ejecución.',
     de_DE:
-      'Dienste auf diesem Server, etwa die Websuche von Open WebUI, können SearXNG nutzen, während es eine Anmeldung verlangt. Aktualisieren Sie auch Open WebUI.',
+      'Erfordert StartOS 0.4.1 oder neuer. Behebt einen während der Laufzeit des Dienstes ansteigenden Speicherverbrauch.',
     pl_PL:
-      'Usługi na tym serwerze, takie jak wyszukiwanie w sieci w Open WebUI, mogą korzystać z SearXNG, gdy wymaga ono logowania. Zaktualizuj też Open WebUI.',
+      'Wymaga StartOS 0.4.1 lub nowszego. Naprawia wzrost zużycia pamięci podczas działania usługi.',
     fr_FR:
-      'Les services de ce serveur, comme la recherche web d’Open WebUI, peuvent utiliser SearXNG lorsqu’il exige une connexion. Mettez aussi Open WebUI à jour.',
+      "Nécessite StartOS 0.4.1 ou une version ultérieure. Corrige l'augmentation de la consommation de mémoire pendant le fonctionnement du service.",
   },
   migrations: {
     up: async () => {},
