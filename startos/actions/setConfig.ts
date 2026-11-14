@@ -109,7 +109,7 @@ export const setConfig = sdk.Action.withInput(
     settingsYaml.merge(effects, {
       general: {
         instance_name: input.instance_name,
-        contact_url: input.contact_url ?? undefined,
+        contact_url: input.contact_url || undefined,
         enable_metrics: input.enable_metrics,
       },
       server: {
