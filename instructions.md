@@ -16,7 +16,9 @@
 
 SearXNG works out of the box — there's no required setup step. On install it picks the defaults "My SearXNG" for the instance name and your `.local` (LAN) address as the primary URL, so you can just **start** SearXNG and open the **Web UI** interface.
 
-To customize, run the **Config** action: set an **Instance Name** and pick a different **Primary URL** from the addresses StartOS has assigned to the Web UI. You can also turn on the optional stats dashboard and the Tor outbound proxy there.
+To customize, run the **Config** action: set an **Instance Name** and a **Contact Address**, and pick a different **Primary URL** from the addresses StartOS has assigned to the Web UI. You can also turn on the optional stats dashboard and the Tor outbound proxy there.
+
+Wikipedia, Wikidata and OpenStreetMap results appear only once a **Contact Address** is set — those services require a way to reach whoever runs the instance. Enter a `mailto:` address (e.g. `mailto:you@example.com`) or a web page; it is sent with requests to those services and linked in the SearXNG page footer.
 
 ## Using SearXNG
 
@@ -26,7 +28,7 @@ Open the **Web UI** interface to search. Per-user preferences (theme, enabled en
 
 ### Actions
 
-- **Config** — change the instance name, switch the primary URL, toggle the stats dashboard, or turn the Tor outbound proxy on or off. Turning the Tor proxy on routes every outgoing search request through the StartOS Tor service (which becomes a required dependency) and enables Tor-only engines like Ahmia and Torch; searches will be slower.
+- **Config** — change the instance name, set the contact address, switch the primary URL, toggle the stats dashboard, or turn the Tor outbound proxy on or off. Turning the Tor proxy on routes every outgoing search request through the StartOS Tor service (which becomes a required dependency) and enables Tor-only engines like Ahmia and Torch; searches will be slower.
 - **Engine API Keys** — add or remove API keys for paid engines (e.g. Brave Search, Wolfram Alpha, Kagi). The **Engine ID** must match the SearXNG engine module name. Adding an entry both supplies the key and activates the engine; removing an entry reverts it to the upstream default. Keys are stored masked.
 - **Manage Access** — keep your instance public (the default) or require a login. Switch to **Private** and set a password (use the generate button for a strong random one, or type your own); the username is always `admin`. StartOS enforces the login in front of SearXNG, so it protects both the Web UI and the Stats Dashboard. The result shows a copyable username and a masked, copyable password, not links to open. The new password takes effect without restarting the service. Switch back to **Public** to remove the login.
 

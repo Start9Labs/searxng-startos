@@ -26,6 +26,7 @@ const generalSchema = z.looseObject({
   debug: z.literal(false).catch(false),
   instance_name: z.string().catch('My SearXNG'),
   enable_metrics: z.boolean().catch(false),
+  contact_url: z.string().optional().catch(undefined),
 })
 
 const outgoingSchema = z.looseObject({

@@ -35,7 +35,7 @@
 
 ## Image and Container Runtime
 
-Three upstream images run as three daemons in a fixed chain. `caddy` and `valkey/valkey` are unmodified; the root `Dockerfile` removes the compromised emSign ECC Root CA - G3 from `searxng/searxng`'s CA store until upstream ships an image built on a fixed one.
+Three upstream images run as three daemons in a fixed chain. All three are unmodified.
 
 | Property      | Value                                       |
 | ------------- | ------------------------------------------- |
@@ -84,7 +84,7 @@ Three models: SearXNG's settings, a small store for the access password and one 
 
 **Seeded once** — `server.secret_key`, a 24-character random value generated on first write.
 
-**Yours** — the instance name, the primary URL, the metrics toggle, the Tor toggle, and per-engine API keys, all through the two configuring actions.
+**Yours** — the instance name, the contact address, the primary URL, the metrics toggle, the Tor toggle, and per-engine API keys, all through the two configuring actions.
 
 Five settings depart from upstream's defaults:
 
@@ -142,12 +142,13 @@ Three actions, all available whether or not the service is running.
 
 ### Config
 
-Instance name, primary URL, the metrics toggle, and the Tor toggle.
+Instance name, contact address, primary URL, the metrics toggle, and the Tor toggle.
 
-- **What it changes:** `general.instance_name`, `server.base_url`, `general.enable_metrics`, and `outgoing.using_tor_proxy` in `settings.yml`.
+- **What it changes:** `general.instance_name`, `general.contact_url`, `server.base_url`, `general.enable_metrics`, and `outgoing.using_tor_proxy` in `settings.yml`.
 - **Cost:** seconds, then a restart.
 - **Repeat safety:** idempotent; the form is pre-filled.
 - **Enabling metrics adds an interface.** The Stats Dashboard appears on the service page and disappears again when you turn it off.
+- **The contact address gates three engines.** SearXNG turns off Wikipedia, Wikidata and OpenStreetMap while `general.contact_url` is unset, and sends it in their User-Agent once set. It must be a `mailto:` address or an http(s) URL; it is also linked in the page footer. Clearing it removes the key.
 - **The Tor toggle records intent only.** The actual proxy address is resolved separately, so turning it on before Tor is installed is not an error — it takes effect when Tor appears.
 
 ### Engine API Keys
@@ -201,7 +202,7 @@ The `main` and `public` volumes are copied wholesale — `sdk.Backups.ofVolumes(
 2. **Rate limiting is off.** SearXNG's bot limiter is disabled, so a public instance has nothing throttling automated queries against it.
 3. **Search results are served through Caddy**, which adds a strict Content-Security-Policy and related headers. A page or an engine that needs a looser policy has no way to relax it here.
 4. **The Tor proxy fails closed.** With the toggle on and Tor absent, no proxy is written — queries do not silently fall back to going out directly.
-5. **The engine list is upstream's**, unmodified; only API keys are configurable.
+5. **The engine list is upstream's**, unmodified; only API keys are configurable. Wikipedia, Wikidata and OpenStreetMap stay off until a contact address is set.
 6. **The Stats Dashboard exists only while metrics are enabled**, and metrics are off by default.
 7. **The JSON API is enabled**, which upstream leaves off.
 8. **No riscv64 build.** x86_64 and aarch64 only.
@@ -212,7 +213,7 @@ The `main` and `public` volumes are copied wholesale — `sdk.Backups.ofVolumes(
 
 ```yaml
 package_id: searxng
-image: searxng/searxng + root Dockerfile (CA store fix) # plus caddy and valkey/valkey
+image: searxng/searxng # plus caddy and valkey/valkey
 architectures:
   - x86_64
   - aarch64

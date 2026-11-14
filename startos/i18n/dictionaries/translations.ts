@@ -40,6 +40,9 @@ export default {
     37: 'Nombre de usuario',
     38: 'Ahora es pública',
     39: 'Su instancia de SearXNG ahora es pública: cualquiera con la dirección puede usarla.',
+    40: 'Dirección de contacto',
+    41: 'Una dirección mailto: o una página web donde los servicios que consulta SearXNG pueden contactarle. Wikipedia, Wikidata y OpenStreetMap la requieren y permanecen desactivados mientras esté vacía. También se enlaza en el pie de página.',
+    42: 'Debe ser una dirección mailto: o una URL http(s)',
   },
   de_DE: {
     0: 'SearXNG wird gestartet!',
@@ -80,6 +83,9 @@ export default {
     37: 'Benutzername',
     38: 'Jetzt öffentlich',
     39: 'Ihre SearXNG-Instanz ist jetzt öffentlich – jeder mit der Adresse kann sie nutzen.',
+    40: 'Kontaktadresse',
+    41: 'Eine mailto:-Adresse oder Webseite, unter der die von SearXNG abgefragten Dienste Sie erreichen können. Wikipedia, Wikidata und OpenStreetMap setzen sie voraus und bleiben deaktiviert, solange sie leer ist. Sie wird außerdem in der Fußzeile verlinkt.',
+    42: 'Muss eine mailto:-Adresse oder eine http(s)-URL sein',
   },
   pl_PL: {
     0: 'Uruchamianie SearXNG!',
@@ -120,6 +126,9 @@ export default {
     37: 'Nazwa użytkownika',
     38: 'Teraz publiczna',
     39: 'Twoja instancja SearXNG jest teraz publiczna — każdy, kto zna adres, może z niej korzystać.',
+    40: 'Adres kontaktowy',
+    41: 'Adres mailto: lub strona internetowa, pod którą usługi odpytywane przez SearXNG mogą się z Tobą skontaktować. Wikipedia, Wikidata i OpenStreetMap go wymagają i pozostają wyłączone, dopóki pole jest puste. Jest też podlinkowany w stopce strony.',
+    42: 'Musi to być adres mailto: lub adres URL http(s)',
   },
   fr_FR: {
     0: 'Démarrage de SearXNG !',
@@ -160,5 +169,8 @@ export default {
     37: "Nom d'utilisateur",
     38: 'Désormais publique',
     39: "Votre instance SearXNG est désormais publique : toute personne disposant de l'adresse peut l'utiliser.",
+    40: 'Adresse de contact',
+    41: "Une adresse mailto: ou une page web où les services interrogés par SearXNG peuvent vous joindre. Wikipédia, Wikidata et OpenStreetMap l'exigent et restent désactivés tant qu'elle est vide. Elle est aussi liée en pied de page.",
+    42: 'Doit être une adresse mailto: ou une URL http(s)',
   },
 } satisfies Record<string, LangDict>
