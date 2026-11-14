@@ -39,6 +39,9 @@ const dict = {
   Username: 37,
   'Now Public': 38,
   'Your SearXNG instance is now public — anyone with the address can use it.': 39,
+  'Contact Address': 40,
+  'A mailto: address or web page where the services SearXNG queries can reach you. Wikipedia, Wikidata and OpenStreetMap require it and are turned off while this is empty. It is also linked in the page footer.': 41,
+  'Must be a mailto: address or an http(s) URL': 42,
 } as const
 
 export type I18nKey = keyof typeof dict

@@ -14,6 +14,21 @@ export const inputSpec = InputSpec.of({
     required: true,
     default: 'My SearXNG',
   }),
+  contact_url: Value.text({
+    name: i18n('Contact Address'),
+    description: i18n(
+      'A mailto: address or web page where the services SearXNG queries can reach you. Wikipedia, Wikidata and OpenStreetMap require it and are turned off while this is empty. It is also linked in the page footer.',
+    ),
+    required: false,
+    default: null,
+    placeholder: 'mailto:you@example.com',
+    patterns: [
+      {
+        regex: '^(mailto:[^\\s@]+@[^\\s@]+|https?://\\S+)$',
+        description: i18n('Must be a mailto: address or an http(s) URL'),
+      },
+    ],
+  }),
   base_url: Value.dynamicSelect(async ({ effects }) => {
     const urls = await sdk.host
       .getOwn(effects, mainHostId, (host) => {
@@ -81,6 +96,7 @@ export const setConfig = sdk.Action.withInput(
     return yaml
       ? {
           instance_name: yaml.general.instance_name,
+          contact_url: yaml.general.contact_url ?? null,
           base_url: yaml.server.base_url,
           enable_metrics: yaml.general.enable_metrics,
           proxy_tor: !!yaml.outgoing.using_tor_proxy,
@@ -93,6 +109,7 @@ export const setConfig = sdk.Action.withInput(
     settingsYaml.merge(effects, {
       general: {
         instance_name: input.instance_name,
+        contact_url: input.contact_url || undefined,
         enable_metrics: input.enable_metrics,
       },
       server: {
